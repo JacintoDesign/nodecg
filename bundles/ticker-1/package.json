@@ -1,0 +1,59 @@
+{
+  "name": "ticker-1",
+  "version": "0.0.1",
+  "description": "Layering some cool graphics onto things",
+  "homepage": "",
+  "author": {
+    "name": "T.J.",
+    "email": "tjheideman@gmail.com",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension",
+    "sound"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^2.1.2",
+    "dashboardPanels": [
+      {
+        "name": "ticker-1",
+        "title": "Ticker 1",
+        "width": 5,
+        "file": "ticker-1-dash.html",
+        "headerColor": "D12500"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "ticker-1.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ],
+    "soundCues": [
+      {
+        "name": "NAV_IN_mp3",
+        "defaultVolume": 100,
+        "assignable": true,
+        "channels": 1
+
+      },
+      {
+        "name": "NAV_OUT_mp3",
+        "defaultVolume": 100,
+        "assignable": true,
+        "channels": 1
+      }
+
+    ]
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "private": true
+}

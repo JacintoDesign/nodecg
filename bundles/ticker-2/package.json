@@ -1,0 +1,44 @@
+{
+  "name": "ticker-2",
+  "version": "0.0.1",
+  "description": "Layering some cool graphics onto things",
+  "homepage": "",
+  "author": {
+    "name": "T.J.",
+    "email": "tjheideman@gmail.com",
+    "url": ""
+  },
+  "files": [
+    "dashboard",
+    "graphics",
+    "extension.js",
+    "extension",
+    "sound"
+  ],
+  "keywords": [
+    "",
+    "nodecg-bundle"
+  ],
+  "nodecg": {
+    "compatibleRange": "^2.1.2",
+    "dashboardPanels": [
+      {
+        "name": "ticker-2",
+        "title": "Ticker 2",
+        "width": 5,
+        "file": "ticker-2-dash.html",
+        "headerColor": "D12500"
+      }
+    ],
+    "graphics": [
+      {
+        "file": "ticker-2.html",
+        "width": 1920,
+        "height": 1080
+      }
+    ]
+
+  },
+  "repository": "https://github.com/nodecg/nodecg.git",
+  "private": true
+}
