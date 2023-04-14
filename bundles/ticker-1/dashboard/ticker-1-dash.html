@@ -68,9 +68,7 @@
 </head>
 <body>
 	<p>
-		Hello, I'm one of the panels in your bundle!
-		I'm where you put your controls.
-
+		Top Right Ticker
 	</p>
 
 	<div><label>Enter your information:</label></div>
@@ -93,8 +91,8 @@
 
 
 </body>
-
-	<script>
+<script src="/nodecg-api.min.js"></script>
+<script>
 	
 	const headerInput = document.querySelector('#headerInput');
 	const titleInput = document.querySelector('#titleInput');
@@ -139,7 +137,6 @@
 		netRSN.value = newValue;
 	});
 
-
 	buttonSubmit.onclick = () => {
 		// A Replicant can be modified by modifying its `value`.
 		titleReplicant.value = titleInput.value;
@@ -150,11 +147,11 @@
 	};
 
 	buttonPlay.onclick = () => {
-		nodecg.sendMessage('playTicker',);
+		nodecg.sendMessage('playTicker');
 	};
 
 	buttonClear.onclick = () => {
-		nodecg.sendMessage('stopTicker',);
+		nodecg.sendMessage('stopTicker');
 };
 
 function netCheck() {
@@ -182,13 +179,10 @@ function netCheck() {
   }
 
   
-  console.log(netCBCRep) 
-  console.log(netTSNRep)
-  console.log(netRSNRep)
+  console.log("CBC", netCBCRep.value); 
+  console.log("TSN", netTSNRep.value);
+  console.log("RSN", netRSNRep.value);
 }
-
-
-
 
 </script>
 

@@ -5,8 +5,7 @@
   "homepage": "",
   "author": {
     "name": "T.J.",
-    "email": "tjheideman@gmail.com",
-    "url": ""
+    "email": "tjheideman@gmail.com"
   },
   "files": [
     "dashboard",
@@ -36,22 +35,6 @@
         "width": 1920,
         "height": 1080
       }
-    ],
-    "soundCues": [
-      {
-        "name": "NAV_IN_mp3",
-        "defaultVolume": 100,
-        "assignable": true,
-        "channels": 1
-
-      },
-      {
-        "name": "NAV_OUT_mp3",
-        "defaultVolume": 100,
-        "assignable": true,
-        "channels": 1
-      }
-
     ]
   },
   "repository": "https://github.com/nodecg/nodecg.git",

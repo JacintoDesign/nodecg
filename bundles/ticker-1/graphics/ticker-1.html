@@ -75,8 +75,10 @@
 			<div id="nav_message"><span>LINE3</span></div>
 		</div>
 		<div id="nav_lower"><span>LINE4</span></div>
+		<audio id="audioIn" src="/bundles/ticker-1/shared/sound/NAV_IN.wav"></audio>
+		<audio id="audioOut" src="/bundles/ticker-1/shared/sound/NAV_OUT.wav"></audio>
 	</div>
-	
+	<script src="/nodecg-api.min.js"></script>
 	<script>
 		// We can access Replicants from other bundles by specifying the bundle name as a second parameter.
 		// NodeCG requires that bundle names match their directory names, but you can always check the `package.json` to double check.
@@ -105,28 +107,33 @@
 			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
 			lowerReplicant.on('change', (newValue, oldValue) => {
 			nav_lower.innerText = newValue;
-		});	
-		netCBCRep.on('change', (newValue, oldValue) => {
-			netCBC.value = newValue;
-			console.log(netCBC)
-		});	
-		
-		nodecg.listenFor('playTicker',() => {
-        	if (netCBCRep.value = "true") {
-				console.log(netCBCRep)
-				nodecg.playSound('NAV_IN_mp3');
-				$('#nav_container').slideDown(1000);
-				} else
-				console.log(netCBCRep)
-			});
+		});
 
-			nodecg.listenFor('stopTicker',() => {
-        	if (netCBCRep.value = "true") {
-				nodecg.playSound('NAV_OUT_mp3');
+		netCBCRep.on('change', (newValue, oldValue) => {
+			netCBCRep.value = newValue;
+			console.log("CBC change", netCBCRep.value)
+		});	
+
+		nodecg.listenFor('playTicker', () => {
+			if (netCBCRep.value == "true") {
+				var audio = document.getElementById("audioIn");
+  				audio.play();
+				$('#nav_container').slideDown(1000);
+				console.log('playTicker');
+			} else {
+				console.log("CBC", netCBCRep.value);
+			}});
+
+		nodecg.listenFor('stopTicker', () => {
+			if (netCBCRep.value == "true") {
+				var audio = document.getElementById("audioOut");
+				audio.play();
 				$('#nav_container').slideUp(1000);
-				} else
-				console.log(netCBCRep)
-			});
+				console.log("stopTicker");
+			} else {
+				console.log("CBC", netCBCRep.value);
+			}
+		});
 
 	</script>
 
