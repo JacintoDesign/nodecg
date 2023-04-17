@@ -1,53 +1,121 @@
+@font-face {
+    font-family: 'Gotham Bold';
+    src: url('../shared/fonts/Gotham-Bold.ttf') format('truetype');
+    font-weight: bold;
+  }
+  
+  @font-face {
+    font-family: 'Gotham Book';
+    src: url('../shared/fonts/Gotham-Book.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Gotham Light';
+    src: url('../shared/fonts/Gotham-Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Gotham Medium';
+    src: url('../shared/fonts/Gotham-Medium.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
 body {
-    font-family: sans-serif;
-    background: lightslategray;
+    background: url('../shared/assets/mountain.jpg');
+    background-size: 170%;
+    background-position: 45% 23.45%;
+    padding: 0;
+    margin: 0;
 }
 
-#nav_container {
-    background-color:#EEE;
-    width: 300px;
-    float: right;   
+#ticker_wrapper {
+    width: 290px;
+    position: absolute;
+    right: 50px;   
 }
 
-#nav_container span {
-    padding: 5px 10px;
+#ticker_decoration {
+    width: 290px;
+    height: 60px;
+    display: flex;
 }
 
-#nav_header {
-    font-family: 'Radio Canada', sans-serif;
-    font-weight: 700;
+#box_1 {
+    position: relative;
+    background: url('../shared/assets/pattern-brick.png');
+    height: 59px;
+    width: 100%;
+    background-size: 130%;
+    background-position: 50% 86%;
+    background-repeat: no-repeat;
+    opacity: 0.4;
+}
+
+#ticker_main div {
+    padding: 0 7.5px;
+}
+
+#ticker_header {
+    font-family: 'Gotham Bold', sans-serif;
+    text-transform: uppercase;
+    font-size: 1.7em;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    background: black;
+    color: rgb(235, 235, 235);
+}
+
+#ticker_content {
+    font-family: 'Gotham Book', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    color: black;
+    background-color:whitesmoke;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px !important;
+}
+
+#ticker_title {
+    font-family: 'Gotham Medium', sans-serif;
+    color: gray;
+    letter-spacing: -1px;
     text-transform: uppercase;
     font-size: 1.5em;
-    padding: 0em 0em 0em .2em;
+    font-weight: bold;
 }
 
-#nav_title {
-    font-family: 'Radio Canada', sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 1.5em;
-    padding: 0em 0em 0em .2em;
+#ticker_message {
+    font-size: 1.35em;
 }
 
-#nav_content {
-    font-family: 'Radio Canada', sans-serif;
-    font-weight: 400;
-    text-transform: uppercase;
-    color: #FFF;
-    background-color:#444;
-    padding: 0em 0em 0em .2em;
+#ticker_time {
+    font-size: 1.35em;
+    padding-bottom: 3px;
 }
 
-#nav_lower {
-    font-family: 'Radio Canada', sans-serif;
-    font-weight: 300;
-    text-transform: uppercase;
-    color:#FFF;
-    background-color:#222;
-    font-size: 0.8em;
-    padding: 0em 0em 0em .2em;
-} 
-
-.monospace {
-    font-family: monospace;
-}
+#ticker_footer {
+    position: relative;
+    background: url('../shared/assets/pattern-flower.jpg');
+    height: 10px;
+    background-size: 160% 40px;
+    background-position: 100% 50%;
+    background-repeat: no-repeat;
+    filter: saturate(200%);
+  }
+  
+  #ticker_footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.4;
+  }  

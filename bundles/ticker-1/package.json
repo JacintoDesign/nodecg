@@ -4,15 +4,15 @@
   "description": "Layering some cool graphics onto things",
   "homepage": "",
   "author": {
-    "name": "T.J.",
-    "email": "tjheideman@gmail.com"
+    "name": "Jacinto Wong",
+    "email": "jacinto.wong@cbc.ca"
   },
   "files": [
     "dashboard",
     "graphics",
     "extension.js",
     "extension",
-    "sound"
+    "sounds"
   ],
   "keywords": [
     "",
