@@ -3,72 +3,20 @@
 <head>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+	<link
+		href="https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+		rel="stylesheet">
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="ticker-1.css">
 	<script src="../shared/jquery-3.6.3.min.js"></script>
-	<style>
-		body {
-			font-family: sans-serif;
-		}
-
-		#nav_container {
-			background-color:#EEE;
-			width: 300px;
-			float: right;
-			
-		}
-
-		#nav_container span {
-			padding: 5px 10px;
-		}
-
-		#nav_header {
-			font-family: 'Radio Canada', sans-serif;
-			font-weight: 700;
-			text-transform: uppercase;
-			font-size: 1.5em;
-			padding: 0em 0em 0em .2em;
-		}
-
-		#nav_title {
-			font-family: 'Radio Canada', sans-serif;
-			font-weight: 600;
-			text-transform: uppercase;
-			font-size: 1.5em;
-			padding: 0em 0em 0em .2em;
-		}
-
-		#nav_content {
-			font-family: 'Radio Canada', sans-serif;
-			font-weight: 400;
-			text-transform: uppercase;
-			color: #FFF;
-			background-color:#444;
-			padding: 0em 0em 0em .2em;
-		}
-
-		#nav_lower {
-			font-family: 'Radio Canada', sans-serif;
-			font-weight: 300;
-			text-transform: uppercase;
-			color:#FFF;
-			background-color:#222;
-			font-size: 0.8em;
-			padding: 0em 0em 0em .2em;
-		} 
-
-		.monospace {
-			font-family: monospace;
-		}
-
-
-	</style>
+	<script src="/nodecg-api.min.js"></script>
+	<script src="ticker-1.js"></script>
 </head>
+
 <body>
 	<div id="nav_container">
-		
 		<div id="nav_header">
-		<span>LINE1</span>
+			<span>LINE1</span>
 		</div>
 		<div id="nav_content">
 			<div id="nav_title"><span>LINE2</span></div>
@@ -78,65 +26,6 @@
 		<audio id="audioIn" src="/bundles/ticker-1/shared/sound/NAV_IN.wav"></audio>
 		<audio id="audioOut" src="/bundles/ticker-1/shared/sound/NAV_OUT.wav"></audio>
 	</div>
-	<script src="/nodecg-api.min.js"></script>
-	<script>
-		// We can access Replicants from other bundles by specifying the bundle name as a second parameter.
-		// NodeCG requires that bundle names match their directory names, but you can always check the `package.json` to double check.
-		//const netCBC = 
-		//console.log(netCBC);
-		const headerReplicant = nodecg.Replicant('header');
-		const titleReplicant = nodecg.Replicant('title');
-		const messageReplicant = nodecg.Replicant('message');
-		const lowerReplicant = nodecg.Replicant('lower');
-		var netCBCRep = nodecg.Replicant('netCBC');
-		//console.log(netCBCRep);
-		
-
-			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-			headerReplicant.on('change', (newValue, oldValue) => {
-			nav_header.innerText = newValue;
-		});
-			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-			titleReplicant.on('change', (newValue, oldValue) => {
-			nav_title.innerText = newValue;
-		});
-			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-			messageReplicant.on('change', (newValue, oldValue) => {
-			nav_message.innerText = newValue;
-		});
-			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-			lowerReplicant.on('change', (newValue, oldValue) => {
-			nav_lower.innerText = newValue;
-		});
-
-		netCBCRep.on('change', (newValue, oldValue) => {
-			netCBCRep.value = newValue;
-			console.log("CBC change", netCBCRep.value)
-		});	
-
-		nodecg.listenFor('playTicker', () => {
-			if (netCBCRep.value == "true") {
-				var audio = document.getElementById("audioIn");
-  				audio.play();
-				$('#nav_container').slideDown(1000);
-				console.log('playTicker');
-			} else {
-				console.log("CBC", netCBCRep.value);
-			}});
-
-		nodecg.listenFor('stopTicker', () => {
-			if (netCBCRep.value == "true") {
-				var audio = document.getElementById("audioOut");
-				audio.play();
-				$('#nav_container').slideUp(1000);
-				console.log("stopTicker");
-			} else {
-				console.log("CBC", netCBCRep.value);
-			}
-		});
-
-	</script>
-
-   
 </body>
+
 </html>
