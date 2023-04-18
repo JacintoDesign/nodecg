@@ -169,3 +169,54 @@ body {
 		background-color: black;
 		opacity: 0.4;
 	}  
+
+	.text-fade-out {
+		animation: text-fade-out 0.5s forwards;
+	}
+	
+	.text-fade-in {
+		animation: text-fade-in 0.5s forwards;
+	}
+
+	/* Update Text Animation */
+	@keyframes text-fade-out {
+		0% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0;
+		}
+	}
+	
+	@keyframes text-fade-in {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+	/* Animate Out */
+	@keyframes decoration-slide-up {
+		0% {
+			transform: translateY(0);
+		}
+		100% {
+			transform: translateY(-60px);
+		}
+	}
+	
+	@keyframes hide {
+		0% {
+			opacity: 1;
+			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+		}
+		100% {
+			opacity: 0;
+			clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+		}
+	}
+	
+	
+	
