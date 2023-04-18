@@ -11,32 +11,33 @@
 		
 
 			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-			headerReplicant.on('change', (newValue, oldValue) => {
+			headerReplicant.on('change', (newValue) => {
 			nav_header.innerText = newValue;
 		});
 			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-			titleReplicant.on('change', (newValue, oldValue) => {
+			titleReplicant.on('change', (newValue) => {
 			nav_title.innerText = newValue;
 		});
 			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-			messageReplicant.on('change', (newValue, oldValue) => {
+			messageReplicant.on('change', (newValue) => {
 			nav_message.innerText = newValue;
 		});
 			// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-			lowerReplicant.on('change', (newValue, oldValue) => {
+			lowerReplicant.on('change', (newValue) => {
 			nav_lower.innerText = newValue;
 		});
 
-		netCBCRep.on('change', (newValue, oldValue) => {
+		netCBCRep.on('change', (newValue) => {
 			netCBCRep.value = newValue;
 			console.log("CBC change", netCBCRep.value)
 		});	
 
 		nodecg.listenFor('playTicker', () => {
 			if (netCBCRep.value == "true") {
+                // Play Audio In
 				var audio = document.getElementById("audioIn");
   				audio.play();
-				$('#nav_container').slideDown(1000);
+                // Animate In
 				console.log('playTicker');
 			} else {
 				console.log("CBC", netCBCRep.value);
@@ -44,9 +45,10 @@
 
 		nodecg.listenFor('stopTicker', () => {
 			if (netCBCRep.value == "true") {
+                // Play Audio Out
 				var audio = document.getElementById("audioOut");
 				audio.play();
-				$('#nav_container').slideUp(1000);
+                // Animate Out
 				console.log("stopTicker");
 			} else {
 				console.log("CBC", netCBCRep.value);
