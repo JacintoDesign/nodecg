@@ -50,53 +50,78 @@
 //     }
 // });
 
-function updateText(textClass, newText) {
-    const textElements = document.querySelectorAll(textClass);
-  
-    textElements.forEach((element) => {
-      element.classList.add('text-fade-out');
-  
-      element.addEventListener('animationend', () => {
-        element.textContent = newText;
-        element.classList.remove('text-fade-out');
-        element.classList.add('text-fade-in');
-  
-        element.addEventListener('animationend', () => {
-          element.classList.remove('text-fade-in');
-        }, { once: true });
-      }, { once: true });
-    });
-  }
-  
+function animateTimeText() {
+  const timeTextParts = document.querySelectorAll('.time-text-part');
+  let delay = 500; // Animation delay in milliseconds
 
-  document.addEventListener('DOMContentLoaded', () => {
-    const animateOutBtn = document.getElementById('animate-out-btn');
-    const animateInBtn = document.getElementById('animate-in-btn');
-    const updateTextBtn = document.getElementById('update-text-btn');
-  
-    animateOutBtn.addEventListener('click', () => {
-        const decoration = document.getElementById('ticker_decoration');
-        const main = document.getElementById('ticker_main');
-        main.style.animation = 'hide 1s ease-in forwards';
-      
-        main.addEventListener('animationend', () => {
-          decoration.style.animation = 'decoration-slide-up 1s ease-in forwards';
-        }, { once: true });
-      });
-      
-  
-    animateInBtn.addEventListener('click', () => {
-      const decoration = document.getElementById('ticker_decoration');
-      const main = document.getElementById('ticker_main');
-      decoration.style.animation = 'decoration-slide-down 1s ease-in forwards';
-      main.style.animation = 'reveal 1s ease-in forwards 1s';
-    });
-  
-    updateTextBtn.addEventListener('click', () => {
-      // Replace this with the actual new text you want to set
-      const newText = 'New Content';
-      updateText('.text', newText);
-    });
+  timeTextParts.forEach((part) => {
+    part.style.opacity = '0';
+    part.style.animationName = 'fade-in';
+    part.style.animationDuration = '1s';
+    part.style.animationTimingFunction = 'ease-in';
+    part.style.animationFillMode = 'forwards';
+    part.style.animationDelay = `${delay}ms`;
+    delay += 200;
   });
-  
-  
+}
+
+let groups = [];
+let currentGroup = 0;
+
+function switchGroup() {
+  groups[currentGroup].style.display = 'none';
+  currentGroup = (currentGroup + 1) % groups.length;
+  groups[currentGroup].style.display = 'block';
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const animateOutBtn = document.getElementById('animate-out-btn');
+  const animateInBtn = document.getElementById('animate-in-btn');
+  const updateTextBtn = document.getElementById('update-text-btn');
+
+  groups = [
+    document.getElementById('results-group'),
+    document.getElementById('events-group'),
+    document.getElementById('breaking-group'),
+  ];
+
+  animateOutBtn.addEventListener('click', () => {
+    const decoration = document.getElementById('ticker_decoration');
+    const main = document.getElementById('ticker_main');
+    main.style.animation = 'hide 1s ease-in forwards';
+    const timeTextParts = document.querySelectorAll('.time-text-part');
+
+    timeTextParts.forEach((part) => {
+      part.style.opacity = '0';
+      part.style.animationName = '';
+      part.style.animationDuration = '';
+      part.style.animationTimingFunction = '';
+      part.style.animationFillMode = '';
+      part.style.animationDelay = '';
+    });
+
+    main.addEventListener('animationend', () => {
+      decoration.style.animation = 'decoration-slide-up 1s ease-in forwards';
+    }, { once: true });
+  });
+
+  animateInBtn.addEventListener('click', () => {
+    const decoration = document.getElementById('ticker_decoration');
+    const main = document.getElementById('ticker_main');
+    decoration.style.animation = 'decoration-slide-down 1s ease-in forwards';
+    main.style.animation = 'reveal 1s ease-in forwards 1s';
+    // Set a delay before calling animateTimeText
+    setTimeout(() => {
+      animateTimeText();
+    }, 2000);
+  });
+
+  updateTextBtn.addEventListener('click', () => {
+    switchGroup();
+  });
+
+});
+
+setTimeout(() => {
+  animateTimeText();
+}, 2000);

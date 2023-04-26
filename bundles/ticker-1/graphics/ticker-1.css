@@ -83,7 +83,7 @@ body {
 	} 
 	
 
-#ticker_main div {
+#results-group div, #events-group div, #breaking-group div {
 		padding: 0 7.5px;
 }
 
@@ -98,19 +98,36 @@ body {
 }
 
 #ticker_header .text {
-  display: inline-block;
+  	display: inline-block;
 	position: relative;
 	top: 1px;
-  animation: text-slide-up 1s ease-in forwards 1.5s;
+  	animation: text-slide-up 1s ease-in forwards;
+}
+
+.red {
+	background-color: red !important;
 }
 
 @keyframes text-slide-up {
 		0% {
+			opacity: 0;
 			transform: translateY(0);
 		}
 		100% {
 			transform: translateY(-1px);
+			opacity: 1;
 		}
+}
+
+@keyframes text-slide-up-alt {
+	0% {
+		transform: translateY(0);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(-2px);
+		opacity: 1;
+	}
 }
 
 #ticker_content {
@@ -122,6 +139,12 @@ body {
 		display: flex;
 		flex-direction: column;
 		padding-top: 5px !important;
+		padding-bottom: 5px !important;
+}
+
+#event-time, #event-text {
+	display: flex;
+	flex-direction: column;
 }
 
 #ticker_title {
@@ -137,17 +160,33 @@ body {
 	display: inline-block;
 	position: relative;
 	top: 1px;
-	animation: text-slide-up 1s ease-in forwards 1.5s;
+	animation: text-slide-up 1s ease-in forwards;
 }
 
 #ticker_message {
-		font-size: 1.35em;
+	font-size: 1.35em;
 }
 
-#ticker_time {
-		font-size: 1.35em;
-		padding-bottom: 3px;
+#ticker_message .text {
+	display: inline-block;
+	position: relative;
+	top: 2px;
+	animation: text-slide-up-alt 1s ease-in forwards;
 }
+
+/* Time */
+#ticker_time {
+	font-size: 1.35em;
+}
+
+@keyframes fade-in {
+	0% {
+	  opacity: 0;
+	}
+	100% {
+	  opacity: 1;
+	}
+  }  
 
 #ticker_footer {
 		position: relative;
@@ -219,4 +258,10 @@ body {
 	}
 	
 	
-	
+#events-group {
+	display: none;
+}
+
+#breaking-group {
+	display: none;
+}
