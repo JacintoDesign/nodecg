@@ -1,19 +1,18 @@
 {
-  "name": "ticker-2",
+  "name": "nav-1",
   "version": "0.0.1",
   "description": "Layering some cool graphics onto things",
   "homepage": "",
   "author": {
-    "name": "T.J.",
-    "email": "tjheideman@gmail.com",
-    "url": ""
+    "name": "Jacinto Wong",
+    "email": "jacinto.wong@cbc.ca"
   },
   "files": [
     "dashboard",
     "graphics",
     "extension.js",
     "extension",
-    "sound"
+    "sounds"
   ],
   "keywords": [
     "",
@@ -23,21 +22,20 @@
     "compatibleRange": "^2.1.2",
     "dashboardPanels": [
       {
-        "name": "ticker-2",
-        "title": "Ticker 2",
+        "name": "nav-1",
+        "title": "nav 1",
         "width": 5,
-        "file": "ticker-2-dash.html",
+        "file": "nav-1-dash.html",
         "headerColor": "D12500"
       }
     ],
     "graphics": [
       {
-        "file": "ticker-2.html",
+        "file": "nav-1.html",
         "width": 1920,
         "height": 1080
       }
     ]
-
   },
   "repository": "https://github.com/nodecg/nodecg.git",
   "private": true

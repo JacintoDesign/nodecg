@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+	<meta charset="UTF-8">
+	<style>
+		p{
+			font-family: 'Radio Canada', sans-serif;
+		}
+		
+		Input{
+			font-family: 'Radio Canada';
+			font-size: 200;
+		}
+		.monospace {
+			font-family: radio-canada;
+		}
+
+		.button {
+  			 border: none;
+ 			 color: white;
+ 			 padding: 16px 32px;
+ 			 text-align: center;
+ 			 text-decoration: none;
+ 			 display: inline-block;
+ 			 font-size: 16px;
+ 			 margin: 4px 2px;
+  			 transition-duration: 0.4s;
+  			 cursor: pointer;
+			 font-family:'Radio Canada'
+		}
+
+		.buttonSubmit {
+  			background-color: white; 
+ 			 color: black; 
+ 			 border: 2px solid #0055f1;
+		}
+
+		.buttonSubmit:hover {
+ 			 background-color: #0055f1;
+			  color: white;
+		}
+
+		.buttonPlay {
+ 			 background-color: white; 
+ 			 color: black; 
+  			border: 2px solid #01753f;
+		}
+
+		.buttonPlay:hover {
+ 		 background-color: #01753f;
+ 		 color: white;
+			}
+		
+		.buttonClear {
+ 			 background-color: white; 
+ 			 color: black; 
+  			border: 2px solid #a00000;
+		}
+
+		.buttonClear:hover {
+ 		 background-color: #a00000;
+ 		 color: white;
+			}			
+	</style>
+</head>
+<body>
+	<p>
+		Top Right Ticker
+	</p>
+
+	<div><label>Enter your information:</label></div>
+	<div><input id="headerInput" type="text" placeholder="HEADER, eg CBC"></input></div>
+	<div><input id="titleInput" type="text" placeholder="TITLE, eg COMING UP"></input></div>
+	<div><input id="messageInput" type="text" placeholder="MESSAGE eg Rowing, 1pm"></input></div>
+	<div><input id="lowerInput" type="text" placeholder="LOWER eg Or on CBC.ca"></input></div>
+	<button class="button buttonSubmit" >Submit</button>
+	<button class="button buttonPlay">Play</button>
+	<button class="button buttonClear">Clear</button>
+	
+	<div>
+		<input type="checkbox" id="netCBC" name="netCBC" onclick="netCheck()">
+		 <label for="netCBC">CBC</label><br>
+		 <input type="checkbox" id="netTSN" name="netTSN" onclick="netCheck()">
+		 <label for="netTSN">TSN</label><br>
+		 <input type="checkbox" id="netRSN" name="netRSN" onclick="netCheck()">
+		 <label for="netRSN">RSN</label><br>	
+	</div>
+
+
+</body>
+<script src="/nodecg-api.min.js"></script>
+<script>
+	
+	const headerInput = document.querySelector('#headerInput');
+	const titleInput = document.querySelector('#titleInput');
+	const messageInput = document.querySelector('#messageInput');
+	const lowerInput = document.querySelector('#lowerInput');
+	
+	const buttonSubmit = document.querySelector('.button.buttonSubmit');
+	const buttonPlay = document.querySelector('.button.buttonPlay');
+	const buttonClear = document.querySelector('.button.buttonClear');
+
+	const headerReplicant = nodecg.Replicant('header');
+	const titleReplicant = nodecg.Replicant('title');
+	const messageReplicant = nodecg.Replicant('message');
+	const lowerReplicant = nodecg.Replicant('lower');
+
+	const netCBCRep = nodecg.Replicant('netCBC');
+	const netTSNRep = nodecg.Replicant('netTSN');
+	const netRSNRep = nodecg.Replicant('netRSN');
+
+	headerReplicant.on('change', (newValue, oldValue) => {
+		// The value of the Replicant has changed somewhere in NodeCG,
+		// this could be another dashboard panel, a server initiated change,
+		// or the doing of another user accessing your dashboard panel.
+		headerInput.value = newValue;
+	});   
+	titleReplicant.on('change', (newValue, oldValue) => {
+		titleInput.value = newValue;
+	});
+	messageReplicant.on('change', (newValue, oldValue) => {
+		messageInput.value = newValue;
+	});
+	lowerReplicant.on('change', (newValue, oldValue) => {
+		lowerInput.value = newValue;
+	});
+	netCBCRep.on('change', (newValue, oldValue) => {
+		netCBC.value = newValue;
+	});
+	netTSNRep.on('change', (newValue, oldValue) => {
+		netTSN.value = newValue;
+	});
+	netRSNRep.on('change', (newValue, oldValue) => {
+		netRSN.value = newValue;
+	});
+
+	buttonSubmit.onclick = () => {
+		// A Replicant can be modified by modifying its `value`.
+		titleReplicant.value = titleInput.value;
+		headerReplicant.value = headerInput.value;
+		messageReplicant.value = messageInput.value;
+		lowerReplicant.value = lowerInput.value;
+		netCheck();
+	};
+
+	buttonPlay.onclick = () => {
+		nodecg.sendMessage('playTicker');
+	};
+
+	buttonClear.onclick = () => {
+		nodecg.sendMessage('stopTicker');
+};
+
+function netCheck() {
+  // Get the checkbox
+  var CBCcheck = document.getElementById("netCBC");
+  var TSNcheck = document.getElementById("netTSN");
+  var RSNcheck = document.getElementById("netRSN");
+
+  if (CBCcheck.checked == true){
+    netCBCRep.value = "true";
+  } else {
+    netCBCRep.value = "false";
+  }
+  
+  if (TSNcheck.checked == true){
+    netTSNRep.value = "true";
+  } else {
+    netTSNRep.value = "false";
+  }
+  
+  if (RSNcheck.checked == true){
+    netRSNRep.value = "true";
+  } else {
+    netRSNRep.value = "false";
+  }
+
+  
+  console.log("CBC", netCBCRep.value); 
+  console.log("TSN", netTSNRep.value);
+  console.log("RSN", netRSNRep.value);
+}
+
+</script>
+
+</html>
