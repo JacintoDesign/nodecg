@@ -27,51 +27,67 @@
 //     console.log("CBC change", netCBCRep.value)
 // });	
 
-// nodecg.listenFor('playTicker', () => {
+// nodecg.listenFor('playnav', () => {
 //     if (netCBCRep.value == "true") {
 //         // Play Audio In
 //         var audio = document.getElementById("audioIn");
 //         audio.play();
 //         // Animate In
-//         console.log('playTicker');
+//         console.log('playnav');
 //     } else {
 //         console.log("CBC", netCBCRep.value);
 //     }});
 
-// nodecg.listenFor('stopTicker', () => {
+// nodecg.listenFor('stopnav', () => {
 //     if (netCBCRep.value == "true") {
 //         // Play Audio Out
 //         var audio = document.getElementById("audioOut");
 //         audio.play();
 //         // Animate Out
-//         console.log("stopTicker");
+//         console.log("stopnav");
 //     } else {
 //         console.log("CBC", netCBCRep.value);
 //     }
 // });
 
 function animateTimeText() {
-  const timeTextParts = document.querySelectorAll('.time-text-part');
   let delay = 500; // Animation delay in milliseconds
 
-  timeTextParts.forEach((part) => {
-    part.style.opacity = '0';
-    part.style.animationName = 'fade-in';
-    part.style.animationDuration = '1s';
-    part.style.animationTimingFunction = 'ease-in';
-    part.style.animationFillMode = 'forwards';
-    part.style.animationDelay = `${delay}ms`;
+  for (let i = 1; i <= 3; i++) {
+    const part = document.getElementById(`time-${i}`);
+    part.style.animation = `fade-in 1s ease-in forwards ${delay}ms`;
     delay += 200;
-  });
+  }
 }
 
-let groups = [];
-let currentGroup = 0;
+function updateText(id, text) {
+  const element = document.getElementById(id);
+  element.style.animation = 'text-slide-out .5s ease-in forwards';
+  setTimeout(() => {
+    if (id !== "nav_time") {
+      element.textContent = text;
+      element.style.animation = 'text-slide-in .5s ease-in forwards';
+    } else {
+      const [time, amPm, timeZone] = text.split(' ');
+      document.getElementById('time-1').textContent = time;
+      document.getElementById('time-2').textContent = amPm;
+      document.getElementById('time-3').textContent = timeZone;
 
-function switchGroup() {
-  groups[currentGroup].style.display = 'none';
-  currentGroup = (currentGroup + 1) % groups.length;
-  groups[currentGroup].style.display = 'block';
+      element.style.animation = ''; // Reset animation for nav_time element
+
+      for (let i = 1; i <= 3; i++) {
+        const part = document.getElementById(`time-${i}`);
+        part.style.animation = ''; // Reset animation
+      }
+
+      setTimeout(() => {
+        for (let i = 1; i <= 3; i++) {
+          const part = document.getElementById(`time-${i}`);
+          part.style.animation = `time-text-slide-in .5s ease-in forwards ${i * 200}ms`;
+        }
+      }, 100);
+    }
+  }, 500);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -79,49 +95,56 @@ document.addEventListener('DOMContentLoaded', () => {
   const animateInBtn = document.getElementById('animate-in-btn');
   const updateTextBtn = document.getElementById('update-text-btn');
 
-  groups = [
-    document.getElementById('results-group'),
-    document.getElementById('events-group'),
-    document.getElementById('breaking-group'),
+  const channelInfos = [
+    { header: 'TSN', title: 'Freestyle Halfpipe', time: '8:00 AM ET', day: 'Today' },
+    { header: 'SN', title: 'Ski Jumping', time: '3:00 PM ET', day: 'Tuesday' },
+    { header: 'TSN2', title: 'Biathalon', time: '1:30 PM ET', day: 'Friday' },
+    { header: 'SN1', title: 'Nordic Combined', time: '11:00 PM ET', day: 'Tonight' }
   ];
+  let currentInfoIndex = 0;
+
+  updateTextBtn.addEventListener('click', () => {
+    const nextInfo = channelInfos[currentInfoIndex];
+    updateText('header_text', nextInfo.header);
+    updateText('nav_title', nextInfo.title);
+    updateText('nav_time', nextInfo.time);
+    updateText('nav_footer_text', nextInfo.day);
+  
+    currentInfoIndex = (currentInfoIndex + 1) % channelInfos.length;
+  });  
 
   animateOutBtn.addEventListener('click', () => {
-    const decoration = document.getElementById('ticker_decoration');
-    const main = document.getElementById('ticker_main');
+    const decoration = document.getElementById('nav_decoration');
+    const main = document.getElementById('nav_main');
+    const footer = document.getElementById('nav_footer');
     main.style.animation = 'hide 1s ease-in forwards';
+    footer.style.animation = 'hide-footer 1s ease-in forwards';
     const timeTextParts = document.querySelectorAll('.time-text-part');
 
     timeTextParts.forEach((part) => {
-      part.style.opacity = '0';
-      part.style.animationName = '';
-      part.style.animationDuration = '';
-      part.style.animationTimingFunction = '';
-      part.style.animationFillMode = '';
-      part.style.animationDelay = '';
+      part.style.animation = 'fade-out 1s ease-in forwards';
     });
 
     main.addEventListener('animationend', () => {
-      decoration.style.animation = 'decoration-slide-up 1s ease-in forwards';
+      decoration.style.animation = 'decoration-slide-out 1s ease-in forwards';
     }, { once: true });
   });
 
   animateInBtn.addEventListener('click', () => {
-    const decoration = document.getElementById('ticker_decoration');
-    const main = document.getElementById('ticker_main');
-    decoration.style.animation = 'decoration-slide-down 1s ease-in forwards';
-    main.style.animation = 'reveal 1s ease-in forwards 1s';
+    const decoration = document.getElementById('nav_decoration');
+    const main = document.getElementById('nav_main');
+    const footer = document.getElementById('nav_footer');
+    decoration.style.animation = 'decoration-slide-in 1s ease-in forwards';
+    footer.style.animation = 'reveal-footer 1s ease-in forwards .5s';
+    main.style.animation = 'reveal 1s ease-in forwards .5s';
     // Set a delay before calling animateTimeText
     setTimeout(() => {
       animateTimeText();
-    }, 2000);
-  });
-
-  updateTextBtn.addEventListener('click', () => {
-    switchGroup();
+    }, 1500);
   });
 
 });
 
 setTimeout(() => {
   animateTimeText();
-}, 2000);
+}, 1500);
