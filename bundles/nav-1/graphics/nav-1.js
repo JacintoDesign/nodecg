@@ -50,6 +50,7 @@
 //     }
 // });
 
+// Animate Time Text Helper
 function animateTimeText() {
   let delay = 500; // Animation delay in milliseconds
 
@@ -60,14 +61,19 @@ function animateTimeText() {
   }
 }
 
+// Update Text Helper
 function updateText(id, text) {
+  // Animate Out Previous
   const element = document.getElementById(id);
   element.style.animation = 'text-slide-out .5s ease-in forwards';
-  setTimeout(() => {
+  
+  element.addEventListener('animationend', () => {
+    // If Not Time, Animate In
     if (id !== "nav_time") {
       element.textContent = text;
-      element.style.animation = 'text-slide-in .5s ease-in forwards';
+      element.style.animation = 'text-slide-in .5s ease-out forwards';
     } else {
+      // Set Text for Time
       const [time, amPm, timeZone] = text.split(' ');
       document.getElementById('time-1').textContent = time;
       document.getElementById('time-2').textContent = amPm;
@@ -75,26 +81,32 @@ function updateText(id, text) {
 
       element.style.animation = ''; // Reset animation for nav_time element
 
+      // Reset Time Elements
       for (let i = 1; i <= 3; i++) {
         const part = document.getElementById(`time-${i}`);
         part.style.animation = ''; // Reset animation
+        part.style.opacity = '0'; // Reset opacity
       }
 
+      // Animate In Time Elements
       setTimeout(() => {
         for (let i = 1; i <= 3; i++) {
           const part = document.getElementById(`time-${i}`);
           part.style.animation = `time-text-slide-in .5s ease-in forwards ${i * 200}ms`;
         }
-      }, 100);
+      }, 50);
     }
-  }, 500);
+  }, { once: true });
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
+  // Button Elements
   const animateOutBtn = document.getElementById('animate-out-btn');
   const animateInBtn = document.getElementById('animate-in-btn');
   const updateTextBtn = document.getElementById('update-text-btn');
 
+  // Channel Info
   const channelInfos = [
     { header: 'TSN', title: 'Freestyle Halfpipe', time: '8:00 AM ET', day: 'Today' },
     { header: 'SN', title: 'Ski Jumping', time: '3:00 PM ET', day: 'Tuesday' },
@@ -103,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   let currentInfoIndex = 0;
 
+  // Update Text
   updateTextBtn.addEventListener('click', () => {
     const nextInfo = channelInfos[currentInfoIndex];
     updateText('header_text', nextInfo.header);
@@ -113,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
     currentInfoIndex = (currentInfoIndex + 1) % channelInfos.length;
   });  
 
+  // Animate Out
   animateOutBtn.addEventListener('click', () => {
     const decoration = document.getElementById('nav_decoration');
     const main = document.getElementById('nav_main');
@@ -121,15 +135,18 @@ document.addEventListener('DOMContentLoaded', () => {
     footer.style.animation = 'hide-footer 1s ease-in forwards';
     const timeTextParts = document.querySelectorAll('.time-text-part');
 
+    // Fade Out Time
     timeTextParts.forEach((part) => {
       part.style.animation = 'fade-out 1s ease-in forwards';
     });
 
+    // Fade Out Decoration
     main.addEventListener('animationend', () => {
       decoration.style.animation = 'decoration-slide-out 1s ease-in forwards';
     }, { once: true });
   });
 
+  // Animate In
   animateInBtn.addEventListener('click', () => {
     const decoration = document.getElementById('nav_decoration');
     const main = document.getElementById('nav_main');
@@ -145,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
+// Initial Time Text Animation
 setTimeout(() => {
   animateTimeText();
 }, 1500);
