@@ -52,7 +52,7 @@
 
 // Animate Time Text Helper
 function animateTimeText() {
-  let delay = 500; // Animation delay in milliseconds
+  let delay = 100; // Animation delay in milliseconds
 
   for (let i = 1; i <= 3; i++) {
     const part = document.getElementById(`time-${i}`);
@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   let currentInfoIndex = 0;
 
-  // Update Text
+  // Update Text ---------
   updateTextBtn.addEventListener('click', () => {
     const nextInfo = channelInfos[currentInfoIndex];
     updateText('header_text', nextInfo.header);
@@ -126,18 +126,21 @@ document.addEventListener('DOMContentLoaded', () => {
     currentInfoIndex = (currentInfoIndex + 1) % channelInfos.length;
   });  
 
-  // Animate Out
+  // Animate Out ---------
   animateOutBtn.addEventListener('click', () => {
     const decoration = document.getElementById('nav_decoration');
     const main = document.getElementById('nav_main');
     const footer = document.getElementById('nav_footer');
-    main.style.animation = 'hide 1s ease-in forwards';
-    footer.style.animation = 'hide-footer 1s ease-in forwards';
+    const triangle = document.getElementById('triangle');
+    const triangleImg = triangle.querySelector('img');
+    main.style.animation = 'hide .5s ease-in forwards';
+    footer.style.animation = 'hide-footer .5s ease-in forwards';
+    triangleImg.style.animation = 'diagonal-animation-2 .75s ease-in forwards';
     const timeTextParts = document.querySelectorAll('.time-text-part');
 
     // Fade Out Time
     timeTextParts.forEach((part) => {
-      part.style.animation = 'fade-out 1s ease-in forwards';
+      part.style.animation = 'fade-out .5s ease-in forwards';
     });
 
     // Fade Out Decoration
@@ -146,18 +149,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { once: true });
   });
 
-  // Animate In
+  // Animate In ---------
   animateInBtn.addEventListener('click', () => {
     const decoration = document.getElementById('nav_decoration');
     const main = document.getElementById('nav_main');
     const footer = document.getElementById('nav_footer');
-    decoration.style.animation = 'decoration-slide-in 1s ease-in forwards';
-    footer.style.animation = 'reveal-footer 1s ease-in forwards .5s';
-    main.style.animation = 'reveal 1s ease-in forwards .5s';
+    const triangle = document.getElementById('triangle');
+    const triangleImg = triangle.querySelector('img');
+    decoration.style.animation = 'decoration-slide-in .5s ease-in forwards';
+    footer.style.animation = 'reveal-footer .5s ease-in forwards .5s';
+    triangleImg.style.animation = 'fade-in-diagonal 1s ease-in forwards .5s, diagonal-animation-1 2s linear 1s forwards';
+    main.style.animation = 'reveal .5s ease-in forwards .5s';
     // Set a delay before calling animateTimeText
     setTimeout(() => {
       animateTimeText();
-    }, 1500);
+    }, 500);
   });
 
 });
@@ -165,4 +171,4 @@ document.addEventListener('DOMContentLoaded', () => {
 // Initial Time Text Animation
 setTimeout(() => {
   animateTimeText();
-}, 1500);
+}, 500);

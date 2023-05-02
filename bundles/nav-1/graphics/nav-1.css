@@ -48,7 +48,7 @@ body {
 	right: 0;
 	top: 0;
 	display: flex;
-	animation: decoration-slide-in 1s ease-in forwards;
+	animation: decoration-slide-in .5s ease-in forwards;
 }
 
 #box_1 {
@@ -67,7 +67,7 @@ body {
 	position: absolute;
 	right: 54px;
 	width: 370px;
-	animation: reveal 1s ease-in forwards 1s;
+	animation: reveal .5s ease-in forwards .3s;
 	opacity: 0;
 }
 
@@ -132,7 +132,7 @@ body {
 	position: relative;
 	top: 1px;
 	opacity: 0;
-  	animation: text-slide-in .5s ease-in forwards 2s;
+  	animation: text-slide-in .5s ease-in forwards 1s;
 }
 
 @keyframes text-slide-in {
@@ -191,7 +191,7 @@ body {
 	position: relative;
 	top: 1px;
 	opacity: 0;
-	animation: text-slide-in 1s ease-in forwards 2s;
+	animation: text-slide-in 1s ease-in forwards .5s;
 }
 
 /* Time */
@@ -247,7 +247,7 @@ body {
 	position: relative;
 	top: -23px;
 	right: 54px;
-	animation: reveal-footer 1s ease-in forwards 1s;
+	animation: reveal-footer .5s ease-in forwards .3s;
 	opacity: 0;
 }
 
@@ -292,6 +292,71 @@ body {
 	position: relative;
 	top: 3px;
 	left: 5px;
+}
+
+/* Triangle */
+#triangle {
+	position: absolute;
+	top: -23px;
+    left: -111px;
+    width: 57px;
+    height: 30px;
+	height: 30px;
+    clip-path: polygon(100% 0, 0 0, 50% 100%);
+}
+
+#triangle img {
+	position: absolute;
+	bottom: -8px;
+	left: 20%;
+	transform: translateX(-50%) rotate(-45deg);
+	width: 126%;
+	opacity: 0;
+	animation: fade-in-diagonal 1s ease-in forwards .5s, diagonal-animation-1 2s linear 1s forwards;
+}
+  
+@keyframes fade-in-diagonal {
+	0% {
+		opacity: 0;
+		transform: translateX(-50%) rotate(-45deg);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(-50%) rotate(-45deg);
+	}
+}
+
+@keyframes diagonal-animation-1 {
+	0% {
+		position: absolute;
+		bottom: -8px;
+		left: 20%;
+		transform: translateX(-50%) translateY(0%) rotate(-45deg);
+	}
+	100% {
+		position: absolute;
+		bottom: -8px;
+		left: 20%;
+		transform: translateX(-39%) translateY(-18%) rotate(-45deg);
+	}
+}
+  
+@keyframes diagonal-animation-2 {
+	0% {
+		opacity: 1;
+		transform: translateX(-39%) translateY(-18%) rotate(-45deg);
+	}
+	33% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0;
+		transform: translateX(0%) translateY(-66.66%) rotate(-45deg);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(40%) translateY(-140%) rotate(-50deg);
+	}
 }
 
 /* Button Group */
