@@ -50,6 +50,64 @@
 //     }
 // });
 
+document.addEventListener('DOMContentLoaded', () => {
+  // Elements
+  const decoration = document.getElementById('ticker_decoration');
+  const main = document.getElementById('ticker_main');
+  const timeTextParts = document.querySelectorAll('.time-text-part');
+  const audioIn = document.getElementById('audioIn');
+  const audioOut = document.getElementById('audioOut');
+  const animateOutBtn = document.getElementById('animate-out-btn');
+  const animateInBtn = document.getElementById('animate-in-btn');
+  const updateTextBtn = document.getElementById('update-text-btn');
+
+  // Groups Elements
+  groups = [
+    document.getElementById('results-group'),
+    document.getElementById('events-group'),
+    document.getElementById('breaking-group'),
+  ];
+
+  // Animate Out ---------
+  animateOutBtn.addEventListener('click', () => {
+    audioOut.play();
+    main.style.animation = 'hide 1s ease-in forwards';
+
+    // Reset Time
+    timeTextParts.forEach((part) => { 
+      part.style.opacity = '0'; 
+      part.style.animationName = ''; 
+      part.style.animationDuration = ''; 
+      part.style.animationTimingFunction = ''; 
+      part.style.animationFillMode = ''; 
+      part.style.animationDelay = ''; 
+    }); 
+
+    // On Main Hide / Hide Decoration
+    main.addEventListener('animationend', () => {
+      decoration.style.animation = 'decoration-slide-up 1s ease-in forwards';
+    }, { once: true });
+  });
+
+  // Animate In ---------
+  animateInBtn.addEventListener('click', () => {
+    audioIn.play();
+    decoration.style.animation = 'decoration-slide-down 1s ease-in forwards';
+    main.style.animation = 'reveal 1s ease-in forwards 1s';
+    // Set a delay before calling animateTimeText
+    setTimeout(() => {
+      animateTimeText();
+    }, 2000);
+  });
+
+  // Update Group ---------
+  updateTextBtn.addEventListener('click', () => {
+    switchGroup();
+  });
+
+});
+
+// Animate Time Text Helper
 function animateTimeText() {
   const timeTextParts = document.querySelectorAll('.time-text-part');
   let delay = 500; // Animation delay in milliseconds
@@ -65,6 +123,7 @@ function animateTimeText() {
   });
 }
 
+// Show / hide groups
 let groups = [];
 let currentGroup = 0;
 
@@ -74,54 +133,7 @@ function switchGroup() {
   groups[currentGroup].style.display = 'block';
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const animateOutBtn = document.getElementById('animate-out-btn');
-  const animateInBtn = document.getElementById('animate-in-btn');
-  const updateTextBtn = document.getElementById('update-text-btn');
-
-  groups = [
-    document.getElementById('results-group'),
-    document.getElementById('events-group'),
-    document.getElementById('breaking-group'),
-  ];
-
-  animateOutBtn.addEventListener('click', () => {
-    const decoration = document.getElementById('ticker_decoration');
-    const main = document.getElementById('ticker_main');
-    main.style.animation = 'hide 1s ease-in forwards';
-    const timeTextParts = document.querySelectorAll('.time-text-part');
-
-    timeTextParts.forEach((part) => {
-      part.style.opacity = '0';
-      part.style.animationName = '';
-      part.style.animationDuration = '';
-      part.style.animationTimingFunction = '';
-      part.style.animationFillMode = '';
-      part.style.animationDelay = '';
-    });
-
-    main.addEventListener('animationend', () => {
-      decoration.style.animation = 'decoration-slide-up 1s ease-in forwards';
-    }, { once: true });
-  });
-
-  animateInBtn.addEventListener('click', () => {
-    const decoration = document.getElementById('ticker_decoration');
-    const main = document.getElementById('ticker_main');
-    decoration.style.animation = 'decoration-slide-down 1s ease-in forwards';
-    main.style.animation = 'reveal 1s ease-in forwards 1s';
-    // Set a delay before calling animateTimeText
-    setTimeout(() => {
-      animateTimeText();
-    }, 2000);
-  });
-
-  updateTextBtn.addEventListener('click', () => {
-    switchGroup();
-  });
-
-});
-
+// Initial Time Text Animation
 setTimeout(() => {
   animateTimeText();
 }, 2000);

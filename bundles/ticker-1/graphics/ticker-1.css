@@ -1,100 +1,102 @@
 @font-face {
-		font-family: 'Gotham Bold';
-		src: url('../shared/fonts/Gotham-Bold.ttf') format('truetype');
-		font-weight: bold;
-	}
-	
-	@font-face {
-		font-family: 'Gotham Book';
-		src: url('../shared/fonts/Gotham-Book.otf') format('opentype');
-		font-weight: normal;
-		font-style: normal;
-	}
-	
-	@font-face {
-		font-family: 'Gotham Light';
-		src: url('../shared/fonts/Gotham-Light.ttf') format('truetype');
-		font-weight: normal;
-		font-style: normal;
-	}
-	
-	@font-face {
-		font-family: 'Gotham Medium';
-		src: url('../shared/fonts/Gotham-Medium.ttf') format('truetype');
-		font-weight: normal;
-		font-style: normal;
-	}
+	font-family: 'Gotham Bold';
+	src: url('../shared/fonts/Gotham-Bold.ttf') format('truetype');
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: 'Gotham Book';
+	src: url('../shared/fonts/Gotham-Book.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gotham Light';
+	src: url('../shared/fonts/Gotham-Light.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gotham Medium';
+	src: url('../shared/fonts/Gotham-Medium.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
 
 body {
-		background: url('../shared/assets/mountain.jpg');
-		background-size: 170%;
-		background-position: 45% 23.45%;
-		padding: 0;
-		margin: 0;
+	background: url('../shared/assets/mountain.jpg');
+	background-size: 170%;
+	background-position: 45% 23.45%;
+	padding: 0;
+	margin: 0;
 }
 
 #ticker_wrapper {
-		width: 290px;
-		position: absolute;
-		right: 50px;   
+	width: 290px;
+	position: absolute;
+	right: 50px;   
 }
 
+/* Decoration */
 #ticker_decoration {
-		width: 290px;
-		height: 60px;
-		display: flex;
-		animation: decoration-slide-down 1s ease-in forwards;
+	width: 290px;
+	height: 60px;
+	display: flex;
+	animation: decoration-slide-down 1s ease-in forwards;
 }
 
 @keyframes decoration-slide-down {
-		0% {
-				transform: translateY(-60px);
-			}
-			100% {
-				transform: translateY(0px);
-			}
+	0% {
+		transform: translateY(-60px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
 }
 
 #box_1 {
-		position: relative;
-		background: url('../shared/assets/pattern-brick.png');
-		height: 59px;
-		width: 100%;
-		background-size: 130%;
-		background-position: 50% 86%;
-		background-repeat: no-repeat;
-		opacity: 0.4;
+	position: relative;
+	background: url('../shared/assets/pattern-brick.png');
+	height: 59px;
+	width: 100%;
+	background-size: 130%;
+	background-position: 50% 86%;
+	background-repeat: no-repeat;
+	opacity: 0.4;
 }
 
+/* Main */
 #ticker_main {
-		animation: reveal 1s ease-in forwards 1s;
-		opacity: 0;
-	}
+	animation: reveal 1s ease-in forwards 1s;
+	opacity: 0;
+}
  
-	@keyframes reveal {
-		0% {
-			opacity: 0;
-			clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
-		}
-		100% {
-			opacity: 1;
-			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-		}
-	} 
-	
+@keyframes reveal {
+	0% {
+		opacity: 0;
+		clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+	}
+	100% {
+		opacity: 1;
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+	}
+} 
 
 #results-group div, #events-group div, #breaking-group div {
-		padding: 0 7.5px;
+	padding: 0 7.5px;
 }
 
+/* Header */
 #ticker_header {
-		font-family: 'Gotham Bold', sans-serif;
-		text-transform: uppercase;
-		font-size: 1.7em;
-		padding-top: 3px !important;
-		padding-bottom: 3px !important;
-		background: black;
-		color: rgb(235, 235, 235);
+	font-family: 'Gotham Bold', sans-serif;
+	text-transform: uppercase;
+	font-size: 1.7em;
+	padding-top: 3px !important;
+	padding-bottom: 3px !important;
+	background: black;
+	color: rgb(235, 235, 235);
 }
 
 #ticker_header .text {
@@ -109,14 +111,14 @@ body {
 }
 
 @keyframes text-slide-up {
-		0% {
-			opacity: 0;
-			transform: translateY(0);
-		}
-		100% {
-			transform: translateY(-1px);
-			opacity: 1;
-		}
+	0% {
+		opacity: 0;
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(-1px);
+		opacity: 1;
+	}
 }
 
 @keyframes text-slide-up-alt {
@@ -130,16 +132,17 @@ body {
 	}
 }
 
+/* Content */
 #ticker_content {
-		font-family: 'Gotham Book', sans-serif;
-		text-transform: uppercase;
-		letter-spacing: -1px;
-		color: black;
-		background-color:whitesmoke;
-		display: flex;
-		flex-direction: column;
-		padding-top: 5px !important;
-		padding-bottom: 5px !important;
+	font-family: 'Gotham Book', sans-serif;
+	text-transform: uppercase;
+	letter-spacing: -1px;
+	color: black;
+	background-color:whitesmoke;
+	display: flex;
+	flex-direction: column;
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
 }
 
 #event-time, #event-text {
@@ -147,13 +150,14 @@ body {
 	flex-direction: column;
 }
 
+/* Title & Message */
 #ticker_title {
-		font-family: 'Gotham Medium', sans-serif;
-		color: gray;
-		letter-spacing: -1px;
-		text-transform: uppercase;
-		font-size: 1.5em;
-		font-weight: bold;
+	font-family: 'Gotham Medium', sans-serif;
+	color: gray;
+	letter-spacing: -1px;
+	text-transform: uppercase;
+	font-size: 1.5em;
+	font-weight: bold;
 }
 
 #ticker_title .text {
@@ -186,78 +190,79 @@ body {
 	100% {
 	  opacity: 1;
 	}
-  }  
+}
 
+/* Footer */
 #ticker_footer {
-		position: relative;
-		background: url('../shared/assets/pattern-flower.jpg');
-		height: 10px;
-		background-size: 160% 40px;
-		background-position: 100% 50%;
-		background-repeat: no-repeat;
-		filter: saturate(200%);
-	}
+	position: relative;
+	background: url('../shared/assets/pattern-flower.jpg');
+	height: 10px;
+	background-size: 160% 40px;
+	background-position: 100% 50%;
+	background-repeat: no-repeat;
+	filter: saturate(200%);
+}
 	
-	#ticker_footer::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: black;
-		opacity: 0.4;
-	}  
+#ticker_footer::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	opacity: 0.4;
+}  
 
-	.text-fade-out {
-		animation: text-fade-out 0.5s forwards;
-	}
-	
-	.text-fade-in {
-		animation: text-fade-in 0.5s forwards;
-	}
+/* Update Text */
+.text-fade-out {
+	animation: text-fade-out 0.5s forwards;
+}
 
-	/* Update Text Animation */
-	@keyframes text-fade-out {
-		0% {
-			opacity: 1;
-		}
-		100% {
-			opacity: 0;
-		}
-	}
-	
-	@keyframes text-fade-in {
-		0% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
-		}
-	}
+.text-fade-in {
+	animation: text-fade-in 0.5s forwards;
+}
 
-	/* Animate Out */
-	@keyframes decoration-slide-up {
-		0% {
-			transform: translateY(0);
-		}
-		100% {
-			transform: translateY(-60px);
-		}
+@keyframes text-fade-out {
+	0% {
+		opacity: 1;
 	}
-	
-	@keyframes hide {
-		0% {
-			opacity: 1;
-			clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-		}
-		100% {
-			opacity: 0;
-			clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-		}
+	100% {
+		opacity: 0;
 	}
-	
-	
+}
+
+@keyframes text-fade-in {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/* Animate Out */
+@keyframes decoration-slide-up {
+	0% {
+		transform: translateY(0);
+	}
+	100% {
+		transform: translateY(-60px);
+	}
+}
+
+@keyframes hide {
+	0% {
+		opacity: 1;
+		clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+	}
+	100% {
+		opacity: 0;
+		clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+	}
+}
+
+/* Groups */
 #events-group {
 	display: none;
 }

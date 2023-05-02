@@ -207,7 +207,6 @@ body {
   pointer-events: none;
 }
 
-
 #nav_title {
 	font-family: 'Gotham Medium', sans-serif;
 	color: rgb(255, 255, 255);
@@ -366,16 +365,16 @@ body {
 		position: absolute;
 		bottom: -8px;
 		left: 20%;
-		transform: translateX(-39%) translateY(-18%) rotate(-45deg);
+		transform: translateX(-38%) translateY(-18%) rotate(-45deg);
 	}
 }
   
 @keyframes diagonal-animation-2 {
 	0% {
 		opacity: 1;
-		transform: translateX(-39%) translateY(-18%) rotate(-45deg);
+		transform: translateX(-38%) translateY(-18%) rotate(-45deg);
 	}
-	33% {
+	10% {
 		opacity: 0;
 	}
 	50% {
