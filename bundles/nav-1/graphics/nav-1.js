@@ -1,54 +1,54 @@
 
-// const headerReplicant = nodecg.Replicant('header');
-// const titleReplicant = nodecg.Replicant('title');
-// const messageReplicant = nodecg.Replicant('message');
-// const lowerReplicant = nodecg.Replicant('lower');
-// var netCBCRep = nodecg.Replicant('netCBC');		
+const headerReplicant = nodecg.Replicant('header');
+const titleReplicant = nodecg.Replicant('title');
+const messageReplicant = nodecg.Replicant('message');
+const lowerReplicant = nodecg.Replicant('lower');
+var netCBCRep = nodecg.Replicant('netCBC');		
 
-// // Change will be called when the Replicant loads too, so we can use it to set the initial value.
-// headerReplicant.on('change', (newValue) => {
-//     nav_header.innerText = newValue;
-// });
-// // Change will be called when the Replicant loads too, so we can use it to set the initial value.
-// titleReplicant.on('change', (newValue) => {
-//     nav_title.innerText = newValue;
-// });
-// // Change will be called when the Replicant loads too, so we can use it to set the initial value.
-// messageReplicant.on('change', (newValue) => {
-//     nav_message.innerText = newValue;
-// });
-// // Change will be called when the Replicant loads too, so we can use it to set the initial value.
-// lowerReplicant.on('change', (newValue) => {
-//     nav_lower.innerText = newValue;
-// });
+// Change will be called when the Replicant loads too, so we can use it to set the initial value.
+headerReplicant.on('change', (newValue) => {
+    nav_header.innerText = newValue;
+});
+// Change will be called when the Replicant loads too, so we can use it to set the initial value.
+titleReplicant.on('change', (newValue) => {
+    nav_title.innerText = newValue;
+});
+// Change will be called when the Replicant loads too, so we can use it to set the initial value.
+messageReplicant.on('change', (newValue) => {
+    nav_message.innerText = newValue;
+});
+// Change will be called when the Replicant loads too, so we can use it to set the initial value.
+lowerReplicant.on('change', (newValue) => {
+    nav_lower.innerText = newValue;
+});
 
-// netCBCRep.on('change', (newValue) => {
-//     netCBCRep.value = newValue;
-//     console.log("CBC change", netCBCRep.value)
-// });	
+netCBCRep.on('change', (newValue) => {
+    netCBCRep.value = newValue;
+    console.log("CBC change", netCBCRep.value)
+});	
 
-// nodecg.listenFor('playnav', () => {
-//     if (netCBCRep.value == "true") {
-//         // Play Audio In
-//         var audio = document.getElementById("audioIn");
-//         audio.play();
-//         // Animate In
-//         console.log('playnav');
-//     } else {
-//         console.log("CBC", netCBCRep.value);
-//     }});
+nodecg.listenFor('playnav', () => {
+    if (netCBCRep.value == "true") {
+        // Play Audio In
+        var audio = document.getElementById("audioIn");
+        audio.play();
+        // Animate In
+        console.log('playnav');
+    } else {
+        console.log("CBC", netCBCRep.value);
+    }});
 
-// nodecg.listenFor('stopnav', () => {
-//     if (netCBCRep.value == "true") {
-//         // Play Audio Out
-//         var audio = document.getElementById("audioOut");
-//         audio.play();
-//         // Animate Out
-//         console.log("stopnav");
-//     } else {
-//         console.log("CBC", netCBCRep.value);
-//     }
-// });
+nodecg.listenFor('stopnav', () => {
+    if (netCBCRep.value == "true") {
+        // Play Audio Out
+        var audio = document.getElementById("audioOut");
+        audio.play();
+        // Animate Out
+        console.log("stopnav");
+    } else {
+        console.log("CBC", netCBCRep.value);
+    }
+});
 
 document.addEventListener('DOMContentLoaded', () => {
   // Elements

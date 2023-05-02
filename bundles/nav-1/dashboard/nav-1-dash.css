@@ -1,0 +1,58 @@
+p{
+    font-family: 'Radio Canada', sans-serif;
+}
+
+Input{
+    font-family: 'Radio Canada';
+    font-size: 200;
+}
+.monospace {
+    font-family: radio-canada;
+}
+
+.button {
+       border: none;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+       transition-duration: 0.4s;
+       cursor: pointer;
+     font-family:'Radio Canada'
+}
+
+.buttonSubmit {
+      background-color: white; 
+      color: black; 
+      border: 2px solid #0055f1;
+}
+
+.buttonSubmit:hover {
+      background-color: #0055f1;
+      color: white;
+}
+
+.buttonPlay {
+      background-color: white; 
+      color: black; 
+      border: 2px solid #01753f;
+}
+
+.buttonPlay:hover {
+  background-color: #01753f;
+  color: white;
+    }
+
+.buttonClear {
+      background-color: white; 
+      color: black; 
+      border: 2px solid #a00000;
+}
+
+.buttonClear:hover {
+  background-color: #a00000;
+  color: white;
+    }		

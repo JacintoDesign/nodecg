@@ -54,7 +54,7 @@ body {
 #box_1 {
 	position: relative;
 	background: url('../shared/assets/brick-right.png');
-	height: 127px;
+	height: 126px;
 	width: 127px;
 	background-size: cover;
 	background-position: center;
@@ -273,7 +273,7 @@ body {
 	background-color: black;
 	color: white;
 	position: relative;
-	top: -23px;
+	top: -24px;
 	right: 53.5px;
 	animation: reveal-footer .5s ease-in forwards .3s;
 	opacity: 0;
@@ -325,8 +325,8 @@ body {
 /* Triangle */
 #triangle {
 	position: absolute;
-	top: -23px;
-    left: -111px;
+	top: -24px;
+    left: -110px;
     width: 57px;
     height: 30px;
 	height: 30px;
