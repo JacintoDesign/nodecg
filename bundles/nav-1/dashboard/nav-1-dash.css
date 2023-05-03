@@ -77,6 +77,7 @@ body {
         margin-left: 10px;
     }
 
+/* Interval */
 #interval_input {
     height: 28px;
     width: 43px;
@@ -94,6 +95,7 @@ body {
     top: 2px;
 }
 
+/* Buttons Group - Arrow Buttons */
 .buttons-group-alt {
     display: flex;
     flex-direction: column;

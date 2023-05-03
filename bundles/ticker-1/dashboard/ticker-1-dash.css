@@ -14,13 +14,18 @@ body {
     top: 10px;    
 }
 
+#ticker_decoration {
+	transform: translateY(0px);
+}
+
 #ticker_main {
 	position: absolute;
     left: 15px;
     margin-top: 10px;
 	width: 290px;
-	opacity: 1;
     animation: none;
+	opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
 #ticker_header .text, #ticker_title .text {
@@ -78,6 +83,7 @@ body {
         margin-left: 10px;
     }
 
+/* Interval */
 #interval_input {
     height: 28px;
     width: 43px;
@@ -88,6 +94,14 @@ body {
     text-align: center;
 }
 
+#countdown {
+    font-size: 24px;
+    margin-left: 10px;
+    position: relative;
+    top: 2px;
+}
+
+/* Buttons Group - Arrow Buttons */
 .buttons-group-alt {
     display: flex;
     flex-direction: column;

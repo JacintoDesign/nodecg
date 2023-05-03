@@ -44,7 +44,7 @@ body {
 	width: 290px;
 	height: 60px;
 	display: flex;
-	animation: decoration-slide-down 1s ease-in forwards;
+	transform: translateY(-60px);
 }
 
 @keyframes decoration-slide-down {
@@ -69,8 +69,8 @@ body {
 
 /* Main */
 #ticker_main {
-	animation: reveal 1s ease-in forwards 1s;
 	opacity: 0;
+	clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
 }
  
 @keyframes reveal {
