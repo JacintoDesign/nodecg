@@ -13,8 +13,13 @@
 	<div class="buttons-group">
 		<button class="btn" id="in_btn">Animate In</button>
 		<button class="btn" id="out_btn">Animate Out</button>
-		<button class="btn" id="next_btn">Animate Next</button>
 		<button class="btn" id="submit_btn">Submit</button>
+	</div>
+
+	<div class="buttons-group" style="margin-top:10px">
+		<button class="btn" id="next_btn">Animate Next</button>
+		<input type="number" id="interval_input" min="1" max="90" value="7">
+		<button class="btn" id="interval_btn">Set Interval</button>
 	</div>
 
 	<div id="nav_wrapper">
@@ -40,24 +45,6 @@
 			</div>
 		</div>
 	</div>
-
-	<!-- <div><input id="headerInput" type="text" placeholder="HEADER, eg CBC"></input></div>
-	<div><input id="titleInput" type="text" placeholder="TITLE, eg COMING UP"></input></div>
-	<div><input id="messageInput" type="text" placeholder="MESSAGE eg Rowing, 1pm"></input></div>
-	<div><input id="lowerInput" type="text" placeholder="LOWER eg Or on CBC.ca"></input></div>
-	<button class="button buttonSubmit" >Submit</button>
-	<button class="button buttonPlay">Play</button>
-	<button class="button buttonClear">Clear</button>
-	
-	<div>
-		<input type="checkbox" id="netCBC" name="netCBC" onclick="netCheck()">
-		<label for="netCBC">CBC</label><br>
-		<input type="checkbox" id="netTSN" name="netTSN" onclick="netCheck()">
-		<label for="netTSN">TSN</label><br>
-		<input type="checkbox" id="netRSN" name="netRSN" onclick="netCheck()">
-		<label for="netRSN">RSN</label><br>	
-	</div> -->
-
 
 </body>
 <script src="/nodecg-api.min.js"></script>

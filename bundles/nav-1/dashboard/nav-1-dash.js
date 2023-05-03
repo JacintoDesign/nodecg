@@ -64,3 +64,18 @@ nextBtn.onclick = () => {
     console.log("next");
     nodecg.sendMessage('next');
 };
+
+const intervalInput = document.getElementById('interval_input');
+const intervalBtn = document.getElementById('interval_btn');
+let autoNextInterval;
+
+intervalBtn.onclick = () => {
+    clearInterval(autoNextInterval);
+    const intervalSeconds = parseInt(intervalInput.value);
+    if (intervalSeconds > 0) {
+        autoNextInterval = setInterval(() => {
+            nodecg.sendMessage('next');
+        }, intervalSeconds * 1000);
+    }
+};
+
