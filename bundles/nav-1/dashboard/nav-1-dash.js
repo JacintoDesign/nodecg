@@ -89,21 +89,47 @@ const intervalInput = document.getElementById('interval_input');
 const startIntervalBtn = document.getElementById('start_interval_btn');
 const stopIntervalBtn = document.getElementById('stop_interval_btn');
 let autoNextInterval;
+let countdownValue;
+let countdownTimerId;
 
 startIntervalBtn.onclick = () => {
     isAuto = true;
     clearInterval(autoNextInterval);
+    clearInterval(countdownTimerId); // Clear the existing countdown timer
     const intervalSeconds = parseInt(intervalInput.value);
+    countdownValue = intervalSeconds; // Set the initial countdown value
+
     if (intervalSeconds > 0) {
         autoNextInterval = setInterval(() => {
             nodecg.sendMessage('next');
+            countdownValue = intervalSeconds; // Reset the countdown value
         }, intervalSeconds * 1000);
+
+        // Start the countdown timer
+        startCountdownTimer();
     }
 };
 
 stopIntervalBtn.onclick = () => {
     isAuto = false;
     clearInterval(autoNextInterval);
+    clearInterval(countdownTimerId); // Clear the countdown timer
+    document.getElementById('countdown').textContent = ''; // Clear the countdown display
+}
+
+function startCountdownTimer() {
+  countdownTimerId = setInterval(() => {
+    countdownValue -= 1;
+    updateCountdownDisplay(countdownValue);
+
+    if (countdownValue <= 0) {
+      countdownValue = parseInt(intervalInput.value);
+    }
+  }, 1000);
+}
+
+function updateCountdownDisplay(value) {
+  document.getElementById('countdown').textContent = `${value}s`;
 }
 
 // Page Values
@@ -213,4 +239,3 @@ function updateChannelInfo() {
 document.addEventListener('DOMContentLoaded', () => {
     loadChannelInfos();
 });
-  

@@ -87,6 +87,13 @@ body {
     text-align: center;
 }
 
+#countdown {
+    font-size: 24px;
+    margin-left: 10px;
+    position: relative;
+    top: 2px;
+}
+
 .buttons-group-alt {
     display: flex;
     flex-direction: column;
