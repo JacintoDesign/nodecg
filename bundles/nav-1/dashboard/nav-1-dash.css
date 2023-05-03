@@ -1,58 +1,71 @@
-p{
-    font-family: 'Radio Canada', sans-serif;
+body {
+	background: #2f3a4f;
+	padding: 10px;
+	margin: 0;
+	overflow: hidden;
+    max-width: 705px;
+    height: 500px;
 }
 
-Input{
-    font-family: 'Radio Canada';
-    font-size: 200;
-}
-.monospace {
-    font-family: radio-canada;
-}
-
-.button {
-       border: none;
-      color: white;
-      padding: 16px 32px;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      font-size: 16px;
-      margin: 4px 2px;
-       transition-duration: 0.4s;
-       cursor: pointer;
-     font-family:'Radio Canada'
+/* Element Preview */
+#nav_wrapper {
+    position: relative;
+    left: 80px;
+    top: 10px;    
 }
 
-.buttonSubmit {
-      background-color: white; 
-      color: black; 
-      border: 2px solid #0055f1;
+#nav_main {
+	position: absolute;
+	right: 53.5px;
+	width: 370px;
+	opacity: 1;
+    animation: none;
 }
 
-.buttonSubmit:hover {
-      background-color: #0055f1;
-      color: white;
+#nav_header .text, #nav_title .text {
+  top: 0;
+  opacity: 1;
+  animation: none;
 }
 
-.buttonPlay {
-      background-color: white; 
-      color: black; 
-      border: 2px solid #01753f;
+.time-text-part {
+	opacity: 1;
 }
 
-.buttonPlay:hover {
-  background-color: #01753f;
-  color: white;
-    }
-
-.buttonClear {
-      background-color: white; 
-      color: black; 
-      border: 2px solid #a00000;
+#nav_footer {
+    animation: none;
+    opacity: 1;
 }
 
-.buttonClear:hover {
-  background-color: #a00000;
-  color: white;
-    }		
+#triangle img {
+    animation: none;
+    transform: translateX(-38%) translateY(-18%) rotate(-45deg);
+    opacity: 1;
+}
+
+/* Buttons Group */
+.buttons-group {
+    display: flex;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.btn {
+    min-width: 100px;
+    height: 30px;
+    padding: 5px 8px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background: #384d75;
+    /* box-shadow: 1px 1px 3px 3px rgba(0,0,0,.3); */
+}
+
+.btn:hover {
+    filter: brightness(1.2);
+    cursor: pointer;
+}
+
+.btn:not(:first-child) {
+    margin-left: 10px;
+}

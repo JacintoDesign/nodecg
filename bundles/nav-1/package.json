@@ -23,7 +23,7 @@
     "dashboardPanels": [
       {
         "name": "nav-1",
-        "title": "nav 1",
+        "title": "NAV",
         "width": 5,
         "file": "nav-1-dash.html",
         "headerColor": "D12500"

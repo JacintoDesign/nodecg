@@ -1,68 +1,4 @@
-
-const headerReplicant = nodecg.Replicant('header');
-const titleReplicant = nodecg.Replicant('title');
-const messageReplicant = nodecg.Replicant('message');
-const lowerReplicant = nodecg.Replicant('lower');
-var netCBCRep = nodecg.Replicant('netCBC');		
-
-// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-headerReplicant.on('change', (newValue) => {
-    nav_header.innerText = newValue;
-});
-// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-titleReplicant.on('change', (newValue) => {
-    nav_title.innerText = newValue;
-});
-// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-messageReplicant.on('change', (newValue) => {
-    nav_message.innerText = newValue;
-});
-// Change will be called when the Replicant loads too, so we can use it to set the initial value.
-lowerReplicant.on('change', (newValue) => {
-    nav_lower.innerText = newValue;
-});
-
-netCBCRep.on('change', (newValue) => {
-    netCBCRep.value = newValue;
-    console.log("CBC change", netCBCRep.value)
-});	
-
-nodecg.listenFor('playnav', () => {
-    if (netCBCRep.value == "true") {
-        // Play Audio In
-        var audio = document.getElementById("audioIn");
-        audio.play();
-        // Animate In
-        console.log('playnav');
-    } else {
-        console.log("CBC", netCBCRep.value);
-    }});
-
-nodecg.listenFor('stopnav', () => {
-    if (netCBCRep.value == "true") {
-        // Play Audio Out
-        var audio = document.getElementById("audioOut");
-        audio.play();
-        // Animate Out
-        console.log("stopnav");
-    } else {
-        console.log("CBC", netCBCRep.value);
-    }
-});
-
 document.addEventListener('DOMContentLoaded', () => {
-  // Elements
-  const decoration = document.getElementById('nav_decoration');
-  const main = document.getElementById('nav_main');
-  const footer = document.getElementById('nav_footer');
-  const triangle = document.getElementById('triangle');
-  const triangleImg = triangle.querySelector('img');
-  const audioIn = document.getElementById('audioIn');
-  const audioOut = document.getElementById('audioOut');
-  const animateOutBtn = document.getElementById('animate-out-btn');
-  const animateInBtn = document.getElementById('animate-in-btn');
-  const updateTextBtn = document.getElementById('update-text-btn');
-
   // Channel Info
   const channelInfos = [
     { header: 'TSN', title: 'Freestyle Halfpipe', time: '8:00 AM ET', day: 'Today' },
@@ -72,50 +8,102 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
   let currentInfoIndex = 0;
 
-  // Update Text ---------
-  updateTextBtn.addEventListener('click', () => {
+  // NodeCG Related -------------------
+  const headerReplicant = nodecg.Replicant('header');
+  const titleReplicant = nodecg.Replicant('title');
+  const headerText = document.getElementById('header_text');
+  const titleText = document.getElementById('title_text');
+
+  // Change will be called when the Replicant loads too, so we can use it to set the initial value.
+  headerReplicant.on('change', (newValue) => {
+    if (newValue && headerText) headerText.textContent = newValue;
+  });
+  // Change will be called when the Replicant loads too, so we can use it to set the initial value.
+  titleReplicant.on('change', (newValue) => {
+    if (newValue && titleText) titleText.textContent = newValue;
+  });
+
+  // Animate In
+  nodecg.listenFor('play', () => {
+    animateIn();
+    console.log('in');
+  });
+
+  // Animate Out
+  nodecg.listenFor('stop', () => {
+    animateOut();
+    console.log('out');
+  });
+
+  // Animate Next
+  nodecg.listenFor('next', () => {
     const nextInfo = channelInfos[currentInfoIndex];
     updateText('header_text', nextInfo.header);
-    updateText('nav_title', nextInfo.title);
+    updateText('title_text', nextInfo.title);
     updateText('nav_time', nextInfo.time);
     updateText('nav_footer_text', nextInfo.day);
   
     currentInfoIndex = (currentInfoIndex + 1) % channelInfos.length;
-  });  
-
-  // Animate Out ---------
-  animateOutBtn.addEventListener('click', () => {
-    audioOut.play();
-    main.style.animation = 'hide .5s ease-in forwards';
-    footer.style.animation = 'hide-footer .5s ease-in forwards';
-    triangleImg.style.animation = 'diagonal-animation-2 .75s ease-in forwards';
-    const timeTextParts = document.querySelectorAll('.time-text-part');
-
-    // Fade Out Time
-    timeTextParts.forEach((part) => {
-      part.style.animation = 'fade-out .5s ease-in forwards';
-    });
-
-    // Fade Out Decoration
-    main.addEventListener('animationend', () => {
-      decoration.style.animation = 'decoration-slide-out 1s ease-in forwards';
-    }, { once: true });
-  });
-
-  // Animate In ---------
-  animateInBtn.addEventListener('click', () => {
-    audioIn.play();
-    decoration.style.animation = 'decoration-slide-in .5s ease-in forwards';
-    footer.style.animation = 'reveal-footer .5s ease-in forwards .5s';
-    triangleImg.style.animation = 'fade-in-diagonal 1s ease-in forwards .5s, diagonal-animation-1 2s linear 1s forwards';
-    main.style.animation = 'reveal .5s ease-in forwards .5s';
-    // Set a delay before calling animateTimeText
-    setTimeout(() => {
-      animateTimeText();
-    }, 500);
+    console.log('next');
   });
 
 });
+
+// Animate In Helper
+function animateIn() {
+  const decoration = document.getElementById('nav_decoration');
+  const main = document.getElementById('nav_main');
+  const footer = document.getElementById('nav_footer');
+  const triangle = document.getElementById('triangle');
+  const triangleImg = triangle.querySelector('img');
+  const audioIn = document.getElementById('audioIn');
+  const headerText = document.getElementById('header_text');
+  const titleText = document.getElementById('title_text');
+  const time1 = document.getElementById('time-1');
+  const time2 = document.getElementById('time-2');
+  const time3 = document.getElementById('time-3');
+
+  headerText.style.animation = 'text-slide-in .5s ease-in forwards 1s';
+  titleText.style.animation = 'text-slide-in 1s ease-in forwards .5s';
+  time1.style.animation = 'time-text-slide-in .5s ease-in forwards';
+  time2.style.animation = 'time-text-slide-in .5s ease-in forwards .15s';
+  time3.style.animation = 'time-text-slide-in .5s ease-in forwards .3s';
+
+  audioIn.play();
+  decoration.style.animation = 'decoration-slide-in .5s ease-in forwards';
+  footer.style.animation = 'reveal-footer .5s ease-in forwards .5s';
+  triangleImg.style.animation = 'fade-in-diagonal 1s ease-in forwards .5s, diagonal-animation-1 2s linear 1s forwards';
+  main.style.animation = 'reveal .5s ease-in forwards .5s';
+  // Set a delay before calling animateTimeText
+  setTimeout(() => {
+    animateTimeText();
+  }, 500);
+}
+
+// Animate Out Helper
+function animateOut() {
+  const decoration = document.getElementById('nav_decoration');
+  const main = document.getElementById('nav_main');
+  const footer = document.getElementById('nav_footer');
+  const triangle = document.getElementById('triangle');
+  const triangleImg = triangle.querySelector('img');
+  const audioOut = document.getElementById('audioOut');
+  audioOut.play();
+  main.style.animation = 'hide .5s ease-in forwards';
+  footer.style.animation = 'hide-footer .5s ease-in forwards';
+  triangleImg.style.animation = 'diagonal-animation-2 .75s ease-in forwards';
+  const timeTextParts = document.querySelectorAll('.time-text-part');
+
+  // Fade Out Time
+  timeTextParts.forEach((part) => {
+    part.style.animation = 'fade-out .5s ease-in forwards';
+  });
+
+  // Fade Out Decoration
+  main.addEventListener('animationend', () => {
+    decoration.style.animation = 'decoration-slide-out 1s ease-in forwards';
+  }, { once: true });
+}
 
 // Animate Time Text Helper
 function animateTimeText() {
@@ -165,8 +153,3 @@ function updateText(id, text) {
     }
   }, { once: true });
 }
-
-// Initial Time Text Animation
-setTimeout(() => {
-  animateTimeText();
-}, 500);

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="stylesheet" href="../graphics/nav-1.css">
 	<link rel="stylesheet" href="nav-1-dash.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8,12 +9,39 @@
 	<meta charset="UTF-8">
 </head>
 <body>
-	<p>
-		Top Right Ticker
-	</p>
 
-	<div><label>Enter your information:</label></div>
-	<div><input id="headerInput" type="text" placeholder="HEADER, eg CBC"></input></div>
+	<div class="buttons-group">
+		<button class="btn" id="next_btn">Animate Next</button>
+		<button class="btn" id="in_btn">Animate In</button>
+		<button class="btn" id="out_btn">Animate Out</button>
+		<button class="btn" id="submit_btn">Submit</button>
+	</div>
+
+	<div id="nav_wrapper">
+		<div id="nav_main">
+			<div id="nav_header">
+				<span class="text" id="header_text" contenteditable="true">CBC</span>
+			</div>
+			<div id="nav_content" class="fade-in-right">
+				<span id="nav_title"><span class="text" contenteditable="true" id="title_text">Alpine Skiing</span></span>
+				<span id="nav_time">
+					<span class="time-text-part" id="time-1" contenteditable="true">11:30</span>
+					<span class="time-text-part" id="time-2" contenteditable="true">AM</span>
+					<span class="time-text-part" id="time-3" contenteditable="true">ET</span>
+				</span>					
+			</div>
+		</div>
+		<div class="footer_wrapper">
+			<div id="triangle">
+				<img src="../shared/assets/pattern-clipped.png" alt="brick pattern">
+			</div>
+			<div id="nav_footer">
+				<span class="text" id="nav_footer_text" contenteditable="true">Today</span>
+			</div>
+		</div>
+	</div>
+
+	<!-- <div><input id="headerInput" type="text" placeholder="HEADER, eg CBC"></input></div>
 	<div><input id="titleInput" type="text" placeholder="TITLE, eg COMING UP"></input></div>
 	<div><input id="messageInput" type="text" placeholder="MESSAGE eg Rowing, 1pm"></input></div>
 	<div><input id="lowerInput" type="text" placeholder="LOWER eg Or on CBC.ca"></input></div>
@@ -28,7 +56,7 @@
 		<label for="netTSN">TSN</label><br>
 		<input type="checkbox" id="netRSN" name="netRSN" onclick="netCheck()">
 		<label for="netRSN">RSN</label><br>	
-	</div>
+	</div> -->
 
 
 </body>
