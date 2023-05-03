@@ -23,7 +23,7 @@
     "dashboardPanels": [
       {
         "name": "ticker-1",
-        "title": "Ticker 1",
+        "title": "TICKER",
         "width": 5,
         "file": "ticker-1-dash.html",
         "headerColor": "D12500"

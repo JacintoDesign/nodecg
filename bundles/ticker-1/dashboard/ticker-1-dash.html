@@ -2,35 +2,94 @@
 <html lang="en">
 <head>
 	<link rel="stylesheet" href="../graphics/ticker-1.css">
-	<link rel="import" href="ticker-1-dash.css">
+	<link rel="stylesheet" href="ticker-1-dash.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 	<meta charset="UTF-8">
 </head>
 <body>
-	<p>
-		Top Right Ticker
-	</p>
 
-	<div><label>Enter your information:</label></div>
-	<div><input id="headerInput" type="text" placeholder="HEADER, eg CBC"></input></div>
-	<div><input id="titleInput" type="text" placeholder="TITLE, eg COMING UP"></input></div>
-	<div><input id="messageInput" type="text" placeholder="MESSAGE eg Rowing, 1pm"></input></div>
-	<div><input id="lowerInput" type="text" placeholder="LOWER eg Or on CBC.ca"></input></div>
-	<button class="button buttonSubmit" >Submit</button>
-	<button class="button buttonPlay">Play</button>
-	<button class="button buttonClear">Clear</button>
+	<!-- Animate In / Out -->
+	<div class="buttons-group">
+		<button class="btn" id="in_btn">Animate In</button>
+		<button class="btn" id="out_btn">Animate Out</button>
+	</div>
+
+	<!-- Animate Next / Set Interval -->
+	<div class="buttons-group">
+		<button class="btn" id="next_btn">Next</button>
+		<input type="number" id="interval_input" min="2" max="90" value="5">
+		<button class="btn" id="start_interval_btn">Start Interval</button>
+		<button class="btn" id="stop_interval_btn">Stop Interval</button>
+	</div>
+
+	<div class="container-main">
+		<!-- Ticker Graphic Preview -->
+		<div id="ticker_main">
+			<!-- Results Group -->
+			<div id="results-group">
+				<div id="ticker_header">
+					<span class="text" id="header_text">RESULTS</span>
+				</div>
+				<div id="ticker_content">
+					<span id="ticker_message">
+						<span class="text">Mark McMorris Won</span>
+						<span class="text">Canada's First</span>
+						<span class="text">Medal of the games.</span>
+					</span>
+				</div>
+			</div>
+			<!-- Events Group -->
+			<div id="events-group">
+				<div id="ticker_header">
+					<span class="text" id="header_text">TODAY</span>
+				</div>
+				<div id="ticker_content">
+					<span id="ticker_title"><span class="text">Snowboard Cross</span></span>
+					<span id="ticker_message"><span class="text">Men's Semi-Finals</span></span>
+					<span id="ticker_time">
+						<span class="time-text-part">3:00</span>
+						<span class="time-text-part">PM</span>
+						<span class="time-text-part">&nbsp;ET</span>
+					</span>		  
+				</div>
+			</div>
+			<!-- Breaking Group -->
+			<div id="breaking-group">
+				<div id="ticker_header" class="red">
+					<span class="text" id="header_text">BREAKING</span>
+				</div>
+				<div id="ticker_content">
+					<span id="ticker_message">
+						<span class="text">Lapointe found not</span>
+						<span class="text">guilty for taking</span>
+						<span class="text">banned substance</span>
+					</span>
+				</div>
+			</div>
+			<div id="ticker_footer"></div>
+		</div>
+
+		<!-- Left / Right / Add Page / Submit -->
+		<div class="buttons-group-alt">
+			<div class="arrow-btns">
+				<button id="prev_channel" class="arrow-btn">&larr;</button>
+				<button id="next_channel" class="arrow-btn">&rarr;</button>
+			</div>
+			<button class="btn" id="add_channel_btn">Add Page</button>
+			<button class="btn" id="submit_btn">Submit & Take</button>
+		</div>
+	</div>
 	
-	<div>
+	<!-- <div>
 		<input type="checkbox" id="netCBC" name="netCBC" onclick="netCheck()">
 		 <label for="netCBC">CBC</label><br>
 		 <input type="checkbox" id="netTSN" name="netTSN" onclick="netCheck()">
 		 <label for="netTSN">TSN</label><br>
 		 <input type="checkbox" id="netRSN" name="netRSN" onclick="netCheck()">
 		 <label for="netRSN">RSN</label><br>	
-	</div>
-
+	</div> -->
 
 </body>
 <script src="/nodecg-api.min.js"></script>

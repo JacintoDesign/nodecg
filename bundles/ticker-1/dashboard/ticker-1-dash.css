@@ -1,0 +1,128 @@
+body {
+	background: #2f3a4f;
+	padding: 10px;
+	margin: 0;
+	overflow: hidden;
+    max-width: 500px;
+    height: 300px;
+}
+
+/* Element Preview */
+#ticker_wrapper {
+    position: relative;
+    left: 80px;
+    top: 10px;    
+}
+
+#ticker_main {
+	position: absolute;
+    left: 15px;
+    margin-top: 10px;
+	width: 290px;
+	opacity: 1;
+    animation: none;
+}
+
+#ticker_header .text, #ticker_title .text {
+  top: 0;
+  opacity: 1;
+  animation: none;
+}
+
+.time-text-part {
+	opacity: 1;
+}
+
+#ticker_footer {
+    animation: none;
+    opacity: 1;
+}
+
+#triangle img {
+    animation: none;
+    transform: translateX(-38%) translateY(-18%) rotate(-45deg);
+    opacity: 1;
+}
+
+.container-main {
+    display: flex;
+}
+
+/* Buttons Group */
+.buttons-group {
+    display: flex;
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+    .buttons-group:not(:first-child) {
+        margin-top: 10px;
+    }
+
+.btn {
+    min-width: 100px;
+    height: 30px;
+    padding: 5px 8px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    background: #384d75;
+}
+
+    .btn:hover {
+        filter: brightness(1.2);
+        cursor: pointer;
+    }
+
+    .btn:not(:first-child) {
+        margin-left: 10px;
+    }
+
+#interval_input {
+    height: 28px;
+    width: 43px;
+    font-size: 24px;
+    border-radius: 5px;
+    border: none;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.buttons-group-alt {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    left: 295px;
+    top: 10px;
+}
+
+    .buttons-group-alt * {
+        margin-bottom: 10px;
+    }
+
+.arrow-btns {
+    display: flex;
+    flex-direction: row;
+    position: relative; 
+    left: 10px;
+    margin-bottom: 0;
+}
+
+.arrow-btn {
+    height: 30px;
+    width: 48.5px;
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background: #384d75;
+}
+
+    .arrow-btn:hover {
+        filter: brightness(1.2);
+        cursor: pointer;
+    }
+
+    .arrow-btn:first-child {
+        margin-right: 5px;
+    }
