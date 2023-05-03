@@ -1,52 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Channel Info
-  const channelInfos = [
-    { header: 'TSN', title: 'Freestyle Halfpipe', time: '8:00 AM ET', day: 'Today' },
-    { header: 'SN', title: 'Ski Jumping', time: '3:00 PM ET', day: 'Tuesday' },
-    { header: 'TSN2', title: 'Biathalon', time: '1:30 PM ET', day: 'Friday' },
-    { header: 'SN1', title: 'Nordic Combined', time: '11:00 PM ET', day: 'Tonight' }
-  ];
   let currentInfoIndex = 0;
-
-  // NodeCG Related -------------------
-  const headerReplicant = nodecg.Replicant('header');
-  const titleReplicant = nodecg.Replicant('title');
-  const time1Replicant = nodecg.Replicant('time-1');
-  const time2Replicant = nodecg.Replicant('time-2');
-  const time3Replicant = nodecg.Replicant('time-3');
-  const footerReplicant = nodecg.Replicant('footer');
-  // Element Reference
-  const headerText = document.getElementById('header_text');
-  const titleText = document.getElementById('title_text');
-  const time1 = document.getElementById('time-1');
-  const time2 = document.getElementById('time-2');
-  const time3 = document.getElementById('time-3');
-  const footerInput = document.getElementById('nav_footer_text');
-
-  // Header Update
-  headerReplicant.on('change', (newValue) => {
-    if (newValue && headerText) headerText.textContent = newValue;
-  });
-  // Title Update
-  titleReplicant.on('change', (newValue) => {
-    if (newValue && titleText) titleText.textContent = newValue;
-  });
-  // Time 1 Update
-  time1Replicant.on('change', (newValue) => {
-    if (newValue && time1) time1.textContent = newValue;
-  });
-  // Time 2 Update
-  time2Replicant.on('change', (newValue) => {
-    if (newValue && time2) time2.textContent = newValue;
-  });
-  // Time 3 Update
-  time3Replicant.on('change', (newValue) => {
-    if (newValue && time3) time3.textContent = newValue;
-  });
-  // Footer Update
-  footerReplicant.on('change', (newValue) => {
-    if (newValue && footerInput) footerInput.textContent = newValue;
-  });
+  // Channel Info
+  loadChannelInfos();
 
   // Animate In
   nodecg.listenFor('play', () => {
@@ -65,9 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextInfo = channelInfos[currentInfoIndex];
     updateText('header_text', nextInfo.header);
     updateText('title_text', nextInfo.title);
-    updateText('nav_time', nextInfo.time);
+    updateText('nav_time', nextInfo.time1, nextInfo.time2, nextInfo.time3); // Pass the new time properties
     updateText('nav_footer_text', nextInfo.day);
-  
+
     currentInfoIndex = (currentInfoIndex + 1) % channelInfos.length;
     console.log('next');
   });
@@ -147,22 +102,21 @@ function animateTimeText() {
 }
 
 // Update Text Helper
-function updateText(id, text) {
+function updateText(id, ...args) { // Update the function definition to accept rest parameters
   // Animate Out Previous
   const element = document.getElementById(id);
   element.style.animation = 'text-slide-out .5s ease-in forwards';
-  
+
   element.addEventListener('animationend', () => {
     // If Not Time, Animate In
     if (id !== "nav_time") {
-      element.textContent = text;
+      element.textContent = args[0]; // Update the text content using the first argument
       element.style.animation = 'text-slide-in .5s ease-out forwards';
     } else {
       // Set Text for Time
-      const [time, amPm, timeZone] = text.split(' ');
-      document.getElementById('time-1').textContent = time;
-      document.getElementById('time-2').textContent = amPm;
-      document.getElementById('time-3').textContent = timeZone;
+      document.getElementById('time-1').textContent = args[0]; // time1
+      document.getElementById('time-2').textContent = args[1]; // time2
+      document.getElementById('time-3').textContent = args[2]; // time3
 
       element.style.animation = ''; // Reset animation for nav_time element
 
@@ -182,4 +136,20 @@ function updateText(id, text) {
       }, 50);
     }
   }, { once: true });
+}
+
+let channelInfos = [
+  { header: 'CBC', title: 'Alpine Skiing', time1: '11:30', time2: 'AM', time3: 'ET', day: 'Today' },
+  { header: 'TSN', title: 'Freestyle Halfpipe', time1: '8:00', time2: 'AM', time3: 'ET', day: 'Today' },
+  { header: 'SN', title: 'Ski Jumping', time1: '3:00', time2: 'PM', time3: 'ET', day: 'Tuesday' },
+  { header: 'TSN2', title: 'Biathalon', time1: '1:30', time2: 'PM', time3: 'ET', day: 'Friday' },
+  { header: 'SN1', title: 'Nordic Combined', time1: '11:00', time2: 'PM', time3: 'ET', day: 'Tonight' }
+];
+
+// Function to load channelInfos from localStorage
+function loadChannelInfos() {
+  const savedChannelInfos = localStorage.getItem('channelInfos');
+  if (savedChannelInfos) {
+    channelInfos = JSON.parse(savedChannelInfos);
+  }
 }
