@@ -57,6 +57,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('events-group'),
     document.getElementById('breaking-group'),
   ];
+
+  // Animate In
+  nodecg.listenFor('play', () => {
+    animateIn();
+    console.log('in');
+  });
+
+  // Animate Out
+  nodecg.listenFor('stop', () => {
+    animateOut();
+    console.log('out');
+  });
+
+  // Animate Next
+  nodecg.listenFor('next', () => {
+    switchGroup();
+    console.log('next');
+  });
+
 });
 
 // Animate In Helper
