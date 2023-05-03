@@ -24,15 +24,96 @@ document.addEventListener('DOMContentLoaded', () => {
     updateText('nav_footer_text', nextInfo.day);
 
     currentInfoIndex = (currentInfoIndex + 1) % channelInfos.length;
+    currentInfoIndexReplicant.value = currentInfoIndex;
     console.log('next');
   });
 
+    // NodeCG Related ------------------- 
+    const currentInfoIndexReplicant = nodecg.Replicant('currentInfoIndexReplicant');
+    const headerReplicant = nodecg.Replicant('header'); 
+    const titleReplicant = nodecg.Replicant('title'); 
+    const time1Replicant = nodecg.Replicant('time-1'); 
+    const time2Replicant = nodecg.Replicant('time-2'); 
+    const time3Replicant = nodecg.Replicant('time-3'); 
+    const footerReplicant = nodecg.Replicant('footer'); 
+    // Element Reference 
+    const headerText = document.getElementById('header_text'); 
+    const titleText = document.getElementById('title_text'); 
+    const time1 = document.getElementById('time-1'); 
+    const time2 = document.getElementById('time-2'); 
+    const time3 = document.getElementById('time-3'); 
+    const footerInput = document.getElementById('nav_footer_text'); 
+   
+    // Header Update 
+    headerReplicant.on('change', (newValue) => { 
+      if (newValue && headerText) headerText.textContent = newValue; 
+    }); 
+    // Title Update 
+    titleReplicant.on('change', (newValue) => { 
+      if (newValue && titleText) titleText.textContent = newValue; 
+    }); 
+    // Time 1 Update 
+    time1Replicant.on('change', (newValue) => { 
+      if (newValue && time1) time1.textContent = newValue; 
+    }); 
+    // Time 2 Update 
+    time2Replicant.on('change', (newValue) => { 
+      if (newValue && time2) time2.textContent = newValue; 
+    }); 
+    // Time 3 Update 
+    time3Replicant.on('change', (newValue) => { 
+      if (newValue && time3) time3.textContent = newValue; 
+    }); 
+    // Footer Update 
+    footerReplicant.on('change', (newValue) => { 
+      if (newValue && footerInput) footerInput.textContent = newValue; 
+    }); 
+
   // Submit
   nodecg.listenFor('update', () => {
-    console.log('update');
+    // Get the old channelInfos before reloading
+    const oldChannelInfos = channelInfos;
+
+    // Reload channelInfos from localStorage
+    loadChannelInfos();
+
+    // Compare the old and new channelInfos at the currentInfoIndex
+    const oldInfo = oldChannelInfos[currentInfoIndex];
+    const newInfo = channelInfos[currentInfoIndex];
+
+    if (JSON.stringify(oldInfo) !== JSON.stringify(newInfo)) {
+      // If the specific item has been modified, apply the current info to the text elements
+      applyCurrentInfo();
+    }
   });
 
 });
+
+// Channel Info
+let channelInfos = [
+  { header: 'CBC', title: 'Alpine Skiing', time1: '11:30', time2: 'AM', time3: 'ET', day: 'Today' },
+  { header: 'TSN', title: 'Freestyle Halfpipe', time1: '8:00', time2: 'AM', time3: 'ET', day: 'Today' },
+  { header: 'SN', title: 'Ski Jumping', time1: '3:00', time2: 'PM', time3: 'ET', day: 'Tuesday' },
+  { header: 'TSN2', title: 'Biathalon', time1: '1:30', time2: 'PM', time3: 'ET', day: 'Friday' },
+  { header: 'SN1', title: 'Nordic Combined', time1: '11:00', time2: 'PM', time3: 'ET', day: 'Tonight' }
+];
+
+// Function to load channelInfos from localStorage
+function loadChannelInfos() {
+  const savedChannelInfos = localStorage.getItem('channelInfos');
+  if (savedChannelInfos) {
+    channelInfos = JSON.parse(savedChannelInfos);
+  }
+}
+
+// Apply current info
+function applyCurrentInfo() {
+  const currentInfo = channelInfos[currentInfoIndex];
+  updateText('header_text', currentInfo.header);
+  updateText('title_text', currentInfo.title);
+  updateText('nav_time', `${currentInfo.time1} ${currentInfo.time2} ${currentInfo.time3}`);
+  updateText('nav_footer_text', currentInfo.day);
+}
 
 // Animate In Helper
 function animateIn() {
@@ -136,20 +217,4 @@ function updateText(id, ...args) { // Update the function definition to accept r
       }, 50);
     }
   }, { once: true });
-}
-
-let channelInfos = [
-  { header: 'CBC', title: 'Alpine Skiing', time1: '11:30', time2: 'AM', time3: 'ET', day: 'Today' },
-  { header: 'TSN', title: 'Freestyle Halfpipe', time1: '8:00', time2: 'AM', time3: 'ET', day: 'Today' },
-  { header: 'SN', title: 'Ski Jumping', time1: '3:00', time2: 'PM', time3: 'ET', day: 'Tuesday' },
-  { header: 'TSN2', title: 'Biathalon', time1: '1:30', time2: 'PM', time3: 'ET', day: 'Friday' },
-  { header: 'SN1', title: 'Nordic Combined', time1: '11:00', time2: 'PM', time3: 'ET', day: 'Tonight' }
-];
-
-// Function to load channelInfos from localStorage
-function loadChannelInfos() {
-  const savedChannelInfos = localStorage.getItem('channelInfos');
-  if (savedChannelInfos) {
-    channelInfos = JSON.parse(savedChannelInfos);
-  }
 }

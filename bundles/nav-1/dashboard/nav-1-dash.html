@@ -18,41 +18,46 @@
 
 	<!-- Animate Next / Set Interval -->
 	<div class="buttons-group">
-		<button class="btn" id="next_btn">Animate Next</button>
-		<input type="number" id="interval_input" min="1" max="90" value="3">
-		<button class="btn" id="interval_btn">Set Interval</button>
+		<button class="btn" id="next_btn">Next</button>
+		<input type="number" id="interval_input" min="2" max="90" value="5">
+		<button class="btn" id="start_interval_btn">Start Interval</button>
+		<button class="btn" id="stop_interval_btn">Stop Interval</button>
 	</div>
 
-	<!-- Left / Right / Add Page / Submit -->
-	<div class="buttons-group">
-		<button id="prev_channel" class="arrow-btn">&larr;</button>
-		<button id="next_channel" class="arrow-btn">&rarr;</button>
-		<button class="btn" id="add_channel_btn">Add Page</button>
-		<button class="btn" id="submit_btn">Submit</button>
-	</div>
-
-	<!-- Nav Graphic Preview -->
-	<div id="nav_wrapper">
-		<div id="nav_main">
-			<div id="nav_header">
-				<span class="text" id="header_text" contenteditable="true"></span>
+	<div class="container-main">
+		<!-- Nav Graphic Preview -->
+		<div id="nav_wrapper">
+			<div id="nav_main">
+				<div id="nav_header">
+					<span class="text" id="header_text" contenteditable="true"></span>
+				</div>
+				<div id="nav_content" class="fade-in-right">
+					<span id="nav_title"><span class="text" contenteditable="true" id="title_text"></span></span>
+					<span id="nav_time">
+						<span class="time-text-part" id="time-1" contenteditable="true"></span>
+						<span class="time-text-part" id="time-2" contenteditable="true"></span>
+						<span class="time-text-part" id="time-3" contenteditable="true"></span>
+					</span>					
+				</div>
 			</div>
-			<div id="nav_content" class="fade-in-right">
-				<span id="nav_title"><span class="text" contenteditable="true" id="title_text"></span></span>
-				<span id="nav_time">
-					<span class="time-text-part" id="time-1" contenteditable="true"></span>
-					<span class="time-text-part" id="time-2" contenteditable="true"></span>
-					<span class="time-text-part" id="time-3" contenteditable="true"></span>
-				</span>					
+			<div class="footer_wrapper">
+				<div id="triangle">
+					<img src="../shared/assets/pattern-clipped.png" alt="brick pattern">
+				</div>
+				<div id="nav_footer">
+					<span class="text" id="nav_footer_text" contenteditable="true">Today</span>
+				</div>
 			</div>
 		</div>
-		<div class="footer_wrapper">
-			<div id="triangle">
-				<img src="../shared/assets/pattern-clipped.png" alt="brick pattern">
+
+		<!-- Left / Right / Add Page / Submit -->
+		<div class="buttons-group-alt">
+			<div class="arrow-btns">
+				<button id="prev_channel" class="arrow-btn">&larr;</button>
+				<button id="next_channel" class="arrow-btn">&rarr;</button>
 			</div>
-			<div id="nav_footer">
-				<span class="text" id="nav_footer_text" contenteditable="true">Today</span>
-			</div>
+			<button class="btn" id="add_channel_btn">Add Page</button>
+			<button class="btn" id="submit_btn">Submit & Take</button>
 		</div>
 	</div>
 

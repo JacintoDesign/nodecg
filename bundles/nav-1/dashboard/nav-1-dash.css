@@ -43,6 +43,10 @@ body {
     opacity: 1;
 }
 
+.container-main {
+    display: flex;
+}
+
 /* Buttons Group */
 .buttons-group {
     display: flex;
@@ -80,9 +84,33 @@ body {
     border-radius: 5px;
     border: none;
     margin-left: 10px;
+    text-align: center;
+}
+
+.buttons-group-alt {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    left: 25px;
+    top: 10px;
+}
+
+    .buttons-group-alt * {
+        margin-bottom: 10px;
+    }
+
+.arrow-btns {
+    display: flex;
+    flex-direction: row;
+    position: relative; 
+    left: 10px;
+    margin-bottom: 0;
 }
 
 .arrow-btn {
+    height: 30px;
+    width: 48.5px;
     border-radius: 5px;
     border: none;
     color: white;
