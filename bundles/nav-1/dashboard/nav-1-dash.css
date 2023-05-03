@@ -3,8 +3,8 @@ body {
 	padding: 10px;
 	margin: 0;
 	overflow: hidden;
-    max-width: 705px;
-    height: 500px;
+    max-width: 500px;
+    height: 300px;
 }
 
 /* Element Preview */
@@ -50,6 +50,10 @@ body {
     margin-top: 5px;
 }
 
+    .buttons-group:not(:first-child) {
+        margin-top: 10px;
+    }
+
 .btn {
     min-width: 100px;
     height: 30px;
@@ -60,14 +64,14 @@ body {
     background: #384d75;
 }
 
-.btn:hover {
-    filter: brightness(1.2);
-    cursor: pointer;
-}
+    .btn:hover {
+        filter: brightness(1.2);
+        cursor: pointer;
+    }
 
-.btn:not(:first-child) {
-    margin-left: 10px;
-}
+    .btn:not(:first-child) {
+        margin-left: 10px;
+    }
 
 #interval_input {
     height: 28px;
@@ -77,3 +81,19 @@ body {
     border: none;
     margin-left: 10px;
 }
+
+.arrow-btn {
+    border-radius: 5px;
+    border: none;
+    color: white;
+    background: #384d75;
+}
+
+    .arrow-btn:hover {
+        filter: brightness(1.2);
+        cursor: pointer;
+    }
+
+    .arrow-btn:first-child {
+        margin-right: 5px;
+    }
