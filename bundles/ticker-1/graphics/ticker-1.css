@@ -89,7 +89,7 @@ body {
 }
 
 /* Header */
-#ticker_header {
+.ticker_header {
 	font-family: 'Gotham Bold', sans-serif;
 	text-transform: uppercase;
 	font-size: 1.7em;
@@ -99,7 +99,7 @@ body {
 	color: rgb(235, 235, 235);
 }
 
-#ticker_header .text {
+.ticker_header .text {
   	display: inline-block;
 	position: relative;
 	top: 1px;
@@ -133,7 +133,7 @@ body {
 }
 
 /* Content */
-#ticker_content {
+.ticker_content {
 	font-family: 'Gotham Book', sans-serif;
 	text-transform: uppercase;
 	letter-spacing: -1px;
@@ -143,11 +143,6 @@ body {
 	flex-direction: column;
 	padding-top: 5px !important;
 	padding-bottom: 5px !important;
-}
-
-#event-time, #event-text {
-	display: flex;
-	flex-direction: column;
 }
 
 /* Title & Message */
@@ -167,11 +162,11 @@ body {
 	animation: text-slide-up 1s ease-in forwards;
 }
 
-#ticker_message {
+.ticker_message {
 	font-size: 1.35em;
 }
 
-#ticker_message .text {
+.ticker_message .text {
 	display: inline-block;
 	position: relative;
 	top: 2px;
