@@ -28,7 +28,7 @@ body {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
-#ticker_header .text, #ticker_title .text {
+.ticker_header .text, #ticker_title .text, .ticker_message .text {
   top: 0;
   opacity: 1;
   animation: none;
@@ -40,12 +40,6 @@ body {
 
 #ticker_footer {
     animation: none;
-    opacity: 1;
-}
-
-#triangle img {
-    animation: none;
-    transform: translateX(-38%) translateY(-18%) rotate(-45deg);
     opacity: 1;
 }
 

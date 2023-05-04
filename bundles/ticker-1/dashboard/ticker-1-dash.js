@@ -166,6 +166,42 @@ function updateCountdownDisplay(value) {
   document.getElementById('countdown').textContent = `${value}s`;
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    // Groups
+    groups = [
+      document.getElementById('results-group'),
+      document.getElementById('events-group'),
+      document.getElementById('breaking-group'),
+    ];
+});
+
+// Show / hide groups
+let groups = [];
+let currentGroup = 0;
+
+function switchGroup(direction) {
+  groups[currentGroup].style.display = 'none';
+  if (direction === 'forward') {
+    currentGroup = (currentGroup + 1) % groups.length;
+  } else if (direction === 'backward') {
+    currentGroup = (currentGroup - 1 + groups.length) % groups.length;
+  }
+  groups[currentGroup].style.display = 'block';
+}
+
+// Add new variables for the arrow buttons
+const prevChannelBtn = document.getElementById('prev_channel');
+const nextChannelBtn = document.getElementById('next_channel');
+
+// Previous Page
+prevChannelBtn.onclick = () => {
+  switchGroup('backward');
+};
+
+// Next Page
+nextChannelBtn.onclick = () => {
+  switchGroup('forward');
+};
 
 
 
@@ -182,10 +218,6 @@ let channelInfos = [
     { header: 'TSN2', title: 'Biathalon', time1: '1:30', time2: 'PM', time3: 'ET', day: 'Friday' },
     { header: 'SN1', title: 'Nordic Combined', time1: '11:00', time2: 'PM', time3: 'ET', day: 'Tonight' }
 ];
-  
-// Add new variables for the arrow buttons
-const prevChannelBtn = document.getElementById('prev_channel');
-const nextChannelBtn = document.getElementById('next_channel');
 
 // Add a new variable to keep track of the current channel index
 let currentChannelIndex = 0;
@@ -208,25 +240,7 @@ time2.addEventListener('input', updateChannelInfo);
 time3.addEventListener('input', updateChannelInfo);
 footerInput.addEventListener('input', updateChannelInfo);
 
-// Previous Page
-prevChannelBtn.onclick = () => {
-    isAuto = false;
-    currentChannelIndex--;
-    if (currentChannelIndex < 0) {
-        currentChannelIndex = channelInfos.length - 1;
-    }
-    updateTextElements(channelInfos[currentChannelIndex]);
-};
 
-// Next Page
-nextChannelBtn.onclick = () => {
-    isAuto = false;
-    currentChannelIndex++;
-    if (currentChannelIndex >= channelInfos.length) {
-        currentChannelIndex = 0;
-    }
-    updateTextElements(channelInfos[currentChannelIndex]);
-};
 
 // Add a new variable for the add channel button
 const addChannelBtn = document.getElementById('add_channel_btn');
