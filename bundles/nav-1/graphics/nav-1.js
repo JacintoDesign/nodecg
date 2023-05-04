@@ -28,46 +28,46 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('next');
   });
 
-    // NodeCG Related ------------------- 
-    const currentInfoIndexReplicant = nodecg.Replicant('currentInfoIndexReplicant');
-    const headerReplicant = nodecg.Replicant('header'); 
-    const titleReplicant = nodecg.Replicant('title'); 
-    const time1Replicant = nodecg.Replicant('time-1'); 
-    const time2Replicant = nodecg.Replicant('time-2'); 
-    const time3Replicant = nodecg.Replicant('time-3'); 
-    const footerReplicant = nodecg.Replicant('footer'); 
-    // Element Reference 
-    const headerText = document.getElementById('header_text'); 
-    const titleText = document.getElementById('title_text'); 
-    const time1 = document.getElementById('time-1'); 
-    const time2 = document.getElementById('time-2'); 
-    const time3 = document.getElementById('time-3'); 
-    const footerInput = document.getElementById('nav_footer_text'); 
-   
-    // Header Update 
-    headerReplicant.on('change', (newValue) => { 
-      if (newValue && headerText) headerText.textContent = newValue; 
-    }); 
-    // Title Update 
-    titleReplicant.on('change', (newValue) => { 
-      if (newValue && titleText) titleText.textContent = newValue; 
-    }); 
-    // Time 1 Update 
-    time1Replicant.on('change', (newValue) => { 
-      if (newValue && time1) time1.textContent = newValue; 
-    }); 
-    // Time 2 Update 
-    time2Replicant.on('change', (newValue) => { 
-      if (newValue && time2) time2.textContent = newValue; 
-    }); 
-    // Time 3 Update 
-    time3Replicant.on('change', (newValue) => { 
-      if (newValue && time3) time3.textContent = newValue; 
-    }); 
-    // Footer Update 
-    footerReplicant.on('change', (newValue) => { 
-      if (newValue && footerInput) footerInput.textContent = newValue; 
-    }); 
+  // NodeCG Related ------------------- 
+  const currentInfoIndexReplicant = nodecg.Replicant('currentInfoIndexReplicant');
+  const headerReplicant = nodecg.Replicant('header'); 
+  const titleReplicant = nodecg.Replicant('title'); 
+  const time1Replicant = nodecg.Replicant('time-1'); 
+  const time2Replicant = nodecg.Replicant('time-2'); 
+  const time3Replicant = nodecg.Replicant('time-3'); 
+  const footerReplicant = nodecg.Replicant('footer'); 
+  // Element Reference 
+  const headerText = document.getElementById('header_text'); 
+  const titleText = document.getElementById('title_text'); 
+  const time1 = document.getElementById('time-1'); 
+  const time2 = document.getElementById('time-2'); 
+  const time3 = document.getElementById('time-3'); 
+  const footerInput = document.getElementById('nav_footer_text'); 
+  
+  // Header Update 
+  headerReplicant.on('change', (newValue) => { 
+    if (newValue && headerText) headerText.textContent = newValue; 
+  }); 
+  // Title Update 
+  titleReplicant.on('change', (newValue) => { 
+    if (newValue && titleText) titleText.textContent = newValue; 
+  }); 
+  // Time 1 Update 
+  time1Replicant.on('change', (newValue) => { 
+    if (newValue && time1) time1.textContent = newValue; 
+  }); 
+  // Time 2 Update 
+  time2Replicant.on('change', (newValue) => { 
+    if (newValue && time2) time2.textContent = newValue; 
+  }); 
+  // Time 3 Update 
+  time3Replicant.on('change', (newValue) => { 
+    if (newValue && time3) time3.textContent = newValue; 
+  }); 
+  // Footer Update 
+  footerReplicant.on('change', (newValue) => { 
+    if (newValue && footerInput) footerInput.textContent = newValue; 
+  }); 
 
   // Submit
   nodecg.listenFor('update', () => {

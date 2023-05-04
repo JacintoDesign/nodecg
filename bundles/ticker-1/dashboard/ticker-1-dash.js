@@ -70,70 +70,107 @@ const breakingText2Replicant = nodecg.Replicant('breaking_text_2');
 const breakingText3Replicant = nodecg.Replicant('breaking_text_3');
 
 resultsHeaderReplicant.on('change', (newValue) => {
-    // do something with newValue
-});
-resultsText1Replicant.on('change', (newValue) => {
-    // do something with newValue
-});
-resultsText2Replicant.on('change', (newValue) => {
-    // do something with newValue
-});
-resultsText3Replicant.on('change', (newValue) => {
-    // do something with newValue
-});
-eventsHeaderReplicant.on('change', (newValue) => {
-    // do something with newValue
-});
-eventsText1Replicant.on('change', (newValue) => {
-    // do something with newValue
-});
-eventsText2Replicant.on('change', (newValue) => {
-    // do something with newValue
-});
-eventsText3Replicant.on('change', (newValue) => {
-    // do something with newValue
-});
-eventsText4Replicant.on('change', (newValue) => {
-    // do something with newValue
-});
-eventsText5Replicant.on('change', (newValue) => {
-    // do something with newValue
-});
-breakingHeaderReplicant.on('change', (newValue) => {
-    // do something with newValue
-});
-breakingText1Replicant.on('change', (newValue) => {
-    // do something with newValue
-});
-breakingText2Replicant.on('change', (newValue) => {
-    // do something with newValue
-});
-breakingText3Replicant.on('change', (newValue) => {
-    // do something with newValue
+    resultsHeader.value = newValue;
 });
 
-// Listen for changes in the Replicant value
-currentInfoIndexReplicant.on('change', (newIndex) => {
-    // Handle the new value
-    if (isAuto) {
-        console.log('New Index:', newIndex);
-        updateTextElements(channelInfos[newIndex]);
-    } else {
-        console.log('Current Index:', currentChannelIndex);
-        updateTextElements(channelInfos[currentChannelIndex]);
-    }
+resultsText1Replicant.on('change', (newValue) => {
+    resultsText1.value = newValue;
 });
+
+resultsText2Replicant.on('change', (newValue) => {
+    resultsText2.value = newValue;
+});
+
+resultsText3Replicant.on('change', (newValue) => {
+    resultsText3.value = newValue;
+});
+
+eventsHeaderReplicant.on('change', (newValue) => {
+    eventsHeader.value = newValue;
+});
+
+eventsText1Replicant.on('change', (newValue) => {
+    eventsText1.value = newValue;
+});
+
+eventsText2Replicant.on('change', (newValue) => {
+    eventsText2.value = newValue;
+});
+
+eventsText3Replicant.on('change', (newValue) => {
+    eventsText3.value = newValue;
+});
+
+eventsText4Replicant.on('change', (newValue) => {
+    eventsText4.value = newValue;
+});
+
+eventsText5Replicant.on('change', (newValue) => {
+    eventsText5.value = newValue;
+});
+
+breakingHeaderReplicant.on('change', (newValue) => {
+    breakingHeader.value = newValue;
+});
+
+breakingText1Replicant.on('change', (newValue) => {
+    breakingText1.value = newValue;
+});
+
+breakingText2Replicant.on('change', (newValue) => {
+    breakingText2.value = newValue;
+});
+
+breakingText3Replicant.on('change', (newValue) => {
+    breakingText3.value = newValue;
+});
+
+
+// Listen for changes in the Replicant value
+// currentInfoIndexReplicant.on('change', (newIndex) => {
+//     // Handle the new value
+//     if (isAuto) {
+//         console.log('New Index:', newIndex);
+//         updateTextElements(tickerPages[newIndex]);
+//     } else {
+//         console.log('Current Index:', currentGroup);
+//         updateTextElements(tickerPages[currentGroup]);
+//     }
+// });
 
 // Handle Submit Btn
 buttonSubmit.onclick = () => {
-    titleReplicant.value = titleInput.innerText;
-    headerReplicant.value = headerInput.innerText;
-    time1Replicant.value = time1.innerText;
-    time2Replicant.value = time2.innerText;
-    time3Replicant.value = time3.innerText;
-    footerReplicant.value = footerInput.innerText;
+    if (resultsHeaderReplicant && resultsHeader) resultsHeaderReplicant.value = resultsHeader.innerText;
+    if (resultsText1Replicant && resultsText1) resultsText1Replicant.value = resultsText1.innerText;
+    if (resultsText2Replicant && resultsText2) resultsText2Replicant.value = resultsText2.innerText;
+    if (resultsText3Replicant && resultsText3) resultsText3Replicant.value = resultsText3.innerText;
+    if (eventsHeaderReplicant && eventsHeader) eventsHeaderReplicant.value = eventsHeader.innerText;
+    if (eventsText1Replicant && eventsText1) eventsText1Replicant.value = eventsText1.innerText;
+    if (eventsText2Replicant && eventsText2) eventsText2Replicant.value = eventsText2.innerText;
+    if (eventsText3Replicant && eventsText3) eventsText3Replicant.value = eventsText3.innerText;
+    if (eventsText4Replicant && eventsText4) eventsText4Replicant.value = eventsText4.innerText;
+    if (eventsText5Replicant && eventsText5) eventsText5Replicant.value = eventsText5.innerText;
+    if (breakingHeaderReplicant && breakingHeader) breakingHeaderReplicant.value = breakingHeader.innerText;
+    if (breakingText1Replicant && breakingText1) breakingText1Replicant.value = breakingText1.innerText;
+    if (breakingText2Replicant && breakingText2) breakingText2Replicant.value = breakingText2.innerText;
+    if (breakingText3Replicant && breakingText3) breakingText3Replicant.value = breakingText3.innerText;
     nodecg.sendMessage('update');
-    console.log(titleReplicant.value, headerReplicant.value, time1Replicant.value, time2Replicant.value, time3Replicant.value, 'text');
+    console.log(
+        resultsHeaderReplicant.value,
+        resultsText1Replicant.value,
+        resultsText2Replicant.value,
+        resultsText3Replicant.value,
+        eventsHeaderReplicant.value,
+        eventsText1Replicant.value,
+        eventsText2Replicant.value,
+        eventsText3Replicant.value,
+        eventsText4Replicant.value,
+        eventsText5Replicant.value,
+        breakingHeaderReplicant.value,
+        breakingText1Replicant.value,
+        breakingText2Replicant.value,
+        breakingText3Replicant.value
+    );
 };
 
 // Animate In
@@ -244,134 +281,119 @@ nextChannelBtn.onclick = () => {
 };
 
 // Page Values
-let channelInfos = [
+let tickerPages = [
     { type: 'results', header: 'RESULTS!', title: '', text1: 'Mark McMorris Won', text2: "Canada's First", text3: 'Medal of the games.', time1: '', time2: '', time3: '' },
     { type: 'events', header: 'TODAY!', title: 'Snowboard Cross', text1: "Men's Semi-Finals", text2: "", text3: '', time1: '3:00', time2: 'PM', time3: 'ET' },
     { type: 'breaking', header: 'BREAKING!', title: '', text1: 'Lapointe found not', text2: "guilty for taking", text3: 'banned substance', time1: '', time2: '', time3: '' },
 ];
 
-function populateChannelInfo() {
-    channelInfos.forEach(info => {
-        let groupElement = document.getElementById(`${info.type}-group`);
+function populatePages() {
+    tickerPages.forEach(page => {
+        let groupElement = document.getElementById(`${page.type}-group`);
 
         if (groupElement) {
-            if (info.header) {
-                let headerElement = groupElement.querySelector(`#${info.type}_header_text`);
-                if (headerElement) headerElement.textContent = info.header;
+            if (page.header) {
+                let headerElement = groupElement.querySelector(`#${page.type}_header_text`);
+                if (headerElement) headerElement.textContent = page.header;
             }
 
             for (let i = 1; i <= 3; i++) {
-                let textElement = groupElement.querySelector(`#${info.type}_text_${i}`);
+                let textElement = groupElement.querySelector(`#${page.type}_text_${i}`);
                 if (textElement) {
-                    if (info.type === 'events') {
+                    if (page.type === 'events') {
                         if (i === 1) {
-                            textElement.textContent = info.title;
+                            textElement.textContent = page.title;
                         } else if (i === 2) {
-                            textElement.textContent = info.text1;
+                            textElement.textContent = page.text1;
                         }
                     } else {
-                        textElement.textContent = info[`text${i}`];
+                        textElement.textContent = page[`text${i}`];
                     }
                 }
             }
 
-            if (info.type === 'events') {
+            if (page.type === 'events') {
                 for (let i = 1; i <= 3; i++) {
-                    let timeElement = groupElement.querySelector(`#${info.type}_text_${2 + i}`);
-                    if (timeElement && info[`time${i}`]) timeElement.textContent = info[`time${i}`];
+                    let timeElement = groupElement.querySelector(`#${page.type}_text_${2 + i}`);
+                    if (timeElement && page[`time${i}`]) timeElement.textContent = page[`time${i}`];
                 }
             }
         }
     });
 }
 
-// Call the function to populate the channel info
-populateChannelInfo();
-
-
-
-
-
-
-
-
-
-
-
+// Call the function to populate the pages
+populatePages();
+loadTickerPages();
 
 // Add a new variable to keep track of the current channel index
 let currentChannelIndex = 0;
 
-// Add a new function to update the text elements with the values from the channelInfos array
-function updateTextElements(channelInfo) {
-    headerInput.textContent = channelInfo.header;
-    titleInput.textContent = channelInfo.title;
-    time1.textContent = channelInfo.time1;
-    time2.textContent = channelInfo.time2;
-    time3.textContent = channelInfo.time3;
-    footerInput.textContent = channelInfo.day;
+// Add a new function to update the text elements with the values from the tickerPages array
+function updateTextElements(tickerPage) {
+    resultsHeader.textContent = tickerPage.resultsHeader;
+    resultsText1.textContent = tickerPage.resultsText1;
+    resultsText2.textContent = tickerPage.resultsText2;
+    resultsText3.textContent = tickerPage.resultsText3;
+    eventsHeader.textContent = tickerPage.eventsHeader;
+    eventsText1.textContent = tickerPage.eventsText1;
+    eventsText2.textContent = tickerPage.eventsText2;
+    eventsText3.textContent = tickerPage.eventsText3;
+    eventsText4.textContent = tickerPage.eventsText4;
+    eventsText5.textContent = tickerPage.eventsText5;
+    breakingHeader.textContent = tickerPage.breakingHeader;
+    breakingText1.textContent = tickerPage.breakingText1;
+    breakingText2.textContent = tickerPage.breakingText2;
+    breakingText3.textContent = tickerPage.breakingText3;
 }
 
-// Add input event listeners for contenteditable elements to update the channelInfos array
-headerInput.addEventListener('input', updateChannelInfo);
-titleInput.addEventListener('input', updateChannelInfo);
-time1.addEventListener('input', updateChannelInfo);
-time2.addEventListener('input', updateChannelInfo);
-time3.addEventListener('input', updateChannelInfo);
-footerInput.addEventListener('input', updateChannelInfo);
+// Add input event listeners for contenteditable elements to update the tickerPages array
+resultsHeader.addEventListener('input', updateTickerPage);
+resultsText1.addEventListener('input', updateTickerPage);
+resultsText2.addEventListener('input', updateTickerPage);
+resultsText3.addEventListener('input', updateTickerPage);
+eventsHeader.addEventListener('input', updateTickerPage);
+eventsText1.addEventListener('input', updateTickerPage);
+eventsText2.addEventListener('input', updateTickerPage);
+eventsText3.addEventListener('input', updateTickerPage);
+eventsText4.addEventListener('input', updateTickerPage);
+eventsText5.addEventListener('input', updateTickerPage);
+breakingHeader.addEventListener('input', updateTickerPage);
+breakingText1.addEventListener('input', updateTickerPage);
+breakingText2.addEventListener('input', updateTickerPage);
+breakingText3.addEventListener('input', updateTickerPage);
 
+// Update the updateTickerPage function to also save the updated array to localStorage
+function updateTickerPage() {
+    tickerPages[currentGroup] = {
+        resultsHeader: resultsHeader.innerText,
+        resultsText1: resultsText1.innerText,
+        resultsText2: resultsText2.innerText,
+        resultsText3: resultsText3.innerText,
+        eventsHeader: eventsHeader.innerText,
+        eventsText1: eventsText1.innerText,
+        eventsText2: eventsText2.innerText,
+        eventsText3: eventsText3.innerText,
+        eventsText4: eventsText4.innerText,
+        eventsText5: eventsText5.innerText,
+        breakingHeader: breakingHeader.innerText,
+        breakingText1: breakingText1.innerText,
+        breakingText2: breakingText2.innerText,
+        breakingText3: breakingText3.innerText
+    };
+    saveTickerPages(); // Save the updated array to localStorage
+} 
 
-
-// Add a new variable for the add channel button
-const addChannelBtn = document.getElementById('add_channel_btn');
-
-// Add default values for new channels
-const defaultChannelInfo = {
-  header: 'Network',
-  title: 'Title',
-  time1: '12:00',
-  time2: 'AM',
-  time3: 'ET',
-  day: 'day'
-};
-
-// Update the addChannelBtn.onclick function to also save the updated array to localStorage
-addChannelBtn.onclick = () => {
-    isAuto = false;
-    channelInfos.push({ ...defaultChannelInfo });
-    currentChannelIndex = channelInfos.length - 1;
-    updateTextElements(channelInfos[currentChannelIndex]);
-    saveChannelInfos(); // Save the updated array to localStorage
-};
-
-// Add a function to save the channelInfos array to localStorage
-function saveChannelInfos() {
-    localStorage.setItem('channelInfos', JSON.stringify(channelInfos));
+// Add a function to save the tickerPages array to localStorage
+function saveTickerPages() {
+    localStorage.setItem('tickerPages', JSON.stringify(tickerPages));
 }
 
-// Add a function to load the channelInfos array from localStorage if it exists
-function loadChannelInfos() {
-    const storedChannelInfos = localStorage.getItem('channelInfos');
-    if (storedChannelInfos) {
-        channelInfos = JSON.parse(storedChannelInfos);
-        updateTextElements(channelInfos[currentChannelIndex]);
+// Add a function to load the tickerPages array from localStorage if it exists
+function loadTickerPages() {
+    const storedTickerPages = localStorage.getItem('tickerPages');
+    if (storedTickerPages) {
+        tickerPages = JSON.parse(storedTickerPages);
+        updateTextElements(tickerPages[currentGroup]);
     }
 }
-
-// Update the updateChannelInfo function to also save the updated array to localStorage
-function updateChannelInfo() {
-    channelInfos[currentChannelIndex] = {
-        header: headerInput.innerText,
-        title: titleInput.innerText,
-        time1: time1.innerText,
-        time2: time2.innerText,
-        time3: time3.innerText,
-        day: footerInput.innerText
-    };
-    saveChannelInfos(); // Save the updated array to localStorage
-}
-  
-// Wrap the loadChannelInfos function call inside the DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', () => {
-    loadChannelInfos();
-});
