@@ -33,12 +33,20 @@
 
 
 // Preview Elements
-const headerInput = document.getElementById('header_text');
-const titleInput = document.getElementById('title_text');
-const time1 = document.getElementById('time-1');
-const time2 = document.getElementById('time-2');
-const time3 = document.getElementById('time-3');
-const footerInput = document.getElementById('nav_footer_text');
+const resultsHeader = document.getElementById('results_header_text');
+const resultsText1 = document.getElementById('results_text_1');
+const resultsText2 = document.getElementById('results_text_2');
+const resultsText3 = document.getElementById('results_text_3');
+const eventsHeader = document.getElementById('events_header_text');
+const eventsText1 = document.getElementById('events_text_1');
+const eventsText2 = document.getElementById('events_text_2');
+const eventsText3 = document.getElementById('events_text_3');
+const eventsText4 = document.getElementById('events_text_4');
+const eventsText5 = document.getElementById('events_text_5');
+const breakingHeader = document.getElementById('breaking_header_text');
+const breakingText1 = document.getElementById('breaking_text_1');
+const breakingText2 = document.getElementById('breaking_text_2');
+const breakingText3 = document.getElementById('breaking_text_3');
 // Button Elements
 const nextBtn = document.getElementById('next_btn');
 const buttonSubmit = document.getElementById('submit_btn');
@@ -46,30 +54,62 @@ const buttonPlay = document.getElementById('in_btn');
 const buttonClear = document.getElementById('out_btn');
 // Replicants
 const currentInfoIndexReplicant = nodecg.Replicant('currentInfoIndexReplicant');
-const headerReplicant = nodecg.Replicant('header');
-const titleReplicant = nodecg.Replicant('title');
-const time1Replicant = nodecg.Replicant('time-1');
-const time2Replicant = nodecg.Replicant('time-2');
-const time3Replicant = nodecg.Replicant('time-3');
-const footerReplicant = nodecg.Replicant('footer');
+const resultsHeaderReplicant = nodecg.Replicant('results_header_text');
+const resultsText1Replicant = nodecg.Replicant('results_text_1');
+const resultsText2Replicant = nodecg.Replicant('results_text_2');
+const resultsText3Replicant = nodecg.Replicant('results_text_3');
+const eventsHeaderReplicant = nodecg.Replicant('events_header_text');
+const eventsText1Replicant = nodecg.Replicant('events_text_1');
+const eventsText2Replicant = nodecg.Replicant('events_text_2');
+const eventsText3Replicant = nodecg.Replicant('events_text_3');
+const eventsText4Replicant = nodecg.Replicant('events_text_4');
+const eventsText5Replicant = nodecg.Replicant('events_text_5');
+const breakingHeaderReplicant = nodecg.Replicant('breaking_header_text');
+const breakingText1Replicant = nodecg.Replicant('breaking_text_1');
+const breakingText2Replicant = nodecg.Replicant('breaking_text_2');
+const breakingText3Replicant = nodecg.Replicant('breaking_text_3');
 
-headerReplicant.on('change', (newValue) => {
-    headerInput.value = newValue;
+resultsHeaderReplicant.on('change', (newValue) => {
+    // do something with newValue
 });
-titleReplicant.on('change', (newValue) => {
-    titleInput.value = newValue;
+resultsText1Replicant.on('change', (newValue) => {
+    // do something with newValue
 });
-time1Replicant.on('change', (newValue) => {
-    time1.value = newValue;
+resultsText2Replicant.on('change', (newValue) => {
+    // do something with newValue
 });
-time2Replicant.on('change', (newValue) => {
-    time2.value = newValue;
+resultsText3Replicant.on('change', (newValue) => {
+    // do something with newValue
 });
-time3Replicant.on('change', (newValue) => {
-    time3.value = newValue;
+eventsHeaderReplicant.on('change', (newValue) => {
+    // do something with newValue
 });
-footerReplicant.on('change', (newValue) => {
-    footerInput.value = newValue;
+eventsText1Replicant.on('change', (newValue) => {
+    // do something with newValue
+});
+eventsText2Replicant.on('change', (newValue) => {
+    // do something with newValue
+});
+eventsText3Replicant.on('change', (newValue) => {
+    // do something with newValue
+});
+eventsText4Replicant.on('change', (newValue) => {
+    // do something with newValue
+});
+eventsText5Replicant.on('change', (newValue) => {
+    // do something with newValue
+});
+breakingHeaderReplicant.on('change', (newValue) => {
+    // do something with newValue
+});
+breakingText1Replicant.on('change', (newValue) => {
+    // do something with newValue
+});
+breakingText2Replicant.on('change', (newValue) => {
+    // do something with newValue
+});
+breakingText3Replicant.on('change', (newValue) => {
+    // do something with newValue
 });
 
 // Listen for changes in the Replicant value
@@ -203,21 +243,61 @@ nextChannelBtn.onclick = () => {
   switchGroup('forward');
 };
 
-
-
-
-
-
-
-
 // Page Values
 let channelInfos = [
-    { header: 'CBC', title: 'Alpine Skiing', time1: '11:30', time2: 'AM', time3: 'ET', day: 'Today' },
-    { header: 'TSN', title: 'Freestyle Halfpipe', time1: '8:00', time2: 'AM', time3: 'ET', day: 'Today' },
-    { header: 'SN', title: 'Ski Jumping', time1: '3:00', time2: 'PM', time3: 'ET', day: 'Tuesday' },
-    { header: 'TSN2', title: 'Biathalon', time1: '1:30', time2: 'PM', time3: 'ET', day: 'Friday' },
-    { header: 'SN1', title: 'Nordic Combined', time1: '11:00', time2: 'PM', time3: 'ET', day: 'Tonight' }
+    { type: 'results', header: 'RESULTS!', title: '', text1: 'Mark McMorris Won', text2: "Canada's First", text3: 'Medal of the games.', time1: '', time2: '', time3: '' },
+    { type: 'events', header: 'TODAY!', title: 'Snowboard Cross', text1: "Men's Semi-Finals", text2: "", text3: '', time1: '3:00', time2: 'PM', time3: 'ET' },
+    { type: 'breaking', header: 'BREAKING!', title: '', text1: 'Lapointe found not', text2: "guilty for taking", text3: 'banned substance', time1: '', time2: '', time3: '' },
 ];
+
+function populateChannelInfo() {
+    channelInfos.forEach(info => {
+        let groupElement = document.getElementById(`${info.type}-group`);
+
+        if (groupElement) {
+            if (info.header) {
+                let headerElement = groupElement.querySelector(`#${info.type}_header_text`);
+                if (headerElement) headerElement.textContent = info.header;
+            }
+
+            for (let i = 1; i <= 3; i++) {
+                let textElement = groupElement.querySelector(`#${info.type}_text_${i}`);
+                if (textElement) {
+                    if (info.type === 'events') {
+                        if (i === 1) {
+                            textElement.textContent = info.title;
+                        } else if (i === 2) {
+                            textElement.textContent = info.text1;
+                        }
+                    } else {
+                        textElement.textContent = info[`text${i}`];
+                    }
+                }
+            }
+
+            if (info.type === 'events') {
+                for (let i = 1; i <= 3; i++) {
+                    let timeElement = groupElement.querySelector(`#${info.type}_text_${2 + i}`);
+                    if (timeElement && info[`time${i}`]) timeElement.textContent = info[`time${i}`];
+                }
+            }
+        }
+    });
+}
+
+// Call the function to populate the channel info
+populateChannelInfo();
+
+
+
+
+
+
+
+
+
+
+
 
 // Add a new variable to keep track of the current channel index
 let currentChannelIndex = 0;
