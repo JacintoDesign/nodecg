@@ -53,7 +53,7 @@ const buttonSubmit = document.getElementById('submit_btn');
 const buttonPlay = document.getElementById('in_btn');
 const buttonClear = document.getElementById('out_btn');
 // Replicants
-const currentInfoIndexReplicant = nodecg.Replicant('currentInfoIndexReplicant');
+const currentInfoIndexReplicantTicker = nodecg.Replicant('currentInfoIndexReplicantTicker');
 const resultsHeaderReplicant = nodecg.Replicant('results_header_text');
 const resultsText1Replicant = nodecg.Replicant('results_text_1');
 const resultsText2Replicant = nodecg.Replicant('results_text_2');
@@ -125,18 +125,14 @@ breakingText3Replicant.on('change', (newValue) => {
     breakingText3.value = newValue;
 });
 
-
 // Listen for changes in the Replicant value
-// currentInfoIndexReplicant.on('change', (newIndex) => {
-//     // Handle the new value
-//     if (isAuto) {
-//         console.log('New Index:', newIndex);
-//         updateTextElements(tickerPages[newIndex]);
-//     } else {
-//         console.log('Current Index:', currentGroup);
-//         updateTextElements(tickerPages[currentGroup]);
-//     }
-// });
+currentInfoIndexReplicantTicker.on('change', (newIndex) => {
+    // Handle the new value
+    if (isAuto) {
+        console.log('Ticker New Index:', newIndex);
+        switchGroupByIndex(newIndex);
+    }
+});
 
 // Handle Submit Btn
 buttonSubmit.onclick = () => {
@@ -255,6 +251,22 @@ document.addEventListener('DOMContentLoaded', () => {
 // Show / hide groups
 let groups = [];
 let currentGroup = 0;
+
+function switchGroupByIndex(index) {
+    if (index < 0 || index >= groups.length) {
+      console.error("Invalid index provided");
+      return;
+    }
+
+    // Hide the current group
+    groups[currentGroup].style.display = 'none';
+  
+    // Update the current group index
+    currentGroup = index;
+  
+    // Show the new group
+    groups[currentGroup].style.display = 'block';
+  }
 
 function switchGroup(direction) {
   groups[currentGroup].style.display = 'none';

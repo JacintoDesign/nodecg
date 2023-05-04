@@ -205,10 +205,12 @@ function animateTimeText() {
 // Show / hide groups
 let groups = [];
 let currentGroup = 0;
+const currentInfoIndexReplicantTicker = nodecg.Replicant('currentInfoIndexReplicantTicker');
 
 function switchGroup() {
   groups[currentGroup].style.display = 'none';
   currentGroup = (currentGroup + 1) % groups.length;
+  currentInfoIndexReplicantTicker.value = currentGroup;
   groups[currentGroup].style.display = 'block';
 }
 
