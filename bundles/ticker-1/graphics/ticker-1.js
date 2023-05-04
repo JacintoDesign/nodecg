@@ -10,20 +10,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Animate In
   nodecg.listenFor('play', () => {
-    animateIn();
-    console.log('in');
+    if (netCBCRep.value == "true") {
+      animateIn();
+      console.log('in');
+    }
   });
 
   // Animate Out
   nodecg.listenFor('stop', () => {
-    animateOut();
-    console.log('out');
+    if (netCBCRep.value == "true") {
+      animateOut();
+      console.log('out');
+    }
   });
 
   // Animate Next
   nodecg.listenFor('next', () => {
-    switchGroup();
-    console.log('next');
+    if (netCBCRep.value == "true") {
+      switchGroup();
+      console.log('next');
+    }
   });
 
   // NodeCG Related ------------------- 
@@ -41,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const breakingText1Replicant = nodecg.Replicant('breaking_text_1');
   const breakingText2Replicant = nodecg.Replicant('breaking_text_2');
   const breakingText3Replicant = nodecg.Replicant('breaking_text_3');
+  const netCBCRep = nodecg.Replicant('netCBC');
   // Elements
   const resultsHeader = document.getElementById('results_header_text');
   const resultsText1 = document.getElementById('results_text_1');
@@ -113,6 +120,11 @@ document.addEventListener('DOMContentLoaded', () => {
   breakingText3Replicant.on('change', (newValue) => {
     if (newValue && breakingText3) breakingText3.textContent = newValue;
   });
+
+  netCBCRep.on('change', (newValue) => {
+    netCBCRep.value = newValue;
+    console.log("CBC change", netCBCRep.value);
+  });	
 
 });
 
@@ -214,10 +226,7 @@ function switchGroup() {
   groups[currentGroup].style.display = 'block';
 }
 
-// netCBCRep.on('change', (newValue) => {
-//     netCBCRep.value = newValue;
-//     console.log("CBC change", netCBCRep.value)
-// });	
+
 
 // nodecg.listenFor('playTicker', () => {
 //     if (netCBCRep.value == "true") {

@@ -1,37 +1,3 @@
-// 	const netCBCRep = nodecg.Replicant('netCBC');
-// 	const netTSNRep = nodecg.Replicant('netTSN');
-// 	const netRSNRep = nodecg.Replicant('netRSN');
-
-// function netCheck() {
-//   // Get the checkbox
-//   var CBCcheck = document.getElementById("netCBC");
-//   var TSNcheck = document.getElementById("netTSN");
-//   var RSNcheck = document.getElementById("netRSN");
-
-//   if (CBCcheck.checked == true){
-//     netCBCRep.value = "true";
-//   } else {
-//     netCBCRep.value = "false";
-//   }
-  
-//   if (TSNcheck.checked == true){
-//     netTSNRep.value = "true";
-//   } else {
-//     netTSNRep.value = "false";
-//   }
-  
-//   if (RSNcheck.checked == true){
-//     netRSNRep.value = "true";
-//   } else {
-//     netRSNRep.value = "false";
-//   }
-
-//   console.log("CBC", netCBCRep.value); 
-//   console.log("TSN", netTSNRep.value);
-//   console.log("RSN", netRSNRep.value);
-// }
-
-
 // Preview Elements
 const resultsHeader = document.getElementById('results_header_text');
 const resultsText1 = document.getElementById('results_text_1');
@@ -68,6 +34,9 @@ const breakingHeaderReplicant = nodecg.Replicant('breaking_header_text');
 const breakingText1Replicant = nodecg.Replicant('breaking_text_1');
 const breakingText2Replicant = nodecg.Replicant('breaking_text_2');
 const breakingText3Replicant = nodecg.Replicant('breaking_text_3');
+const netCBCRep = nodecg.Replicant('netCBC');
+const netTSNRep = nodecg.Replicant('netTSN');
+const netRSNRep = nodecg.Replicant('netRSN');
 
 resultsHeaderReplicant.on('change', (newValue) => {
     resultsHeader.value = newValue;
@@ -239,8 +208,8 @@ function updateCountdownDisplay(value) {
   document.getElementById('countdown').textContent = `${value}s`;
 }
 
+// Set Groups on Page Load
 document.addEventListener('DOMContentLoaded', () => {
-    // Groups
     groups = [
       document.getElementById('results-group'),
       document.getElementById('events-group'),
@@ -253,17 +222,10 @@ let groups = [];
 let currentGroup = 0;
 
 function switchGroupByIndex(index) {
-    if (index < 0 || index >= groups.length) {
-      console.error("Invalid index provided");
-      return;
-    }
-
     // Hide the current group
-    groups[currentGroup].style.display = 'none';
-  
+    groups[currentGroup].style.display = 'none';  
     // Update the current group index
     currentGroup = index;
-  
     // Show the new group
     groups[currentGroup].style.display = 'block';
   }
@@ -294,52 +256,61 @@ nextChannelBtn.onclick = () => {
 
 // Page Values
 let tickerPages = [
-    { type: 'results', header: 'RESULTS!', title: '', text1: 'Mark McMorris Won', text2: "Canada's First", text3: 'Medal of the games.', time1: '', time2: '', time3: '' },
-    { type: 'events', header: 'TODAY!', title: 'Snowboard Cross', text1: "Men's Semi-Finals", text2: "", text3: '', time1: '3:00', time2: 'PM', time3: 'ET' },
-    { type: 'breaking', header: 'BREAKING!', title: '', text1: 'Lapointe found not', text2: "guilty for taking", text3: 'banned substance', time1: '', time2: '', time3: '' },
+    {
+        resultsHeader: 'RESULTS!',
+        resultsText1: 'Mark McMorris Won',
+        resultsText2: "Canada's First",
+        resultsText3: 'Medal of the games.',
+        eventsHeader: 'TODAY!',
+        eventsText1: 'Snowboard Cross',
+        eventsText2: "Men's Semi-Finals",
+        eventsText3: '3:00',
+        eventsText4: 'PM',
+        eventsText5: 'ET',
+        breakingHeader: 'BREAKING!',
+        breakingText1: 'Lapointe found not',
+        breakingText2: "guilty for taking",
+        breakingText3: 'banned substance',
+    }
 ];
 
 function populatePages() {
-    tickerPages.forEach(page => {
-        let groupElement = document.getElementById(`${page.type}-group`);
+    let page = tickerPages[0];
 
-        if (groupElement) {
-            if (page.header) {
-                let headerElement = groupElement.querySelector(`#${page.type}_header_text`);
-                if (headerElement) headerElement.textContent = page.header;
-            }
+    let resultsGroupElement = document.getElementById('results-group');
+    let eventsGroupElement = document.getElementById('events-group');
+    let breakingGroupElement = document.getElementById('breaking-group');
 
-            for (let i = 1; i <= 3; i++) {
-                let textElement = groupElement.querySelector(`#${page.type}_text_${i}`);
-                if (textElement) {
-                    if (page.type === 'events') {
-                        if (i === 1) {
-                            textElement.textContent = page.title;
-                        } else if (i === 2) {
-                            textElement.textContent = page.text1;
-                        }
-                    } else {
-                        textElement.textContent = page[`text${i}`];
-                    }
-                }
-            }
+    // Update Results group
+    if (resultsGroupElement) {
+        resultsHeader.textContent = page.resultsHeader;
+        resultsText1.textContent = page.resultsText1;
+        resultsText2.textContent = page.resultsText2;
+        resultsText3.textContent = page.resultsText3;
+    }
 
-            if (page.type === 'events') {
-                for (let i = 1; i <= 3; i++) {
-                    let timeElement = groupElement.querySelector(`#${page.type}_text_${2 + i}`);
-                    if (timeElement && page[`time${i}`]) timeElement.textContent = page[`time${i}`];
-                }
-            }
-        }
-    });
+    // Update Events group
+    if (eventsGroupElement) {
+        eventsHeader.textContent = page.eventsHeader;
+        eventsText1.textContent = page.eventsText1;
+        eventsText2.textContent = page.eventsText2;
+        eventsText3.textContent = page.eventsText3;
+        eventsText4.textContent = page.eventsText4;
+        eventsText5.textContent = page.eventsText5;
+    }
+
+    // Update Breaking group
+    if (breakingGroupElement) {
+        breakingHeader.textContent = page.breakingHeader;
+        breakingText1.textContent = page.breakingText1;
+        breakingText2.textContent = page.breakingText2;
+        breakingText3.textContent = page.breakingText3;
+    }
 }
 
 // Call the function to populate the pages
 populatePages();
 loadTickerPages();
-
-// Add a new variable to keep track of the current channel index
-let currentChannelIndex = 0;
 
 // Add a new function to update the text elements with the values from the tickerPages array
 function updateTextElements(tickerPage) {
@@ -377,7 +348,7 @@ breakingText3.addEventListener('input', updateTickerPage);
 
 // Update the updateTickerPage function to also save the updated array to localStorage
 function updateTickerPage() {
-    tickerPages[currentGroup] = {
+    tickerPages[0] = {
         resultsHeader: resultsHeader.innerText,
         resultsText1: resultsText1.innerText,
         resultsText2: resultsText2.innerText,
@@ -406,6 +377,52 @@ function loadTickerPages() {
     const storedTickerPages = localStorage.getItem('tickerPages');
     if (storedTickerPages) {
         tickerPages = JSON.parse(storedTickerPages);
-        updateTextElements(tickerPages[currentGroup]);
+        updateTextElements(tickerPages[0]);
     }
+}
+
+// Load Replicant value for checkboxes
+const CBCcheck = document.getElementById("netCBC");
+const TSNcheck = document.getElementById("netTSN");
+const RSNcheck = document.getElementById("netRSN");
+const netCBCStoredValue = localStorage.getItem("netCBC");
+const netTSNStoredValue = localStorage.getItem("netTSN");
+const netRSNStoredValue = localStorage.getItem("netRSN");
+
+if (netCBCStoredValue !== null) {
+  CBCcheck.checked = netCBCStoredValue === "true";
+}
+
+if (netTSNStoredValue !== null) {
+  TSNcheck.checked = netTSNStoredValue === "true";
+}
+
+if (netRSNStoredValue !== null) {
+  RSNcheck.checked = netRSNStoredValue === "true";
+}
+
+// Pass Checkbox Value
+function netCheck() {
+  // Get the checkbox
+  if (CBCcheck.checked == true){
+    netCBCRep.value = "true";
+  } else {
+    netCBCRep.value = "false";
+  }
+  
+  if (TSNcheck.checked == true){
+    netTSNRep.value = "true";
+  } else {
+    netTSNRep.value = "false";
+  }
+  
+  if (RSNcheck.checked == true){
+    netRSNRep.value = "true";
+  } else {
+    netRSNRep.value = "false";
+  }
+
+  localStorage.setItem("netCBC", CBCcheck.checked);
+  localStorage.setItem("netTSN", TSNcheck.checked);
+  localStorage.setItem("netRSN", RSNcheck.checked);
 }

@@ -134,3 +134,8 @@ body {
     .arrow-btn:first-child {
         margin-right: 5px;
     }
+
+/* Checkbox Group */
+.checkbox-group {
+    margin-left: 5px;
+}

@@ -78,18 +78,18 @@
 				<button id="prev_channel" class="arrow-btn">&larr;</button>
 				<button id="next_channel" class="arrow-btn">&rarr;</button>
 			</div>
-			<button class="btn" id="submit_btn">Submit</button>
+			<button class="btn" id="submit_btn">Submit</button>				
+			<div class="checkbox-group">
+				<input type="checkbox" id="netCBC" name="netCBC" onclick="netCheck()">
+				<label for="netCBC">CBC</label><br>
+				<input type="checkbox" id="netTSN" name="netTSN" onclick="netCheck()">
+				<label for="netTSN">TSN</label><br>
+				<input type="checkbox" id="netRSN" name="netRSN" onclick="netCheck()">
+				<label for="netRSN">RSN</label><br>	
+			</div>
 		</div>
 	</div>
-	
-	<!-- <div>
-		<input type="checkbox" id="netCBC" name="netCBC" onclick="netCheck()">
-		 <label for="netCBC">CBC</label><br>
-		 <input type="checkbox" id="netTSN" name="netTSN" onclick="netCheck()">
-		 <label for="netTSN">TSN</label><br>
-		 <input type="checkbox" id="netRSN" name="netRSN" onclick="netCheck()">
-		 <label for="netRSN">RSN</label><br>	
-	</div> -->
+
 
 </body>
 <script src="/nodecg-api.min.js"></script>
