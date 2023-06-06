@@ -1,0 +1,10 @@
+version: '3'
+services:
+  nodecg:
+    build: .
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./bundles:/app/bundles
+      - ./cfg:/app/cfg
+      - ./db:/app/db
