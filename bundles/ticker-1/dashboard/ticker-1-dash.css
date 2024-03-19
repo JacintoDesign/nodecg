@@ -4,47 +4,7 @@ body {
 	margin: 0;
 	overflow: hidden;
     max-width: 500px;
-    height: 300px;
-}
-
-/* Element Preview */
-#ticker_wrapper {
-    position: relative;
-    left: 80px;
-    top: 10px;    
-}
-
-#ticker_decoration {
-	transform: translateY(0px);
-}
-
-#ticker_main {
-	position: absolute;
-    left: 15px;
-    margin-top: 10px;
-	width: 290px;
-    animation: none;
-	opacity: 1;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-
-.ticker_header .text, #ticker_title .text, .ticker_message .text {
-  top: 0;
-  opacity: 1;
-  animation: none;
-}
-
-.time-text-part {
-	opacity: 1;
-}
-
-#ticker_footer {
-    animation: none;
-    opacity: 1;
-}
-
-.container-main {
-    display: flex;
+    height: auto;
 }
 
 /* Buttons Group */
@@ -95,47 +55,65 @@ body {
     top: 2px;
 }
 
-/* Buttons Group - Arrow Buttons */
-.buttons-group-alt {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    left: 295px;
-    top: 10px;
-}
-
-    .buttons-group-alt * {
-        margin-bottom: 10px;
-    }
-
-.arrow-btns {
-    display: flex;
-    flex-direction: row;
-    position: relative; 
-    left: 10px;
-    margin-bottom: 0;
-}
-
-.arrow-btn {
-    height: 30px;
-    width: 48.5px;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    background: #384d75;
-}
-
-    .arrow-btn:hover {
-        filter: brightness(1.2);
-        cursor: pointer;
-    }
-
-    .arrow-btn:first-child {
-        margin-right: 5px;
-    }
-
 /* Checkbox Group */
 .checkbox-group {
-    margin-left: 5px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
 }
+
+/* Ticker Table */
+.ticker-table {
+    margin: 20px 5px;
+    width: 675px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow: hidden;
+  }
+  
+  th, td {
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  th:first-child, td:first-child {
+    border-left: 1px solid #ccc;
+  }
+  
+  th {
+    background-color: #f4f4f4;
+    color: black;
+    border-top: 1px solid #ccc;
+  }
+  
+  tbody tr:first-child td {
+    border-top: none;
+  }
+
+  .fa-trash-o, .fa-eye, .fa-eye-slash {
+    cursor: pointer;
+  }
+
+  .fa-trash-o:hover {
+    color: rgb(255, 0, 0);
+  }
+
+  .fa-eye:hover, .fa-eye-slash:hover {
+    color: rgb(108, 108, 108);
+  }
+  
+  .fa-bars:hover {
+    cursor: grab;
+  }
+
+  .fa-bars:active {
+    cursor: grabbing;
+  }

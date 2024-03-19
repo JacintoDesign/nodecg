@@ -1,385 +1,51 @@
-// Preview Elements
-const resultsHeader = document.getElementById('results_header_text');
-const resultsText1 = document.getElementById('results_text_1');
-const resultsText2 = document.getElementById('results_text_2');
-const resultsText3 = document.getElementById('results_text_3');
-const eventsHeader = document.getElementById('events_header_text');
-const eventsText1 = document.getElementById('events_text_1');
-const eventsText2 = document.getElementById('events_text_2');
-const eventsText3 = document.getElementById('events_text_3');
-const eventsText4 = document.getElementById('events_text_4');
-const eventsText5 = document.getElementById('events_text_5');
-const breakingHeader = document.getElementById('breaking_header_text');
-const breakingText1 = document.getElementById('breaking_text_1');
-const breakingText2 = document.getElementById('breaking_text_2');
-const breakingText3 = document.getElementById('breaking_text_3');
 // Button Elements
 const nextBtn = document.getElementById('next_btn');
 const buttonSubmit = document.getElementById('submit_btn');
 const buttonPlay = document.getElementById('in_btn');
 const buttonClear = document.getElementById('out_btn');
 // Replicants
-const currentInfoIndexReplicantTicker = nodecg.Replicant('currentInfoIndexReplicantTicker');
-const resultsHeaderReplicant = nodecg.Replicant('results_header_text');
-const resultsText1Replicant = nodecg.Replicant('results_text_1');
-const resultsText2Replicant = nodecg.Replicant('results_text_2');
-const resultsText3Replicant = nodecg.Replicant('results_text_3');
-const eventsHeaderReplicant = nodecg.Replicant('events_header_text');
-const eventsText1Replicant = nodecg.Replicant('events_text_1');
-const eventsText2Replicant = nodecg.Replicant('events_text_2');
-const eventsText3Replicant = nodecg.Replicant('events_text_3');
-const eventsText4Replicant = nodecg.Replicant('events_text_4');
-const eventsText5Replicant = nodecg.Replicant('events_text_5');
-const breakingHeaderReplicant = nodecg.Replicant('breaking_header_text');
-const breakingText1Replicant = nodecg.Replicant('breaking_text_1');
-const breakingText2Replicant = nodecg.Replicant('breaking_text_2');
-const breakingText3Replicant = nodecg.Replicant('breaking_text_3');
+const tickerItemsReplicant = nodecg.Replicant('tickerItems', {defaultValue: []});
+const refreshIntervalReplicant = nodecg.Replicant('refreshInterval');
 const netCBCRep = nodecg.Replicant('netCBC');
 const netTSNRep = nodecg.Replicant('netTSN');
 const netRSNRep = nodecg.Replicant('netRSN');
 
-resultsHeaderReplicant.on('change', (newValue) => {
-    resultsHeader.value = newValue;
-});
-
-resultsText1Replicant.on('change', (newValue) => {
-    resultsText1.value = newValue;
-});
-
-resultsText2Replicant.on('change', (newValue) => {
-    resultsText2.value = newValue;
-});
-
-resultsText3Replicant.on('change', (newValue) => {
-    resultsText3.value = newValue;
-});
-
-eventsHeaderReplicant.on('change', (newValue) => {
-    eventsHeader.value = newValue;
-});
-
-eventsText1Replicant.on('change', (newValue) => {
-    eventsText1.value = newValue;
-});
-
-eventsText2Replicant.on('change', (newValue) => {
-    eventsText2.value = newValue;
-});
-
-eventsText3Replicant.on('change', (newValue) => {
-    eventsText3.value = newValue;
-});
-
-eventsText4Replicant.on('change', (newValue) => {
-    eventsText4.value = newValue;
-});
-
-eventsText5Replicant.on('change', (newValue) => {
-    eventsText5.value = newValue;
-});
-
-breakingHeaderReplicant.on('change', (newValue) => {
-    breakingHeader.value = newValue;
-});
-
-breakingText1Replicant.on('change', (newValue) => {
-    breakingText1.value = newValue;
-});
-
-breakingText2Replicant.on('change', (newValue) => {
-    breakingText2.value = newValue;
-});
-
-breakingText3Replicant.on('change', (newValue) => {
-    breakingText3.value = newValue;
-});
-
-// Listen for changes in the Replicant value
-currentInfoIndexReplicantTicker.on('change', (newIndex) => {
-    // Handle the new value
-    if (isAuto) {
-        console.log('Ticker New Index:', newIndex);
-        switchGroupByIndex(newIndex);
-    }
-});
-
 // Handle Submit Btn
 buttonSubmit.onclick = () => {
-    if (resultsHeaderReplicant && resultsHeader) resultsHeaderReplicant.value = resultsHeader.innerText;
-    if (resultsText1Replicant && resultsText1) resultsText1Replicant.value = resultsText1.innerText;
-    if (resultsText2Replicant && resultsText2) resultsText2Replicant.value = resultsText2.innerText;
-    if (resultsText3Replicant && resultsText3) resultsText3Replicant.value = resultsText3.innerText;
-    if (eventsHeaderReplicant && eventsHeader) eventsHeaderReplicant.value = eventsHeader.innerText;
-    if (eventsText1Replicant && eventsText1) eventsText1Replicant.value = eventsText1.innerText;
-    if (eventsText2Replicant && eventsText2) eventsText2Replicant.value = eventsText2.innerText;
-    if (eventsText3Replicant && eventsText3) eventsText3Replicant.value = eventsText3.innerText;
-    if (eventsText4Replicant && eventsText4) eventsText4Replicant.value = eventsText4.innerText;
-    if (eventsText5Replicant && eventsText5) eventsText5Replicant.value = eventsText5.innerText;
-    if (breakingHeaderReplicant && breakingHeader) breakingHeaderReplicant.value = breakingHeader.innerText;
-    if (breakingText1Replicant && breakingText1) breakingText1Replicant.value = breakingText1.innerText;
-    if (breakingText2Replicant && breakingText2) breakingText2Replicant.value = breakingText2.innerText;
-    if (breakingText3Replicant && breakingText3) breakingText3Replicant.value = breakingText3.innerText;
-    nodecg.sendMessage('update');
-    console.log(
-        resultsHeaderReplicant.value,
-        resultsText1Replicant.value,
-        resultsText2Replicant.value,
-        resultsText3Replicant.value,
-        eventsHeaderReplicant.value,
-        eventsText1Replicant.value,
-        eventsText2Replicant.value,
-        eventsText3Replicant.value,
-        eventsText4Replicant.value,
-        eventsText5Replicant.value,
-        breakingHeaderReplicant.value,
-        breakingText1Replicant.value,
-        breakingText2Replicant.value,
-        breakingText3Replicant.value
-    );
+  console.log('Updated groupItems:', groupItems);
+  console.log('Updated sendableItems:', sendableItems);
+  nodecg.sendMessage('update');
+  tickerItemsReplicant.value = sendableItems;
+  localStorage.setItem('groupItems', JSON.stringify(groupItems));
+  localStorage.setItem('sendableItems', JSON.stringify(sendableItems));
 };
 
 // Animate In
 buttonPlay.onclick = () => {
-    isAuto = false;
-    console.log("play");
-    nodecg.sendMessage('play');
+  console.log("play");
+  nodecg.sendMessage('play');
 };
 
 // Animate Out
 buttonClear.onclick = () => {
-    isAuto = false;
-    console.log("stop");
-    nodecg.sendMessage('stop');
+  console.log("stop");
+  nodecg.sendMessage('stop');
 };
 
 // Next Page
 nextBtn.onclick = () => {
-    isAuto = true;
-    console.log("next");
-    nodecg.sendMessage('next');
+  console.log("next");
+  nodecg.sendMessage('next');
 };
 
-// Start / Stop Interval
-let isAuto = true;
+// Update Interval
 const intervalInput = document.getElementById('interval_input');
-const startIntervalBtn = document.getElementById('start_interval_btn');
-const stopIntervalBtn = document.getElementById('stop_interval_btn');
-let autoNextInterval;
-let countdownValue;
-let countdownTimerId;
+const updateIntervalBtn = document.getElementById('update_interval_btn');
 
-startIntervalBtn.onclick = () => {
-    isAuto = true;
-    clearInterval(autoNextInterval);
-    clearInterval(countdownTimerId); // Clear the existing countdown timer
-    const intervalSeconds = parseInt(intervalInput.value);
-    countdownValue = intervalSeconds; // Set the initial countdown value
-
-    if (intervalSeconds > 0) {
-        autoNextInterval = setInterval(() => {
-            nodecg.sendMessage('next');
-            countdownValue = intervalSeconds; // Reset the countdown value
-        }, intervalSeconds * 1000);
-
-        // Start the countdown timer
-        startCountdownTimer();
-    }
+updateIntervalBtn.onclick = () => {
+  const intervalSeconds = parseInt(intervalInput.value);
+  refreshIntervalReplicant.value = intervalSeconds;
 };
-
-stopIntervalBtn.onclick = () => {
-    isAuto = false;
-    clearInterval(autoNextInterval);
-    clearInterval(countdownTimerId); // Clear the countdown timer
-    document.getElementById('countdown').textContent = ''; // Clear the countdown display
-}
-
-function startCountdownTimer() {
-  countdownTimerId = setInterval(() => {
-    countdownValue -= 1;
-    updateCountdownDisplay(countdownValue);
-
-    if (countdownValue <= 0) {
-      countdownValue = parseInt(intervalInput.value);
-    }
-  }, 1000);
-}
-
-function updateCountdownDisplay(value) {
-  document.getElementById('countdown').textContent = `${value}s`;
-}
-
-// Set Groups on Page Load
-document.addEventListener('DOMContentLoaded', () => {
-    groups = [
-      document.getElementById('results-group'),
-      document.getElementById('events-group'),
-      document.getElementById('breaking-group'),
-    ];
-});
-
-// Show / hide groups
-let groups = [];
-let currentGroup = 0;
-
-function switchGroupByIndex(index) {
-    // Hide the current group
-    groups[currentGroup].style.display = 'none';  
-    // Update the current group index
-    currentGroup = index;
-    // Show the new group
-    groups[currentGroup].style.display = 'block';
-  }
-
-function switchGroup(direction) {
-  groups[currentGroup].style.display = 'none';
-  if (direction === 'forward') {
-    currentGroup = (currentGroup + 1) % groups.length;
-  } else if (direction === 'backward') {
-    currentGroup = (currentGroup - 1 + groups.length) % groups.length;
-  }
-  groups[currentGroup].style.display = 'block';
-}
-
-// Add new variables for the arrow buttons
-const prevChannelBtn = document.getElementById('prev_channel');
-const nextChannelBtn = document.getElementById('next_channel');
-
-// Previous Page
-prevChannelBtn.onclick = () => {
-  switchGroup('backward');
-};
-
-// Next Page
-nextChannelBtn.onclick = () => {
-  switchGroup('forward');
-};
-
-// Page Values
-let tickerPages = [
-    {
-        resultsHeader: 'RESULTS!',
-        resultsText1: 'Mark McMorris Won',
-        resultsText2: "Canada's First",
-        resultsText3: 'Medal of the games.',
-        eventsHeader: 'TODAY!',
-        eventsText1: 'Snowboard Cross',
-        eventsText2: "Men's Semi-Finals",
-        eventsText3: '3:00',
-        eventsText4: 'PM',
-        eventsText5: 'ET',
-        breakingHeader: 'BREAKING!',
-        breakingText1: 'Lapointe found not',
-        breakingText2: "guilty for taking",
-        breakingText3: 'banned substance',
-    }
-];
-
-function populatePages() {
-    let page = tickerPages[0];
-
-    let resultsGroupElement = document.getElementById('results-group');
-    let eventsGroupElement = document.getElementById('events-group');
-    let breakingGroupElement = document.getElementById('breaking-group');
-
-    // Update Results group
-    if (resultsGroupElement) {
-        resultsHeader.textContent = page.resultsHeader;
-        resultsText1.textContent = page.resultsText1;
-        resultsText2.textContent = page.resultsText2;
-        resultsText3.textContent = page.resultsText3;
-    }
-
-    // Update Events group
-    if (eventsGroupElement) {
-        eventsHeader.textContent = page.eventsHeader;
-        eventsText1.textContent = page.eventsText1;
-        eventsText2.textContent = page.eventsText2;
-        eventsText3.textContent = page.eventsText3;
-        eventsText4.textContent = page.eventsText4;
-        eventsText5.textContent = page.eventsText5;
-    }
-
-    // Update Breaking group
-    if (breakingGroupElement) {
-        breakingHeader.textContent = page.breakingHeader;
-        breakingText1.textContent = page.breakingText1;
-        breakingText2.textContent = page.breakingText2;
-        breakingText3.textContent = page.breakingText3;
-    }
-}
-
-// Call the function to populate the pages
-populatePages();
-loadTickerPages();
-
-// Add a new function to update the text elements with the values from the tickerPages array
-function updateTextElements(tickerPage) {
-    resultsHeader.textContent = tickerPage.resultsHeader;
-    resultsText1.textContent = tickerPage.resultsText1;
-    resultsText2.textContent = tickerPage.resultsText2;
-    resultsText3.textContent = tickerPage.resultsText3;
-    eventsHeader.textContent = tickerPage.eventsHeader;
-    eventsText1.textContent = tickerPage.eventsText1;
-    eventsText2.textContent = tickerPage.eventsText2;
-    eventsText3.textContent = tickerPage.eventsText3;
-    eventsText4.textContent = tickerPage.eventsText4;
-    eventsText5.textContent = tickerPage.eventsText5;
-    breakingHeader.textContent = tickerPage.breakingHeader;
-    breakingText1.textContent = tickerPage.breakingText1;
-    breakingText2.textContent = tickerPage.breakingText2;
-    breakingText3.textContent = tickerPage.breakingText3;
-}
-
-// Add input event listeners for contenteditable elements to update the tickerPages array
-resultsHeader.addEventListener('input', updateTickerPage);
-resultsText1.addEventListener('input', updateTickerPage);
-resultsText2.addEventListener('input', updateTickerPage);
-resultsText3.addEventListener('input', updateTickerPage);
-eventsHeader.addEventListener('input', updateTickerPage);
-eventsText1.addEventListener('input', updateTickerPage);
-eventsText2.addEventListener('input', updateTickerPage);
-eventsText3.addEventListener('input', updateTickerPage);
-eventsText4.addEventListener('input', updateTickerPage);
-eventsText5.addEventListener('input', updateTickerPage);
-breakingHeader.addEventListener('input', updateTickerPage);
-breakingText1.addEventListener('input', updateTickerPage);
-breakingText2.addEventListener('input', updateTickerPage);
-breakingText3.addEventListener('input', updateTickerPage);
-
-// Update the updateTickerPage function to also save the updated array to localStorage
-function updateTickerPage() {
-    tickerPages[0] = {
-        resultsHeader: resultsHeader.innerText,
-        resultsText1: resultsText1.innerText,
-        resultsText2: resultsText2.innerText,
-        resultsText3: resultsText3.innerText,
-        eventsHeader: eventsHeader.innerText,
-        eventsText1: eventsText1.innerText,
-        eventsText2: eventsText2.innerText,
-        eventsText3: eventsText3.innerText,
-        eventsText4: eventsText4.innerText,
-        eventsText5: eventsText5.innerText,
-        breakingHeader: breakingHeader.innerText,
-        breakingText1: breakingText1.innerText,
-        breakingText2: breakingText2.innerText,
-        breakingText3: breakingText3.innerText
-    };
-    saveTickerPages(); // Save the updated array to localStorage
-} 
-
-// Add a function to save the tickerPages array to localStorage
-function saveTickerPages() {
-    localStorage.setItem('tickerPages', JSON.stringify(tickerPages));
-}
-
-// Add a function to load the tickerPages array from localStorage if it exists
-function loadTickerPages() {
-    const storedTickerPages = localStorage.getItem('tickerPages');
-    if (storedTickerPages) {
-        tickerPages = JSON.parse(storedTickerPages);
-        updateTextElements(tickerPages[0]);
-    }
-}
 
 // Load Replicant value for checkboxes
 const CBCcheck = document.getElementById("netCBC");
@@ -409,13 +75,13 @@ function netCheck() {
   } else {
     netCBCRep.value = "false";
   }
-  
+
   if (TSNcheck.checked == true){
     netTSNRep.value = "true";
   } else {
     netTSNRep.value = "false";
   }
-  
+
   if (RSNcheck.checked == true){
     netRSNRep.value = "true";
   } else {
@@ -425,4 +91,273 @@ function netCheck() {
   localStorage.setItem("netCBC", CBCcheck.checked);
   localStorage.setItem("netTSN", TSNcheck.checked);
   localStorage.setItem("netRSN", RSNcheck.checked);
+}
+
+// Initialize
+let groupItems = [];
+let sendableItems = [];
+
+// LocalStorage functionality ----------------------------------------------------
+if (localStorage.getItem('groupItems') && localStorage.getItem('sendableItems')) {
+  // Parse the stored JSON data
+  groupItems = JSON.parse(localStorage.getItem('groupItems'));
+  sendableItems = JSON.parse(localStorage.getItem('sendableItems'));
+} else {
+  // Default values if nothing is in localStorage
+  groupItems = [
+    { type: 'Results', message: '100 Meter World Record Holder' },
+    { type: 'Results', message: '200 Meter World Record Holder' },
+    { type: 'Breaking', message: 'New Marathon Record' },
+    { type: 'Breaking', message: 'Canadian swimmers set World Record' },
+    { type: 'Promo', message: 'Upcoming: World Championship' },
+    { type: 'Free', message: 'Tension as Olympics approach' },
+  ];
+  sendableItems = [...groupItems];
+  // Store the initial arrays in localStorage
+  localStorage.setItem('groupItems', JSON.stringify(groupItems));
+  localStorage.setItem('sendableItems', JSON.stringify(sendableItems));
+}
+
+const tableBody = document.getElementById('table-body');
+
+// Populate the table with groupItems ------------------------------------------
+groupItems.forEach((item, index) => {
+  const row = document.createElement('tr');
+  row.setAttribute('draggable', true);
+
+  // Create Drag / Drop Handle
+  const handleCell = document.createElement('td');
+  const handleIcon = document.createElement('i');
+  handleIcon.className = 'fa fa-bars';
+  handleCell.appendChild(handleIcon);
+  row.appendChild(handleCell);
+
+  // Type cell with contenteditable
+  const typeCell = document.createElement('td');
+  typeCell.setAttribute('contenteditable', true);
+  typeCell.textContent = item.type;
+  typeCell.addEventListener('keypress', (event) => {
+    const key = event.key.toUpperCase();
+    if (['R', 'B', 'P', 'F'].includes(key)) {
+      event.preventDefault(); // Prevent the default character input
+      const fullText = { R: 'Results', B: 'Breaking', P: 'Promo', F: 'Free' }[key];
+      typeCell.textContent = fullText;
+      updateItem(Array.from(tableBody.children).indexOf(row), 'type', fullText);
+    }
+  });
+  typeCell.addEventListener('blur', () => {
+    updateItem(Array.from(tableBody.children).indexOf(row), 'type', typeCell.textContent);
+  });
+  row.appendChild(typeCell);
+
+  // Message cell with contenteditable
+  const messageCell = document.createElement('td');
+  messageCell.setAttribute('contenteditable', true);
+  messageCell.textContent = item.message;
+  messageCell.addEventListener('blur', () => {
+    updateItem(Array.from(tableBody.children).indexOf(row), 'message', messageCell.textContent);
+  });
+  row.appendChild(messageCell);
+
+  // Delete Column
+  const deleteCell = document.createElement('td');
+  const deleteIcon = document.createElement('i');
+  deleteIcon.className = 'fa fa-trash-o';
+  deleteIcon.style.cursor = 'pointer';
+  deleteIcon.onclick = () => {
+    if (confirm('Are you sure you want to delete this row?')) {
+      row.remove();
+      groupItems.splice(index, 1);
+      sendableItems = sendableItems.filter((_, sendableIndex) => sendableIndex !== index);
+      saveItems();
+    }
+  };
+  deleteCell.appendChild(deleteIcon);
+  row.appendChild(deleteCell);
+
+  // Hide Column
+  const hideCell = document.createElement('td');
+  const hideIcon = document.createElement('i');
+  hideIcon.className = 'fa fa-eye';
+  hideIcon.classList.add('visibility-icon');
+  hideIcon.style.cursor = 'pointer';
+
+  // Check if the item is in sendableItems
+  if (!sendableItems.some(si => si.type === item.type && si.message === item.message)) {
+    hideIcon.classList.remove('fa-eye');
+    hideIcon.classList.add('fa-eye-slash');
+  }
+
+  hideIcon.onclick = () => {
+    toggleVisibility(hideIcon, typeCell, messageCell, index);
+    localStorage.setItem('groupItems', JSON.stringify(groupItems));
+    localStorage.setItem('sendableItems', JSON.stringify(sendableItems));
+  };
+  hideCell.appendChild(hideIcon);
+  row.appendChild(hideCell);
+
+  // Drag and Drop functionality
+  addDragAndDropHandlers(row);
+
+  tableBody.appendChild(row);
+});
+
+// Add Button functionality ------------------------------------------------------------------
+document.getElementById('add_btn').addEventListener('click', () => {
+  const newItem = { type: 'Free', message: 'New message' }; // Default values for the new item
+  const newIndex = groupItems.length;
+  groupItems.push(newItem);
+  sendableItems.push(newItem); // Adding the new item to sendableItems as well
+
+  // Append the new row to the table
+  const row = document.createElement('tr');
+  row.setAttribute('draggable', true);
+
+  // Create Drag / Drop Handle
+  const handleCell = document.createElement('td');
+  const handleIcon = document.createElement('i');
+  handleIcon.className = 'fa fa-bars';
+  handleCell.appendChild(handleIcon);
+  row.appendChild(handleCell);
+
+  // Type cell with contenteditable
+  const typeCell = document.createElement('td');
+  typeCell.setAttribute('contenteditable', true);
+  typeCell.textContent = newItem.type;
+  typeCell.addEventListener('keypress', (event) => {
+    const key = event.key.toUpperCase();
+    if (['R', 'B', 'P', 'F'].includes(key)) {
+      event.preventDefault(); // Prevent the default character input
+      const fullText = { R: 'Results', B: 'Breaking', P: 'Promo', F: 'Free' }[key];
+      typeCell.textContent = fullText;
+      updateItem(Array.from(tableBody.children).indexOf(row), 'type', fullText);
+    }
+  });
+  typeCell.addEventListener('blur', () => {
+    updateItem(Array.from(tableBody.children).indexOf(row), 'type', typeCell.textContent);
+  });
+  row.appendChild(typeCell);
+
+  // Message cell with contenteditable
+  const messageCell = document.createElement('td');
+  messageCell.setAttribute('contenteditable', true);
+  messageCell.textContent = newItem.message;
+  messageCell.addEventListener('blur', () => {
+    updateItem(Array.from(tableBody.children).indexOf(row), 'message', messageCell.textContent);
+  });
+  row.appendChild(messageCell);
+
+  // Delete Column
+  const deleteCell = document.createElement('td');
+  const deleteIcon = document.createElement('i');
+  deleteIcon.className = 'fa fa-trash-o';
+  deleteIcon.style.cursor = 'pointer';
+  deleteIcon.onclick = () => {
+    row.remove();
+    groupItems.splice(newIndex, 1);
+    sendableItems = sendableItems.filter((item, idx) => idx !== newIndex);
+    localStorage.setItem('groupItems', JSON.stringify(groupItems));
+    localStorage.setItem('sendableItems', JSON.stringify(sendableItems));
+  };
+  deleteCell.appendChild(deleteIcon);
+  row.appendChild(deleteCell);
+
+  // Hide Column
+  const hideCell = document.createElement('td');
+  const hideIcon = document.createElement('i');
+  hideIcon.className = 'fa fa-eye';
+  hideIcon.classList.add('visibility-icon');
+  hideIcon.style.cursor = 'pointer';
+  hideIcon.onclick = () => {
+    toggleVisibility(hideIcon, typeCell, messageCell, newIndex);
+    localStorage.setItem('groupItems', JSON.stringify(groupItems));
+    localStorage.setItem('sendableItems', JSON.stringify(sendableItems));
+  };
+  hideCell.appendChild(hideIcon);
+  row.appendChild(hideCell);
+
+  // Drag and Drop functionality for the new row
+  addDragAndDropHandlers(row);
+
+  tableBody.appendChild(row);
+
+  saveItems();
+});
+
+// Toggle visibility function ------------------------------------------------------------
+function toggleVisibility(icon, typeCell, messageCell, index) {
+  const currentItem = {
+    type: typeCell.textContent,
+    message: messageCell.textContent
+  };
+
+  if (icon.classList.contains('fa-eye')) {
+    icon.classList.remove('fa-eye');
+    icon.classList.add('fa-eye-slash');
+    sendableItems = sendableItems.filter(item => item.type !== currentItem.type || item.message !== currentItem.message);
+  } else {
+    icon.classList.remove('fa-eye-slash');
+    icon.classList.add('fa-eye');
+    if (!sendableItems.includes(groupItems[index])) {
+      sendableItems.splice(index, 0, groupItems[index]);
+    }
+  }
+}
+
+// Drag and Drop functionality -----------------------------------------------------------
+function addDragAndDropHandlers(row) {
+  row.ondragstart = (event) => {
+    const index = Array.from(tableBody.children).indexOf(row);
+    event.dataTransfer.setData('text/plain', index.toString());
+  };
+
+  row.ondragover = (event) => {
+    event.preventDefault();
+  };
+
+  row.ondrop = (event) => {
+    event.preventDefault();
+    const originIndex = parseInt(event.dataTransfer.getData('text/plain'), 10);
+    const targetIndex = Array.from(tableBody.children).indexOf(row);
+
+    if (targetIndex !== originIndex) {
+      const elementToMove = tableBody.removeChild(tableBody.children[originIndex]);
+      tableBody.insertBefore(elementToMove, tableBody.children[targetIndex] || null);
+
+      // Update groupItems based on the new order
+      const movedItem = groupItems.splice(originIndex, 1)[0];
+      groupItems.splice(targetIndex, 0, movedItem);
+
+      // Update sendableItems based on the new groupItems order
+      sendableItems = groupItems.filter(item => sendableItems.some(si => si.type === item.type && si.message === item.message));
+
+      saveItems();
+    }
+  };
+}
+
+// Function to update item type or message ----------------------------------------------
+function updateItem(index, type, value) {
+  // Update groupItems with the new type or message
+  if (type === 'type') {
+    groupItems[index].type = value;
+  } else if (type === 'message') {
+    groupItems[index].message = value;
+  }
+
+  // Reconstruct sendableItems based on visibility
+  sendableItems = groupItems.filter((item, idx) => {
+    const row = tableBody.children[idx];
+    const visibilityIcon = row.querySelector('.visibility-icon'); // Selecting the visibility icon using its class
+    return visibilityIcon && visibilityIcon.classList.contains('fa-eye'); // Include the item if the icon indicates visibility
+  });
+
+  // Save both groupItems and sendableItems
+  saveItems();
+}
+
+// Save items to localStorage -----------------------------------------------------------
+function saveItems() {
+  localStorage.setItem('groupItems', JSON.stringify(groupItems));
+  localStorage.setItem('sendableItems', JSON.stringify(sendableItems));
 }

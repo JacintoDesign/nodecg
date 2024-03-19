@@ -3,66 +3,48 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="ticker-1.css">
-	<script src="/nodecg-api.min.js"></script>
+	<!-- <script src="/nodecg-api.min.js"></script> -->
 	<script src="ticker-1.js"></script>
 </head>
 
 <body>
-	<div id="ticker_wrapper">
-		<div id="ticker_decoration">
-			<div id="box_1" style="margin-right: 3px"></div>
-			<div id="box_1"></div>
-		</div>
+	<div id="ticker-wrapper">
+		<div id="ticker-background"></div>
+		<div id="ticker-main">
 
-		<div id="ticker_main">
 			<!-- Results Group -->
-			<div id="results-group">
-				<div class="ticker_header">
-					<span class="text" id="results_header_text"></span>
-				</div>
-				<div class="ticker_content">
-					<span class="ticker_message">
-						<span class="text" id="results_text_1"></span>
-						<span class="text" id="results_text_2"></span>
-						<span class="text" id="results_text_3"></span>
-					</span>
-				</div>
-			</div>
-			<!-- Events Group -->
-			<div id="events-group">
-				<div class="ticker_header">
-					<span class="text" id="events_header_text"></span>
-				</div>
-				<div class="ticker_content">
-					<span id="ticker_title"><span class="text" id="events_text_1"></span></span>
-					<span class="ticker_message"><span class="text" id="events_text_2"></span></span>
-					<span id="ticker_time">
-						<span class="time-text-part" id="events_text_3"></span>
-						<span class="time-text-part" id="events_text_4"></span>
-						<span class="time-text-part" id="events_text_5"></span>
-					</span>		  
-				</div>
-			</div>
-			<!-- Breaking Group -->
-			<div id="breaking-group">
-				<div class="ticker_header red">
-					<span class="text" id="breaking_header_text"></span>
-				</div>
-				<div class="ticker_content">
-					<span class="ticker_message">
-						<span class="text" id="breaking_text_1"></span>
-						<span class="text" id="breaking_text_2"></span>
-						<span class="text" id="breaking_text_3"></span>
-					</span>
-				</div>
-			</div>
-			<div id="ticker_footer"></div>
-		</div>
+			<!-- <div class="group results-group" id="group-0">
+				<div class="ticker-header-text results-header-text">Results</div>
+				<div class="ticker-dot results-dot"></div>
+				<div class="ticker-message-text">100 Meter World Record Holder</div>
+			</div> -->
 
-		<!-- Sound Cues -->
-		<audio id="audioIn" src="/bundles/ticker-1/shared/sounds/NAV_IN.wav"></audio>
-		<audio id="audioOut" src="/bundles/ticker-1/shared/sounds/NAV_OUT.wav"></audio>
+			<!-- Breaking Group -->
+			<!-- <div class="group breaking-group" id="group-1">
+				<div class="ticker-header-text breaking-header-text">Breaking</div>
+				<div class="ticker-dot breaking-dot"></div>
+				<div class="ticker-message-text">100 Meter World Record Holder</div>
+			</div> -->
+
+			<!-- Promo Group -->
+			<!-- <div class="group promo-group" id="group-2">
+				<div class="ticker-header-text promo-header-text">Coming Up</div>
+				<div class="ticker-dot promo-dot"></div>
+				<div class="ticker-message-text">100 Meter World Record Holder</div>
+			</div> -->
+
+			<!-- Free Text Group -->
+			<!-- <div class="group free-group" id="group-3">
+				<div class="ticker-dot free-dot"></div>
+				<div class="ticker-message-text">Tension, pressure tick up as paralympics loom 8 months away</div>
+			</div> -->
+
+		</div>
 	</div>
+
+	<!-- Sound Cues -->
+	<!-- <audio id="audioIn" src="/bundles/ticker-1/shared/sounds/NAV-IN.wav"></audio>
+	<audio id="audioOut" src="/bundles/ticker-1/shared/sounds/NAV-OUT.wav"></audio> -->
 </body>
 
 </html>

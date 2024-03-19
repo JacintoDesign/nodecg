@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<link rel="stylesheet" href="../graphics/ticker-1.css">
 	<link rel="stylesheet" href="ticker-1-dash.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 	<meta charset="UTF-8">
 </head>
@@ -20,76 +20,44 @@
 	<div class="buttons-group">
 		<button class="btn" id="next_btn">Next</button>
 		<input type="number" id="interval_input" min="2" max="90" value="5">
-		<button class="btn" id="start_interval_btn">Start Interval</button>
-		<button class="btn" id="stop_interval_btn">Stop Interval</button>
-		<span id="countdown"></span>
+		<button class="btn" id="update_interval_btn">Update Interval</button>
+	</div>
+
+	<!-- Add / Submit -->
+	<div class="buttons-group">
+		<button class="btn" id="add_btn">Add</button>
+		<button class="btn" id="submit_btn">Submit</button>
 	</div>
 
 	<div class="container-main">
-		<!-- Ticker Graphic Preview -->
-		<div id="ticker_main">
-			<!-- Results Group -->
-			<div id="results-group">
-				<div class="ticker_header">
-					<span class="text" id="results_header_text" contenteditable="true"></span>
-				</div>
-				<div class="ticker_content">
-					<span class="ticker_message">
-						<span class="text" id="results_text_1" contenteditable="true"></span>
-						<span class="text" id="results_text_2" contenteditable="true"></span>
-						<span class="text" id="results_text_3" contenteditable="true"></span>
-					</span>
-				</div>
-			</div>
-			<!-- Events Group -->
-			<div id="events-group">
-				<div class="ticker_header">
-					<span class="text" id="events_header_text" contenteditable="true"></span>
-				</div>
-				<div class="ticker_content">
-					<span id="ticker_title"><span class="text" id="events_text_1" contenteditable="true"></span></span>
-					<span class="ticker_message"><span class="text" id="events_text_2" contenteditable="true"></span></span>
-					<span id="ticker_time">
-						<span class="time-text-part" id="events_text_3" contenteditable="true"></span>
-						<span class="time-text-part" id="events_text_4" contenteditable="true"></span>
-						<span class="time-text-part" id="events_text_5" contenteditable="true"></span>
-					</span>		  
-				</div>
-			</div>
-			<!-- Breaking Group -->
-			<div id="breaking-group">
-				<div class="ticker_header red">
-					<span class="text" id="breaking_header_text" contenteditable="true"></span>
-				</div>
-				<div class="ticker_content">
-					<span class="ticker_message">
-						<span class="text" id="breaking_text_1" contenteditable="true"></span>
-						<span class="text" id="breaking_text_2" contenteditable="true"></span>
-						<span class="text" id="breaking_text_3" contenteditable="true"></span>
-					</span>
-				</div>
-			</div>
-			<div id="ticker_footer"></div>
-		</div>
-
-		<!-- Left / Right / Add Page / Submit -->
-		<div class="buttons-group-alt">
-			<div class="arrow-btns">
-				<button id="prev_channel" class="arrow-btn">&larr;</button>
-				<button id="next_channel" class="arrow-btn">&rarr;</button>
-			</div>
-			<button class="btn" id="submit_btn">Submit</button>				
-			<div class="checkbox-group">
-				<input type="checkbox" id="netCBC" name="netCBC" onclick="netCheck()">
-				<label for="netCBC">CBC</label><br>
-				<input type="checkbox" id="netTSN" name="netTSN" onclick="netCheck()">
-				<label for="netTSN">TSN</label><br>
-				<input type="checkbox" id="netRSN" name="netRSN" onclick="netCheck()">
-				<label for="netRSN">RSN</label><br>	
-			</div>
+		<!-- Ticker Table -->
+		<div class="ticker-table">
+			<table>
+				<thead>
+				  <tr>
+					<th style="width:15px"></th>
+					<th style="width:75px">Type</th>
+					<th>Message</th>
+					<th style="width:13px"></th>
+					<th style="width:13px"></th>
+				  </tr>
+				</thead>
+				<tbody id="table-body">
+				  <!-- Rows will be added here dynamically -->
+				</tbody>
+			</table>		  
 		</div>
 	</div>
 
+	<!-- Network -->
+	<div class="checkbox-group">
+		<input type="checkbox" id="netCBC" name="netCBC" onclick="netCheck()">
+		<label for="netCBC">CBC</label><br>
+		<input type="checkbox" id="netTSN" name="netTSN" onclick="netCheck()">
+		<label for="netTSN">TSN</label><br>
+		<input type="checkbox" id="netRSN" name="netRSN" onclick="netCheck()">
+		<label for="netRSN">RSN</label><br>	
+	</div>
 
 </body>
 <script src="/nodecg-api.min.js"></script>
