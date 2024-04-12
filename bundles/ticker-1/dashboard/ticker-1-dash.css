@@ -3,117 +3,110 @@ body {
 	padding: 10px;
 	margin: 0;
 	overflow: hidden;
-    max-width: 500px;
-    height: auto;
+  max-width: 500px;
+  height: auto;
 }
 
 /* Buttons Group */
 .buttons-group {
-    display: flex;
-    margin-left: 5px;
-    margin-top: 5px;
+  display: flex;
+  margin-left: 5px;
+  margin-top: 5px;
 }
 
-    .buttons-group:not(:first-child) {
-        margin-top: 10px;
-    }
+  .buttons-group:not(:first-child) {
+    margin-top: 10px;
+  }
 
 .btn {
-    min-width: 100px;
-    height: 30px;
-    padding: 5px 8px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    background: #384d75;
+  min-width: 100px;
+  height: 30px;
+  padding: 5px 8px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background: #384d75;
 }
 
-    .btn:hover {
-        filter: brightness(1.2);
-        cursor: pointer;
-    }
+  .btn:hover {
+    filter: brightness(1.2);
+    cursor: pointer;
+  }
 
-    .btn:not(:first-child) {
-        margin-left: 10px;
-    }
+  .btn:not(:first-child) {
+    margin-left: 10px;
+  }
 
 /* Interval */
 #interval_input {
-    height: 28px;
-    width: 43px;
-    font-size: 24px;
-    border-radius: 5px;
-    border: none;
-    margin-left: 10px;
-    text-align: center;
-}
-
-#countdown {
-    font-size: 24px;
-    margin-left: 10px;
-    position: relative;
-    top: 2px;
+  height: 28px;
+  width: 43px;
+  font-size: 24px;
+  border-radius: 5px;
+  border: none;
+  margin-left: 10px;
+  text-align: center;
 }
 
 /* Checkbox Group */
 .checkbox-group {
-    position: absolute;
-    right: 20px;
-    top: 20px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 /* Ticker Table */
 .ticker-table {
-    margin: 20px 5px;
-    width: 675px;
+  margin: 20px 5px;
+  width: 675px;
 }
 
 table {
-    border-collapse: separate;
-    border-spacing: 0;
-    width: 100%;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    overflow: hidden;
-  }
-  
-  th, td {
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  th:first-child, td:first-child {
-    border-left: 1px solid #ccc;
-  }
-  
-  th {
-    background-color: #f4f4f4;
-    color: black;
-    border-top: 1px solid #ccc;
-  }
-  
-  tbody tr:first-child td {
-    border-top: none;
-  }
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  overflow: hidden;
+}
 
-  .fa-trash-o, .fa-eye, .fa-eye-slash {
-    cursor: pointer;
-  }
+th, td {
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  text-align: left;
+}
 
-  .fa-trash-o:hover {
-    color: rgb(255, 0, 0);
-  }
+th:first-child, td:first-child {
+  border-left: 1px solid #ccc;
+}
 
-  .fa-eye:hover, .fa-eye-slash:hover {
-    color: rgb(108, 108, 108);
-  }
-  
-  .fa-bars:hover {
-    cursor: grab;
-  }
+th {
+  background-color: #f4f4f4;
+  color: black;
+  border-top: 1px solid #ccc;
+}
 
-  .fa-bars:active {
-    cursor: grabbing;
-  }
+tbody tr:first-child td {
+  border-top: none;
+}
+
+.fa-trash-o, .fa-eye, .fa-eye-slash {
+  cursor: pointer;
+}
+
+.fa-trash-o:hover {
+  color: rgb(255, 0, 0);
+}
+
+.fa-eye:hover, .fa-eye-slash:hover {
+  color: rgb(108, 108, 108);
+}
+
+.fa-bars:hover {
+  cursor: grab;
+}
+
+.fa-bars:active {
+  cursor: grabbing;
+}

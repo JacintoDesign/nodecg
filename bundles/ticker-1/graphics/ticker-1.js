@@ -8,14 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
     { type: 'Free', message: 'Tension as Olympics approach' },
   ];
 
+  let currentGroupIndex = 0;
   let refreshInterval = 5000;
+  let transitionTimeoutId;
 
   // Create Group HTML
   function createGroup(item, index) {
     const group = document.createElement('div');
     group.classList.add('group', `${item.type.toLowerCase()}-group`);
     group.id = `group-${index}`;
-  
+
     // Create Header
     if (item.type !== 'Free') {
       const headerText = document.createElement('div');
@@ -28,21 +30,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       group.appendChild(headerText);
     }
-  
+
     // Create Dot
     const dot = document.createElement('div');
     dot.classList.add('ticker-dot', `${item.type.toLowerCase()}-dot`);
     group.appendChild(dot);
-  
+
     // Create Message
     const messageText = document.createElement('div');
     messageText.classList.add('ticker-message-text');
     messageText.textContent = item.message;
     group.appendChild(messageText);
-  
+
     return group;
   }
-  
+
   // Create and append HTML elements
   function initializeTicker() {
     const tickerMain = document.getElementById('ticker-main');
@@ -57,13 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  initializeTicker();
-
-  let currentGroupIndex = 0;
-
   // Animate In Helper
   function animateIn() {
-    let transitionTimeoutId;
     // Clear existing timeout
     if (transitionTimeoutId) {
       clearTimeout(transitionTimeoutId);
@@ -120,7 +117,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Transition between groups
   function transitionToNextGroup() {
-    let transitionTimeoutId;
     // Clear existing timeout
     if (transitionTimeoutId) {
       clearTimeout(transitionTimeoutId);
@@ -155,13 +151,13 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       // Schedule the next transition
       transitionTimeoutId = setTimeout(transitionToNextGroup, refreshInterval);
-      } else {
-        // If we've displayed all groups, animate out ticker-main
-        const tickerMain = document.getElementById('ticker-main');
-        const tickerBackground = document.getElementById('ticker-background');
-        tickerMain.style.animation = 'slide-down 0.75s ease-in forwards';
-        tickerBackground.style.animation = 'slide-down 0.5s ease-out forwards 0.5s';
-      }
+    } else {
+      // If we've displayed all groups, animate out ticker-main
+      const tickerMain = document.getElementById('ticker-main');
+      const tickerBackground = document.getElementById('ticker-background');
+      tickerMain.style.animation = 'slide-down 0.75s ease-in forwards';
+      tickerBackground.style.animation = 'slide-down 0.5s ease-out forwards 0.5s';
+    }
   }
 
   // Animate In
@@ -183,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Animate Next
   nodecg.listenFor('next', () => {
     if (netCBCRep.value == "true") {
-      // switchGroup();
+      transitionToNextGroup();
       console.log('next');
     }
   });
@@ -201,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log("ticker Items", tickerItemsReplicant.value, groupItems);
       initializeTicker();
     }
-  });	
+  });
 
   // Update Refresh Interval
   refreshIntervalReplicant.on('change', (newValue) => {
@@ -210,13 +206,13 @@ document.addEventListener('DOMContentLoaded', () => {
       refreshInterval = newValue * 1000;
       console.log("refreshInterval", refreshInterval);
     }
-  });	
+  });
 
   // Update Network Display
   netCBCRep.on('change', (newValue) => {
     netCBCRep.value = newValue;
     console.log("CBC change", netCBCRep.value);
-  });	
+  });
 
   // Play
   nodecg.listenFor('playTicker', () => {

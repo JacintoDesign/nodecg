@@ -1,50 +1,274 @@
 body {
-	background: #2f3a4f;
-	padding: 10px;
-	margin: 0;
-	overflow: hidden;
+    background: #2f3a4f;
+    padding: 10px;
+    margin: 0;
+    overflow: hidden;
     max-width: 500px;
-    height: 300px;
+    height: 800px;
+}
+
+/* Tab View */
+.tab-view-container {
+    width: 684px;
+}
+
+.tabs {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tabs button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.tabs button:hover {
+    background-color: #ddd;
+}
+
+.tabs button.active {
+    background-color: #bababa;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-top: none;
+    height: 90vh;
+}
+
+/* Dropdown */
+select {
+    width: 157px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    margin-left: 10px;
+}
+
+option {
+    padding-left: 10px;
+}
+
+/* Table */
+.navbar-table {
+    margin: 15px 5px;
+    width: 661px;
+    overflow-y: auto;
+    max-height: 600px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.row-wrapper {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.settings {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings i {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+td {
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+td:first-child {
+    border-left: 1px solid #ccc;
+}
+
+tbody {
+    display: block;
+}
+
+tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+tbody tr:first-child td {
+    border-top: none;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Settings */
+.fa-trash-o,
+.fa-eye,
+.fa-eye-slash {
+    cursor: pointer;
+}
+
+.fa-trash-o:hover {
+    color: rgb(255, 0, 0);
+}
+
+.fa-eye:hover,
+.fa-eye-slash:hover {
+    color: rgb(108, 108, 108);
+}
+
+.fa-bars:hover {
+    cursor: grab;
+}
+
+.fa-bars:active {
+    cursor: grabbing;
 }
 
 /* Element Preview */
-#nav_wrapper {
-    position: relative;
-    left: 80px;
-    top: 10px;    
+.nav-wrapper {
+    width: 450px;
+    height: 196px;
 }
 
-#nav_main {
-	position: absolute;
-	right: 53.5px;
-	width: 370px;
-	opacity: 1;
-    animation: none;
+.nav-main {
+    clip-path: none;
 }
 
-#nav_header .text, #nav_title .text {
-  top: 0;
-  opacity: 1;
-  animation: none;
+.broadcast-logo {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-.time-text-part {
-	opacity: 1;
-}
-
-#nav_footer {
-    animation: none;
+.nav-title {
     opacity: 1;
 }
 
-#triangle img {
-    animation: none;
-    transform: translateX(-38%) translateY(-18%) rotate(-45deg);
+.nav-time {
     opacity: 1;
 }
 
-.container-main {
-    display: flex;
+.footer-text {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.footer img {
+    transform: translateX(0);
+}
+
+/* Promo */
+.promo-image img {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.promo-image img[src$=".png"] {
+    height: 196px;
+    background: linear-gradient(to bottom right, #ffebb4, #ffebb4 42%, #71eda3, #71eda3);
+}
+
+.promo-image img:hover {
+    filter: brightness(0.8);
+    cursor: pointer;
+}
+
+.title-promo {
+    transform: translateY(0);
+}
+
+.sub-title {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.date {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.image-edit-container {
+    display: none;
+    position: absolute;
+    bottom: -40px;
+    left: 0;
+    height: 30px;
+}
+
+.image-edit-container select {
+    width: 180px;
+    margin-left: 0;
+    margin-right: 10px;
+}
+
+.img-input {
+    width: 50px;
+    border-radius: 5px;
+    border: none;
+    margin-right: 10px;
+    padding-left: 10px;
+}
+
+/* Results */
+.result-wrapper {
+    overflow: hidden;
+}
+
+.header-corner {
+    opacity: 1;
+}
+
+.header-corner-text {
+    opacity: 1;
+}
+
+.header-text {
+    opacity: 1;
+}
+
+.result-row {
+    opacity: 1;
+}
+
+.result-name {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.flag-input-container {
+    position: absolute;
+    left: 450px;
+    top: 54px;
+}
+
+.flag-input input {
+    width: 50px;
+    font-size: 18px;
+    height: 30.5px;
+    text-transform: uppercase;
 }
 
 /* Buttons Group */
@@ -54,9 +278,9 @@ body {
     margin-top: 5px;
 }
 
-    .buttons-group:not(:first-child) {
-        margin-top: 10px;
-    }
+.buttons-group:not(:first-child) {
+    margin-top: 10px;
+}
 
 .btn {
     min-width: 100px;
@@ -68,17 +292,17 @@ body {
     background: #384d75;
 }
 
-    .btn:hover {
-        filter: brightness(1.2);
-        cursor: pointer;
-    }
+.btn:hover {
+    filter: brightness(1.2);
+    cursor: pointer;
+}
 
-    .btn:not(:first-child) {
-        margin-left: 10px;
-    }
+.btn:not(:first-child) {
+    margin-left: 10px;
+}
 
 /* Interval */
-#interval_input {
+.interval-input {
     height: 28px;
     width: 43px;
     font-size: 24px;
@@ -88,49 +312,16 @@ body {
     text-align: center;
 }
 
-#countdown {
+.countdown {
     font-size: 24px;
     margin-left: 10px;
     position: relative;
     top: 2px;
 }
 
-/* Buttons Group - Arrow Buttons */
-.buttons-group-alt {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    left: 25px;
-    top: 10px;
+/* Checkbox Group */
+.checkbox-group {
+    position: absolute;
+    right: 22px;
+    top: 65px;
 }
-
-    .buttons-group-alt * {
-        margin-bottom: 10px;
-    }
-
-.arrow-btns {
-    display: flex;
-    flex-direction: row;
-    position: relative; 
-    left: 10px;
-    margin-bottom: 0;
-}
-
-.arrow-btn {
-    height: 30px;
-    width: 48.5px;
-    border-radius: 5px;
-    border: none;
-    color: white;
-    background: #384d75;
-}
-
-    .arrow-btn:hover {
-        filter: brightness(1.2);
-        cursor: pointer;
-    }
-
-    .arrow-btn:first-child {
-        margin-right: 5px;
-    }
