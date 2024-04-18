@@ -70,8 +70,6 @@ let navbarItems = [
 ];
 
 let navbarItemIndex = 0;
-let navbarRefreshInterval = 5000;
-let navbarTransitionTimeoutId;
 let navbarOutTransitionId;
 
 // Function to create a single navbar item
@@ -156,7 +154,6 @@ function initializeNavbar() {
 
 // Clear existing timeouts
 function clearNavbarTimeouts() {
-  if (navbarTransitionTimeoutId) clearTimeout(navbarTransitionTimeoutId);
   if (navbarOutTransitionId) clearTimeout(navbarOutTransitionId);
 }
 
@@ -202,9 +199,6 @@ function animateInNavbar() {
       }
     });
   }
-
-  // Transition to Next Navbar
-  navbarTransitionTimeoutId = setTimeout(transitionToNextNavbar, navbarRefreshInterval);
 }
 
 // Transition between navbar items
@@ -246,8 +240,6 @@ function transitionToNextNavbar() {
       footerImage.style.opacity = '1';
       footerImage.style.transform = 'translateX(0)';
     }
-    // Schedule the next transition
-    transitionTimeoutId = setTimeout(transitionToNextNavbar, navbarRefreshInterval);
   } else {
     // If we've displayed all navbars, animate out
     hideNavbar();
@@ -257,19 +249,21 @@ function transitionToNextNavbar() {
 function hideNavbar() {
   const navbarContainer = document.getElementById('nav-1');
   const navbar = document.getElementById(`navbar-${navbarItemIndex}`);
-  const broadcastLogo = navbar.querySelector('.broadcast-logo');
-  const navbarTitle = navbar.querySelector('.nav-title');
-  const navbarTime = navbar.querySelector('.nav-time');
-  const footerText = navbar.querySelector('.footer-text');
-  const footerContainer = navbar.querySelector('.footer');
-  const footerImage = navbar.querySelector('.footer img');
-  broadcastLogo.style.animation = 'fadeOutDownText .5s ease-out forwards';
-  navbarTitle.style.animation = 'fadeOut .5s ease forwards';
-  navbarTime.style.animation = 'fadeOut .5s ease forwards';
-  footerText.style.animation = 'fadeOut .5s ease forwards';
-  footerContainer.style.animation = 'fadeOut .5s ease forwards .2s';
-  footerImage.style.animation = 'outLeft 1s ease forwards .1s';
-  navbarContainer.style.animation = 'hideAnimation .3s ease-in forwards .1s';
+  if (navbar) {
+    const broadcastLogo = navbar.querySelector('.broadcast-logo');
+    const navbarTitle = navbar.querySelector('.nav-title');
+    const navbarTime = navbar.querySelector('.nav-time');
+    const footerText = navbar.querySelector('.footer-text');
+    const footerContainer = navbar.querySelector('.footer');
+    const footerImage = navbar.querySelector('.footer img');
+    broadcastLogo.style.animation = 'fadeOutDownText .5s ease-out forwards';
+    navbarTitle.style.animation = 'fadeOut .5s ease forwards';
+    navbarTime.style.animation = 'fadeOut .5s ease forwards';
+    footerText.style.animation = 'fadeOut .5s ease forwards';
+    footerContainer.style.animation = 'fadeOut .5s ease forwards .2s';
+    footerImage.style.animation = 'outLeft 1s ease forwards .1s';
+    navbarContainer.style.animation = 'hideAnimation .3s ease-in forwards .1s';
+  }
 }
 
 function animateOutNavbar() {
@@ -337,7 +331,6 @@ let promoItems = [
 ];
 
 let promoItemIndex = 0;
-let promoRefreshInterval = 5000;
 let promoTransitionTimeoutId;
 
 // Function to create a single promo item
@@ -353,11 +346,9 @@ function createPromoItem(item, index) {
   imageContainer.className = 'promo-image';
   const image = document.createElement('img');
   image.src = item.img;
-  image.alt = 'Promo Image';
   image.style.height = item.height; // Set the height
   image.style.objectPosition = item.objectPosition; // Set the object-position
   if (item.type !== 'Athlete') {
-    image.style.height = '196px';
     image.style.background = 'linear-gradient(to bottom right, #ffebb4, #ffebb4 42%, #71eda3, #71eda3)';
   }
   imageContainer.appendChild(image);
@@ -471,9 +462,6 @@ function animateInPromo() {
       }
     });
   }
-
-  // Transition to Next Promo
-  promoTransitionTimeoutId = setTimeout(transitionToNextPromo, promoRefreshInterval);
 }
 
 // Transition between promo items
@@ -510,8 +498,6 @@ function transitionToNextPromo() {
       footer.style.opacity = '1';
       footer.style.transform = 'translateX(0)';
     }
-    // Schedule the next transition
-    transitionTimeoutId = setTimeout(transitionToNextPromo, promoRefreshInterval);
   } else {
     // If we've displayed all promos, animate out
     hidePromo();
@@ -574,39 +560,13 @@ let resultItems = [
   },
   {
     type: 'Results',
-    gender: '',
     title: 'Results',
-    resultNumber1: '',
-    resultFlag1: '',
-    resultName1: '',
-    resultNumber2: '',
-    resultFlag2: '',
-    resultName2: '',
-    resultNumber3: '',
-    resultFlag3: '',
-    resultName3: '',
-    resultNumber4: '',
-    resultFlag4: '',
-    resultName4: '',
     text: "Pierce Lepage won Canada's First Medal of the Games",
     footer: 'CBC.CA/PARIS2024'
   },
   {
     type: 'Breaking',
-    gender: '',
     title: 'Breaking',
-    resultNumber1: '',
-    resultFlag1: '',
-    resultName1: '',
-    resultNumber2: '',
-    resultFlag2: '',
-    resultName2: '',
-    resultNumber3: '',
-    resultFlag3: '',
-    resultName3: '',
-    resultNumber4: '',
-    resultFlag4: '',
-    resultName4: '',
     text: "Adam Tambellini scores a hat-trick in men's hockey",
     footer: 'CBC.CA/PARIS2024'
   },
@@ -651,7 +611,6 @@ let resultItems = [
 ];
 
 let resultItemIndex = 0;
-let resultRefreshInterval = 5000;
 let resultTransitionTimeoutId;
 let resultOutTransitionId;
 
@@ -716,7 +675,7 @@ function createResultItem(item, index) {
         resultFlag.classList.add('result-flag');
         const img = document.createElement('img');
         img.src = `../shared/assets/flags/${item[`resultFlag${i}`]}.jpg`;
-        img.alt = "Flag";
+        img.alt = item[`resultFlag${i}`];
         resultFlag.appendChild(img);
         resultRow.appendChild(resultFlag);
 
@@ -901,9 +860,6 @@ function animateInResults() {
       }
     });
   }
-
-  // Transition to Next Result
-  resultTransitionTimeoutId = setTimeout(transitionToNextResult, resultRefreshInterval);
 }
 
 // Transition between result items
@@ -1112,8 +1068,6 @@ function transitionToNextResult() {
         }
       }
     }
-    // Transition to Next Result
-    resultTransitionTimeoutId = setTimeout(transitionToNextResult, resultRefreshInterval);
   } else {
     // If we've displayed all results, animate out
     hideResult();
@@ -1168,9 +1122,26 @@ function animateNextResults() {
   transitionToNextResult();
 }
 
+// NodeCG Related ------------------------------------------ 
+const navbarItemsReplicant = nodecg.Replicant('navbarItems');
+const promoItemsReplicant = nodecg.Replicant('promoItems');
+const resultItemsReplicant = nodecg.Replicant('resultItems');
+
+// Navbar -------------------------------------
+
+// Update Items
+navbarItemsReplicant.on('change', (newValue) => {
+  if (newValue) {
+    navbarItemsReplicant.value = newValue;
+    navbarItems = newValue;
+    console.log('navbar Items', navbarItemsReplicant.value, navbarItems);
+    initializeNavbar();
+  }
+});
+
 // Animate In
 nodecg.listenFor('play1', () => {
-  // if (netCBCRep.value == "true") {
+  // if (netCBCRep.value == 'true') {
   animateInNavbar();
   console.log('in');
   // }
@@ -1178,7 +1149,7 @@ nodecg.listenFor('play1', () => {
 
 // Animate Out
 nodecg.listenFor('stop1', () => {
-  // if (netCBCRep.value == "true") {
+  // if (netCBCRep.value == 'true') {
   animateOutNavbar();
   console.log('out');
   // }
@@ -1186,17 +1157,27 @@ nodecg.listenFor('stop1', () => {
 
 // Animate Next
 nodecg.listenFor('next1', () => {
-  // if (netCBCRep.value == "true") {
+  // if (netCBCRep.value == 'true') {
   transitionToNextNavbar();
   console.log('next');
   // }
 });
 
-// -----------------------------
+// Promo -------------------------------------
+
+// Update Items
+promoItemsReplicant.on('change', (newValue) => {
+  if (newValue) {
+    promoItemsReplicant.value = newValue;
+    promoItems = newValue;
+    console.log('promo Items', promoItemsReplicant.value, promoItems);
+    initializePromo();
+  }
+});
 
 // Animate In
 nodecg.listenFor('play2', () => {
-  // if (netCBCRep.value == "true") {
+  // if (netCBCRep.value == 'true') {
   animateInPromo();
   console.log('in');
   // }
@@ -1204,7 +1185,7 @@ nodecg.listenFor('play2', () => {
 
 // Animate Out
 nodecg.listenFor('stop2', () => {
-  // if (netCBCRep.value == "true") {
+  // if (netCBCRep.value == 'true') {
   animateOutPromo();
   console.log('out');
   // }
@@ -1212,17 +1193,27 @@ nodecg.listenFor('stop2', () => {
 
 // Animate Next
 nodecg.listenFor('next2', () => {
-  // if (netCBCRep.value == "true") {
+  // if (netCBCRep.value == 'true') {
   transitionToNextPromo();
   console.log('next');
   // }
 });
 
-// ------------------------------
+// Result -----------------------------------
+
+// Update Items
+resultItemsReplicant.on('change', (newValue) => {
+  if (newValue) {
+    resultItemsReplicant.value = newValue;
+    resultItems = newValue;
+    console.log('result Items', resultItemsReplicant.value, resultItems);
+    initializeResults();
+  }
+});
 
 // Animate In
 nodecg.listenFor('play3', () => {
-  // if (netCBCRep.value == "true") {
+  // if (netCBCRep.value == 'true') {
   animateInResults();
   console.log('in');
   // }
@@ -1230,7 +1221,7 @@ nodecg.listenFor('play3', () => {
 
 // Animate Out
 nodecg.listenFor('stop3', () => {
-  // if (netCBCRep.value == "true") {
+  // if (netCBCRep.value == 'true') {
   animateOutResults();
   console.log('out');
   // }
@@ -1238,40 +1229,8 @@ nodecg.listenFor('stop3', () => {
 
 // Animate Next
 nodecg.listenFor('next3', () => {
-  // if (netCBCRep.value == "true") {
+  // if (netCBCRep.value == 'true') {
   transitionToNextResult();
   console.log('next');
   // }
-});
-
-// NodeCG Related ------------------- 
-const refreshIntervalNavbarReplicant = nodecg.Replicant('refreshIntervalNavbar');
-const refreshIntervalPromoReplicant = nodecg.Replicant('refreshIntervalPromo');
-const refreshIntervalResultReplicant = nodecg.Replicant('refreshIntervalResult');
-
-// Update Navbar Refresh Interval
-refreshIntervalNavbarReplicant.on('change', (newValue) => {
-  if (newValue) {
-    refreshIntervalNavbarReplicant.value = newValue;
-    navbarRefreshInterval = newValue * 1000;
-    console.log("navbarRefreshInterval", navbarRefreshInterval);
-  }
-});
-
-// Update Promo Refresh Interval
-refreshIntervalPromoReplicant.on('change', (newValue) => {
-  if (newValue) {
-    refreshIntervalPromoReplicant.value = newValue;
-    promoRefreshInterval = newValue * 1000;
-    console.log("promoRefreshInterval", promoRefreshInterval);
-  }
-});
-
-// Update Navbar Refresh Interval
-refreshIntervalResultReplicant.on('change', (newValue) => {
-  if (newValue) {
-    refreshIntervalResultReplicant.value = newValue;
-    resultRefreshInterval = newValue * 1000;
-    console.log("resultRefreshInterval", resultRefreshInterval);
-  }
 });

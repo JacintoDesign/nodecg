@@ -38,6 +38,7 @@
 			<div class="buttons-group">
 				<button class="btn" id="in_btn_1">Animate In</button>
 				<button class="btn" id="out_btn_1">Animate Out</button>
+				<button class="btn sm-btn" id="auto_btn_1">Auto</button>
 			</div>
 
 			<!-- Animate Next / Set Interval -->
@@ -51,7 +52,7 @@
 
 			<!-- Add / Select / Submit-->
 			<div class="buttons-group">
-				<button class="btn" id="add_btn_1">Add</button>
+				<button class="btn" id="add_btn_1" onclick="addNewNavbarFromDropdown()">Add</button>
 				<select id="dropdown_1">
 					<option value="option1">CBC</option>
 					<option value="option2">TSN</option>
@@ -65,137 +66,12 @@
 
 			<!-- Table Container -->
 			<div class="container-main">
-				<div class="navbar-table">
-					<table>
-						<tbody id="table-body">
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<div class="nav-wrapper">
-											<!-- Nav 1 - Basic -->
-											<div class="nav-main" id="navbar-1">
-												<div class="navbar-wrapper">
-													<div class="nav-header">
-														<img src="../shared/assets/logos/cbc-logo.png"
-															alt="Broadcast Logo" class="broadcast-logo">
-													</div>
-													<div class="nav-content">
-														<span class="nav-title"><span class="text" id="title-text-1"
-																contenteditable="true">Athletics</span></span>
-														<span class="nav-time">
-															<span class="time-text-part" id="time-1"
-																contenteditable="true">11:30</span>
-															<span class="time-text-part" id="time-2"
-																contenteditable="true">AM</span>
-															<span class="time-text-part" id="time-3"
-																contenteditable="true">ET</span>
-														</span>
-														<span class="text footer-text" id="nav-footer-text"
-															contenteditable="true">CBC.CA/PARIS2024</span>
-													</div>
-													<div class="footer">
-														<img src="../shared/assets/background-bar.png"
-															alt="CBC Gem line pattern">
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<div class="nav-wrapper">
-											<!-- Nav 1 - Basic -->
-											<div class="nav-main" id="navbar-1">
-												<div class="navbar-wrapper">
-													<div class="nav-header">
-														<img src="../shared/assets/logos/tsn-logo.png"
-															alt="Broadcast Logo" class="broadcast-logo">
-													</div>
-													<div class="nav-content">
-														<span class="nav-title"><span class="text" id="title-text-2"
-																contenteditable="true">Rugby
-																Sevens</span></span>
-														<span class="nav-time">
-															<span class="time-text-part" id="time-1"
-																contenteditable="true">2:30</span>
-															<span class="time-text-part" id="time-2"
-																contenteditable="true">PM</span>
-															<span class="time-text-part" id="time-3"
-																contenteditable="true">ET</span>
-														</span>
-														<span class="text footer-text" id="nav-footer-text"
-															contenteditable="true">CBC.CA/PARIS2024</span>
-													</div>
-													<div class="footer">
-														<img src="../shared/assets/background-bar.png"
-															alt="CBC Gem line pattern">
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<div class="nav-wrapper">
-											<!-- Nav 1 - Basic -->
-											<div class="nav-main" id="navbar-1">
-												<div class="navbar-wrapper">
-													<div class="nav-header">
-														<img src="../shared/assets/logos/sn-logo.png"
-															alt="Broadcast Logo" class="broadcast-logo">
-													</div>
-													<div class="nav-content">
-														<span class="nav-title"><span class="text" id="title-text"
-																contenteditable="true">Water
-																Polo</span></span>
-														<span class="nav-time">
-															<span class="time-text-part" id="time-1"
-																contenteditable="true">3:30</span>
-															<span class="time-text-part" id="time-2"
-																contenteditable="true">PM</span>
-															<span class="time-text-part" id="time-3"
-																contenteditable="true">ET</span>
-														</span>
-														<span class="text footer-text" id="nav-footer-text"
-															contenteditable="true">CBC.CA/PARIS2024</span>
-													</div>
-													<div class="footer">
-														<img src="../shared/assets/background-bar.png"
-															alt="CBC Gem line pattern">
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<!-- Rows will be added here dynamically -->
-						</tbody>
+				<div class="nav-table">
+					<table id="navbar-table">
+						<!-- Rows will be added here dynamically -->
 					</table>
 				</div>
 			</div>
-
 		</div>
 
 		<!-- Tab 2 - Promo ---------------------------------->
@@ -204,6 +80,7 @@
 			<div class="buttons-group">
 				<button class="btn" id="in_btn_2">Animate In</button>
 				<button class="btn" id="out_btn_2">Animate Out</button>
+				<button class="btn sm-btn" id="auto_btn_2">Auto</button>
 			</div>
 
 			<!-- Animate Next / Set Interval -->
@@ -217,7 +94,7 @@
 
 			<!-- Add / Select / Submit-->
 			<div class="buttons-group">
-				<button class="btn" id="add_btn_2">Add</button>
+				<button class="btn" id="add_btn_2" onclick="addNewPromoFromDropdown()">Add</button>
 				<select id="dropdown_2">
 					<option value="option1">Athlete</option>
 					<option value="option2">Picto</option>
@@ -228,201 +105,12 @@
 
 			<!-- Table Container -->
 			<div class="container-main">
-				<div class="navbar-table">
-					<table>
-						<tbody id="table-body">
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<!-- Nav 2 - Promo -->
-										<div class="nav-wrapper">
-											<div class="nav-content without-footer-promo">
-												<div class="promo-image">
-													<img src="../shared/assets/athletes/athlete-2.jpg"
-														alt="Athlete Image">
-												</div>
-												<div class="nav-text-container">
-													<span class="nav-text-promo">
-														<span class="nav-title title-promo"
-															contenteditable="true">Deanne Rose</span>
-														<span class="sub-title" contenteditable="true">Football</span>
-														<span class="date" contenteditable="true">Today</span>
-														<span class="text footer-text footer-text-promo"
-															id="nav-footer-text"
-															contenteditable="true">CBC.CA/PARIS2024</span>
-													</span>
-												</div>
-											</div>
-										</div>
-										<!-- Image Adjustment -->
-										<div class="image-edit-container">
-											<select id="img_dropdown_1">
-												<option value="option1">Deanne</option>
-												<option value="option2">Matt</option>
-												<option value="option3">Summer</option>
-											</select>
-											<input type="number" class="img-input" id="img_height_1" min="180"
-												max="5000" value="200" title="Height">
-											<input type="number" class="img-input" id="img_x_1" min="0" max="300"
-												value="50" title="X Axis">
-											<input type="number" class="img-input" id="img_y_1" min="0" max="300"
-												value="50" title="Y Axis">
-										</div>
-										<!-- Settings -->
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<!-- Nav 2 - Promo -->
-										<div class="nav-wrapper">
-											<div class="nav-content without-footer-promo">
-												<div class="promo-image">
-													<img src="../shared/assets/pictos/rowing.png" alt="Athlete Image">
-												</div>
-												<div class="nav-text-container">
-													<span class="nav-text-promo">
-														<span class="nav-title title-promo" contenteditable="true">Jakub
-															Buczek</span>
-														<span class="sub-title" contenteditable="true">Rowing</span>
-														<span class="date" contenteditable="true">Coming Up</span>
-														<span class="text footer-text footer-text-promo"
-															id="nav-footer-text"
-															contenteditable="true">CBC.CA/PARIS2024</span>
-													</span>
-												</div>
-											</div>
-										</div>
-										<!-- Image Adjustment -->
-										<div class="image-edit-container">
-											<select id="img_dropdown_2">
-												<option value="option1">Rowing</option>
-												<option value="option2">Basketball</option>
-												<option value="option3">Skateboarding</option>
-											</select>
-											<input type="number" class="img-input" id="img_height_2" min="180"
-												max="5000" value="200" title="Height">
-											<input type="number" class="img-input" id="img_x_2" min="0" max="300"
-												value="50" title="X Axis">
-											<input type="number" class="img-input" id="img_y_2" min="0" max="300"
-												value="50" title="Y Axis">
-										</div>
-										<!-- Settings -->
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<!-- Nav 2 - Promo -->
-										<div class="nav-wrapper">
-											<div class="nav-content without-footer-promo">
-												<div class="promo-image">
-													<img src="../shared/assets/athletes/athlete-3.jpg"
-														alt="Athlete Image">
-												</div>
-												<div class="nav-text-container">
-													<span class="nav-text-promo">
-														<span class="nav-title title-promo"
-															contenteditable="true">Mathew Sharpe</span>
-														<span class="sub-title" contenteditable="true">Triathlon</span>
-														<span class="date" contenteditable="true">Today</span>
-														<span class="text footer-text footer-text-promo"
-															id="nav-footer-text"
-															contenteditable="true">CBC.CA/PARIS2024</span>
-													</span>
-												</div>
-											</div>
-										</div>
-										<!-- Image Adjustment -->
-										<div class="image-edit-container">
-											<select id="img_dropdown_3">
-												<option value="option1">Deanne</option>
-												<option value="option2">Matt</option>
-												<option value="option3">Summer</option>
-											</select>
-											<input type="number" class="img-input" id="img_height_3" min="180"
-												max="5000" value="200" title="Height">
-											<input type="number" class="img-input" id="img_x_3" min="0" max="300"
-												value="50" title="X Axis">
-											<input type="number" class="img-input" id="img_y_3" min="0" max="300"
-												value="50" title="Y Axis">
-										</div>
-										<!-- Settings -->
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<!-- Nav 2 - Promo -->
-										<div class="nav-wrapper">
-											<div class="nav-content without-footer-promo">
-												<div class="promo-image">
-													<img src="../shared/assets/pictos/rowing.png" alt="Athlete Image">
-												</div>
-												<div class="nav-text-container">
-													<span class="nav-text-promo">
-														<span class="nav-title title-promo"
-															contenteditable="true">Rowing</span>
-														<span class="sub-title continue" contenteditable="true">Continue
-															Watching On</span>
-														<span class="date">
-															<img src="../shared/assets/logos/cbc-gem.png" alt="CBC Gem"
-																class="gem-logo">
-														</span>
-														<span class="text footer-text footer-text-promo"
-															id="nav-footer-text"
-															contenteditable="true">CBC.CA/PARIS2024</span>
-													</span>
-												</div>
-											</div>
-										</div>
-										<!-- Image Adjustment -->
-										<div class="image-edit-container">
-											<select id="img_dropdown_4">
-												<option value="option1">Rowing</option>
-												<option value="option2">Basketball</option>
-												<option value="option3">Skateboarding</option>
-											</select>
-											<input type="number" class="img-input" id="img_height_4" min="180"
-												max="5000" value="200" title="Height">
-											<input type="number" class="img-input" id="img_x_4" min="0" max="300"
-												value="50" title="X Axis">
-											<input type="number" class="img-input" id="img_y_4" min="0" max="300"
-												value="50" title="Y Axis">
-										</div>
-										<!-- Settings -->
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<!-- Rows will be added here dynamically -->
-						</tbody>
+				<div class="nav-table">
+					<table id="promo-table">
+						<!-- Rows will be added here dynamically -->
 					</table>
 				</div>
 			</div>
-
 		</div>
 
 		<!-- Tab 3 - Results -------------------------------->
@@ -431,6 +119,7 @@
 			<div class="buttons-group">
 				<button class="btn" id="in_btn_3">Animate In</button>
 				<button class="btn" id="out_btn_3">Animate Out</button>
+				<button class="btn sm-btn" id="auto_btn_3">Auto</button>
 			</div>
 
 			<!-- Animate Next / Set Interval -->
@@ -444,226 +133,26 @@
 
 			<!-- Add / Select / Submit-->
 			<div class="buttons-group">
-				<button class="btn" id="add_btn_3">Add</button>
+				<button class="btn" id="add_btn_3" onclick="addNewResultFromDropdown()">Add</button>
 				<select id="dropdown_3">
-					<option value="option1">Standings</option>
-					<option value="option2">Standings Alt</option>
-					<option value="option3">Results</option>
-					<option value="option3">Breaking</option>
+					<option value="standings-3">Standings (3)</option>
+					<option value="standings-4">Standings (4)</option>
+					<option value="standings-3-alt">Standings Alt (3)</option>
+					<option value="standings-4-alt">Standings Alt (4)</option>
+					<option value="results">Results</option>
+					<option value="breaking">Breaking</option>
 				</select>
 				<button class="btn" id="submit_btn_3">Submit</button>
 			</div>
 
 			<!-- Table Container -->
 			<div class="container-main">
-				<div class="navbar-table">
-					<table>
-						<tbody id="table-body">
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<!-- Nav 3 - Result A -->
-										<div class="nav-wrapper">
-											<div class="result-wrapper">
-												<div class="nav-header-alt">
-													<div class="header-alt">
-														<span class="header-text header-text-no-corner"
-															contenteditable="true">Canoe Sprint
-														</span>
-													</div>
-												</div>
-												<div class="nav-content without-footer-results">
-													<div class="result-row">
-														<span class="result-number" contenteditable="true">1</span>
-														<div class="result-flag">
-															<img src="../shared/assets/flags/JPN.jpg" alt="Flag">
-														</div>
-														<span class="result-name" contenteditable="true">Suzuki</span>
-													</div>
-													<div class="result-row odd-row">
-														<span class="result-number" contenteditable="true">2</span>
-														<div class="result-flag">
-															<img src="../shared/assets/flags/GBR.jpg" alt="Flag">
-														</div>
-														<span class="result-name" contenteditable="true">Martin</span>
-													</div>
-													<div class="result-row">
-														<span class="result-number" contenteditable="true">3</span>
-														<div class="result-flag">
-															<img src="../shared/assets/flags/ESP.jpg" alt="Flag">
-														</div>
-														<span class="result-name"
-															contenteditable="true">Rodriguez</span>
-													</div>
-													<div class="result-row odd-row">
-														<span class="result-number" contenteditable="true">4</span>
-														<div class="result-flag">
-															<img src="../shared/assets/flags/CAN.jpg" alt="Flag">
-														</div>
-														<span class="result-name" contenteditable="true">Brown</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<!-- Flag Input -->
-										<div class="flag-input-container">
-											<div class="flag-input">
-												<input type="text">
-											</div>
-											<div class="flag-input">
-												<input type="text">
-											</div>
-											<div class="flag-input">
-												<input type="text">
-											</div>
-											<div class="flag-input">
-												<input type="text">
-											</div>
-										</div>
-										<!-- Settings -->
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<!-- Nav 3 - Result B -->
-										<div class="nav-wrapper">
-											<div class="result-wrapper">
-												<div class="nav-header-alt">
-													<div class="header-alt">
-														<span class="header-corner">
-															<span class="header-corner-text"
-																contenteditable="true">M</span>
-														</span>
-														<span class="header-text" contenteditable="true">Athletics
-															1500M</span>
-													</div>
-												</div>
-												<div class="nav-content without-footer-results">
-													<div class="result-row">
-														<span class="result-number" contenteditable="true">1</span>
-														<div class="result-flag">
-															<img src="../shared/assets/flags/USA.jpg" alt="Flag">
-														</div>
-														<span class="result-name"
-															contenteditable="true">Ingebrigtsen</span>
-													</div>
-													<div class="result-row odd-row">
-														<span class="result-number" contenteditable="true">2</span>
-														<div class="result-flag">
-															<img src="../shared/assets/flags/GBR.jpg" alt="Flag">
-														</div>
-														<span class="result-name" contenteditable="true">Kerr</span>
-													</div>
-													<div class="result-row">
-														<span class="result-number" contenteditable="true">3</span>
-														<div class="result-flag">
-															<img src="../shared/assets/flags/CAN.jpg" alt="Flag">
-														</div>
-														<span class="result-name"
-															contenteditable="true">Cheruyiot</span>
-													</div>
-													<span class="text footer-text footer-text-results-1"
-														id="nav-footer-text"
-														contenteditable="true">CBC.CA/PARIS2024</span>
-												</div>
-											</div>
-										</div>
-										<!-- Flag Input -->
-										<div class="flag-input-container">
-											<div class="flag-input">
-												<input type="text">
-											</div>
-											<div class="flag-input">
-												<input type="text">
-											</div>
-											<div class="flag-input">
-												<input type="text">
-											</div>
-										</div>
-										<!-- Settings -->
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<!-- Nav 3 - Result C -->
-										<div class="nav-wrapper">
-											<div class="result-wrapper">
-												<div class="nav-header-alt">
-													<div class="header-alt header-results">
-														<span class="header-text header-text-results"
-															contenteditable="true">Results</span>
-													</div>
-												</div>
-												<div class="nav-content without-footer-results">
-													<span class="results-text" contenteditable="true">Pierce Lepage won
-														Canada's First Medal of
-														the Games</span>
-													<span class="text footer-text footer-text-results-2"
-														id="nav-footer-text"
-														contenteditable="true">CBC.CA/PARIS2024</span>
-												</div>
-											</div>
-										</div>
-										<!-- Settings -->
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class="row-wrapper">
-										<!-- Nav 3 - Result D -->
-										<div class="nav-wrapper">
-											<div class="result-wrapper">
-												<div class="nav-header-alt">
-													<div class="header-alt header-breaking">
-														<span class="header-text header-text-results"
-															contenteditable="true">Breaking</span>
-													</div>
-												</div>
-												<div class="nav-content without-footer-results">
-													<span class="results-text" contenteditable="true">Adam Tambellini
-														scores a hat-trick in
-														men's hockey</span>
-													<span class="text footer-text footer-text-results-2"
-														id="nav-footer-text"
-														contenteditable="true">CBC.CA/PARIS2024</span>
-												</div>
-											</div>
-										</div>
-										<!-- Settings -->
-										<div class="settings">
-											<i class="fa fa-trash-o" style="cursor: pointer;"></i>
-											<i class="fa fa-eye visibility-icon" style="cursor: pointer;"></i>
-											<i class="fa fa-bars"></i>
-										</div>
-									</div>
-								</td>
-							</tr>
-							<!-- Rows will be added here dynamically -->
-						</tbody>
+				<div class="nav-table">
+					<table id="results-table">
+						<!-- Rows will be added here dynamically -->
 					</table>
 				</div>
 			</div>
-
 		</div>
 
 	</div>

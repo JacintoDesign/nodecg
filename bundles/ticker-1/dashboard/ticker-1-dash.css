@@ -1,8 +1,8 @@
 body {
-	background: #2f3a4f;
-	padding: 10px;
-	margin: 0;
-	overflow: hidden;
+  background: #2f3a4f;
+  padding: 10px;
+  margin: 0;
+  overflow: hidden;
   max-width: 500px;
   height: auto;
 }
@@ -14,9 +14,9 @@ body {
   margin-top: 5px;
 }
 
-  .buttons-group:not(:first-child) {
-    margin-top: 10px;
-  }
+.buttons-group:not(:first-child) {
+  margin-top: 10px;
+}
 
 .btn {
   min-width: 100px;
@@ -28,14 +28,14 @@ body {
   background: #384d75;
 }
 
-  .btn:hover {
-    filter: brightness(1.2);
-    cursor: pointer;
-  }
+.btn:hover {
+  filter: brightness(1.2);
+  cursor: pointer;
+}
 
-  .btn:not(:first-child) {
-    margin-left: 10px;
-  }
+.btn:not(:first-child) {
+  margin-left: 10px;
+}
 
 /* Interval */
 #interval_input {
@@ -70,14 +70,16 @@ table {
   overflow: hidden;
 }
 
-th, td {
+th,
+td {
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
   padding: 10px;
   text-align: left;
 }
 
-th:first-child, td:first-child {
+th:first-child,
+td:first-child {
   border-left: 1px solid #ccc;
 }
 
@@ -91,7 +93,15 @@ tbody tr:first-child td {
   border-top: none;
 }
 
-.fa-trash-o, .fa-eye, .fa-eye-slash {
+.type-cell {
+  padding: 2.5px;
+  margin: 0;
+  border-radius: 5px;
+}
+
+.fa-trash-o,
+.fa-eye,
+.fa-eye-slash {
   cursor: pointer;
 }
 
@@ -99,7 +109,8 @@ tbody tr:first-child td {
   color: rgb(255, 0, 0);
 }
 
-.fa-eye:hover, .fa-eye-slash:hover {
+.fa-eye:hover,
+.fa-eye-slash:hover {
   color: rgb(108, 108, 108);
 }
 
@@ -109,4 +120,12 @@ tbody tr:first-child td {
 
 .fa-bars:active {
   cursor: grabbing;
+}
+
+.dragging {
+  background-color: black;
+}
+
+.highlight {
+  background-color: #384d75;
 }
