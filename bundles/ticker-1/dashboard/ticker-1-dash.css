@@ -28,6 +28,17 @@ body {
   background: #384d75;
 }
 
+.sm-btn {
+  min-width: 47px;
+}
+
+.link-btn {
+  text-decoration: none;
+  height: auto;
+  text-align: center;
+  padding: 5px 0;
+}
+
 .btn:hover {
   filter: brightness(1.2);
   cursor: pointer;
@@ -53,6 +64,13 @@ body {
   position: absolute;
   right: 20px;
   top: 20px;
+}
+
+.button-group-nested {
+  position: absolute;
+  right: 0;
+  bottom: -46px;
+  display: flex;
 }
 
 /* Ticker Table */

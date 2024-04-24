@@ -160,34 +160,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Animate In
-  nodecg.listenFor('play', () => {
-    if (netCBCRep.value == "true") {
-      animateIn();
-      console.log('in');
-    }
-  });
-
-  // Animate Out
-  nodecg.listenFor('stop', () => {
-    if (netCBCRep.value == "true") {
-      animateOut();
-      console.log('out');
-    }
-  });
-
-  // Animate Next
-  nodecg.listenFor('next', () => {
-    if (netCBCRep.value == "true") {
-      transitionToNextGroup();
-      console.log('next');
-    }
-  });
-
   // NodeCG Related ------------------- 
   const netCBCRep = nodecg.Replicant('netCBC');
+  const netTSNRep = nodecg.Replicant('netTSN');
+  const netRSNRep = nodecg.Replicant('netRSN');
   const tickerItemsReplicant = nodecg.Replicant('tickerItems');
   const refreshIntervalReplicant = nodecg.Replicant('refreshInterval');
+  const networkReplicants = { netCBCRep, netTSNRep, netRSNRep };
+
+  // Handle Instance of Network
+  function handleInstanceAction(instanceId, replicants, action, logMessage, audioAction) {
+    const instanceActions = {
+      'CBC': { replicant: replicants.netCBCRep, logPrefix: 'CBC' },
+      'TSN': { replicant: replicants.netTSNRep, logPrefix: 'TSN' },
+      'RSN': { replicant: replicants.netRSNRep, logPrefix: 'RSN' }
+    };
+
+    const currentInstance = instanceActions[instanceId];
+    if (currentInstance && currentInstance.replicant.value === "true") {
+      action();
+      console.log(`${currentInstance.logPrefix} ${logMessage}`);
+      if (audioAction) audioAction();
+    }
+  }
 
   // Update Ticker array
   tickerItemsReplicant.on('change', (newValue) => {
@@ -202,46 +197,55 @@ document.addEventListener('DOMContentLoaded', () => {
   // Update Refresh Interval
   refreshIntervalReplicant.on('change', (newValue) => {
     if (newValue) {
-      refreshIntervalReplicant.value = newValue;
-      refreshInterval = newValue * 1000;
-      console.log("refreshInterval", refreshInterval);
+      handleInstanceAction(instanceId, networkReplicants, () => {
+        refreshIntervalReplicant.value = newValue;
+        refreshInterval = newValue * 1000;
+      }, `refreshInterval ${newValue * 1000}`);
     }
   });
 
-  // Update Network Display
-  netCBCRep.on('change', (newValue) => {
-    netCBCRep.value = newValue;
-    console.log("CBC change", netCBCRep.value);
+  // Animate In with audio
+  nodecg.listenFor('play', () => {
+    handleInstanceAction(instanceId, networkReplicants, animateIn, 'in', playAudioIn);
   });
 
-  // Play
-  nodecg.listenFor('playTicker', () => {
-    if (netCBCRep.value == "true") {
-      // Play Audio In
-      var audio = document.getElementById("audioIn");
-      audio.play();
-      // Animate In
-      console.log('playTicker');
-    } else {
-      console.log("CBC", netCBCRep.value);
-    }
+  // Animate Out with audio
+  nodecg.listenFor('stop', () => {
+    handleInstanceAction(instanceId, networkReplicants, animateOut, 'out', playAudioOut);
   });
 
-  // Stop
-  nodecg.listenFor('stopTicker', () => {
-    if (netCBCRep.value == "true") {
-      // Play Audio Out
-      var audio = document.getElementById("audioOut");
-      audio.play();
-      // Animate Out
-      console.log("stopTicker");
-    } else {
-      console.log("CBC", netCBCRep.value);
-    }
+  // Animate Next without specific audio
+  nodecg.listenFor('next', () => {
+    handleInstanceAction(instanceId, networkReplicants, transitionToNextGroup, 'next');
   });
+
+  // Play Audio In
+  function playAudioIn() {
+    const audio = document.getElementById("audioIn");
+    if (audio) audio.play();
+  }
+
+  // Play Audio Out
+  function playAudioOut() {
+    const audio = document.getElementById("audioOut");
+    if (audio) audio.play();
+  }
 
   // Submit
   nodecg.listenFor('update', () => {
     console.log('groupItems update', groupItems);
   });
+
+  // Get instance ID from URL
+  function getParameterByName(name) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(window.location.href);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+
+  const instanceId = getParameterByName('instance');
+  console.log('instanceId', instanceId);
 });

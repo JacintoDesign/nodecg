@@ -1,24 +1,10 @@
 // Button Elements
 const nextBtn = document.getElementById('next_btn');
-const buttonSubmit = document.getElementById('submit_btn');
 const buttonPlay = document.getElementById('in_btn');
 const buttonClear = document.getElementById('out_btn');
 // Replicants
 const tickerItemsReplicant = nodecg.Replicant('tickerItems', { defaultValue: [] });
 const refreshIntervalReplicant = nodecg.Replicant('refreshInterval');
-const netCBCRep = nodecg.Replicant('netCBC');
-const netTSNRep = nodecg.Replicant('netTSN');
-const netRSNRep = nodecg.Replicant('netRSN');
-
-// Handle Submit Btn
-buttonSubmit.onclick = () => {
-  console.log('Updated tickerItems:', tickerItems);
-  console.log('Updated sendableTickerItems:', sendableTickerItems);
-  nodecg.sendMessage('update');
-  tickerItemsReplicant.value = sendableTickerItems;
-  updateSendableTickerItems();
-  saveItems();
-};
 
 // Animate In
 buttonPlay.onclick = () => {
@@ -48,49 +34,52 @@ updateIntervalBtn.onclick = () => {
 };
 
 // Load Replicant value for checkboxes
-const CBCcheck = document.getElementById("netCBC");
-const TSNcheck = document.getElementById("netTSN");
-const RSNcheck = document.getElementById("netRSN");
-const netCBCStoredValue = localStorage.getItem("netCBC");
-const netTSNStoredValue = localStorage.getItem("netTSN");
-const netRSNStoredValue = localStorage.getItem("netRSN");
+const CBCcheck = document.getElementById('netCBC');
+const TSNcheck = document.getElementById('netTSN');
+const RSNcheck = document.getElementById('netRSN');
+const netCBCStoredValue = localStorage.getItem('tickerCBC');
+const netTSNStoredValue = localStorage.getItem('tickerTSN');
+const netRSNStoredValue = localStorage.getItem('tickerRSN');
+const netCBCRep = nodecg.Replicant('netCBC');
+const netTSNRep = nodecg.Replicant('netTSN');
+const netRSNRep = nodecg.Replicant('netRSN');
 
 if (netCBCStoredValue !== null) {
-  CBCcheck.checked = netCBCStoredValue === "true";
+  CBCcheck.checked = netCBCStoredValue === 'true';
 }
 
 if (netTSNStoredValue !== null) {
-  TSNcheck.checked = netTSNStoredValue === "true";
+  TSNcheck.checked = netTSNStoredValue === 'true';
 }
 
 if (netRSNStoredValue !== null) {
-  RSNcheck.checked = netRSNStoredValue === "true";
+  RSNcheck.checked = netRSNStoredValue === 'true';
 }
 
-// Pass Checkbox Value
+// Save Checkbox Value
 function netCheck() {
   // Get the checkbox
   if (CBCcheck.checked == true) {
-    netCBCRep.value = "true";
+    netCBCRep.value = 'true';
   } else {
-    netCBCRep.value = "false";
+    netCBCRep.value = 'false';
   }
 
   if (TSNcheck.checked == true) {
-    netTSNRep.value = "true";
+    netTSNRep.value = 'true';
   } else {
-    netTSNRep.value = "false";
+    netTSNRep.value = 'false';
   }
 
   if (RSNcheck.checked == true) {
-    netRSNRep.value = "true";
+    netRSNRep.value = 'true';
   } else {
-    netRSNRep.value = "false";
+    netRSNRep.value = 'false';
   }
 
-  localStorage.setItem("tickerCBC", CBCcheck.checked);
-  localStorage.setItem("tickerTSN", TSNcheck.checked);
-  localStorage.setItem("tickerRSN", RSNcheck.checked);
+  localStorage.setItem('tickerCBC', CBCcheck.checked);
+  localStorage.setItem('tickerTSN', TSNcheck.checked);
+  localStorage.setItem('tickerRSN', RSNcheck.checked);
 }
 
 // Populate the table with tickerItems ------------------------------------------
@@ -296,6 +285,9 @@ function updateItems() {
   });
   updateSendableTickerItems();
   saveItems();
+  // Update items in Ticker graphic
+  nodecg.sendMessage('update');
+  tickerItemsReplicant.value = sendableTickerItems;
 }
 
 // Generate Table Rows
