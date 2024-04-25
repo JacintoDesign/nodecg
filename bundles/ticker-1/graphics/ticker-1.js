@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
       transitionTimeoutId = setTimeout(transitionToNextGroup, refreshInterval);
     } else {
       // If we've displayed all groups, animate out ticker-main
+      playAudioOut();
       const tickerMain = document.getElementById('ticker-main');
       const tickerBackground = document.getElementById('ticker-background');
       tickerMain.style.animation = 'slide-down 0.75s ease-in forwards';

@@ -247,6 +247,7 @@ function transitionToNextNavbar() {
 }
 
 function hideNavbar() {
+  playAudioOut();
   const navbarContainer = document.getElementById('nav-1');
   const navbar = document.getElementById(`navbar-${navbarItemIndex}`);
   if (navbar) {
@@ -485,6 +486,7 @@ function transitionToNextPromo() {
 }
 
 function hidePromo() {
+  playAudioOut();
   const promoContainer = document.getElementById('nav-2');
   promoContainer.style.animation = 'hideAnimation forwards ease-in .5s';
 }
@@ -1055,6 +1057,7 @@ function transitionToNextResult() {
 }
 
 function hideResult() {
+  playAudioOut();
   const resultContainer = document.getElementById('nav-3');
   const result = document.getElementById(`result-${resultItemIndex}`);
   const headerText = result.querySelector('.header-text');
