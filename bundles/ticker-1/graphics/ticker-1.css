@@ -149,7 +149,7 @@ body {
 	border-radius: 50%;
 	margin-right: 30px;
 	position: relative;
-	top: 2px;
+	top: 1px;
 	/* animation: blink-on 1s forwards .75s; */
 	opacity: 0;
 }
