@@ -8,19 +8,22 @@ const refreshIntervalReplicant = nodecg.Replicant('refreshInterval');
 
 // Animate In
 buttonPlay.onclick = () => {
-  console.log("play");
-  nodecg.sendMessage('play');
+  updateItems();
+  setTimeout(() => {
+    console.log('play');
+    nodecg.sendMessage('play');
+  }, 100);
 };
 
 // Animate Out
 buttonClear.onclick = () => {
-  console.log("stop");
+  console.log('stop');
   nodecg.sendMessage('stop');
 };
 
 // Next Page
 nextBtn.onclick = () => {
-  console.log("next");
+  console.log('next');
   nodecg.sendMessage('next');
 };
 
@@ -115,24 +118,12 @@ function addTableRow(item) {
   typeCell.appendChild(select);
   row.appendChild(typeCell);
 
-  // Event listeners to handle change
-  select.addEventListener('change', () => {
-    updateItems();
-  });
-
-  select.addEventListener('blur', () => {
-    updateItems();
-  });
-
   // Message cell with contenteditable
   const messageCell = document.createElement('td');
   const message = document.createElement('span');
   message.className = 'message-cell';
   message.setAttribute('contenteditable', true);
   message.textContent = item.message;
-  message.addEventListener('blur', () => {
-    updateItems();
-  });
   messageCell.appendChild(message);
   row.appendChild(messageCell);
 

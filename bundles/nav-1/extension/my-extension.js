@@ -5,17 +5,28 @@ module.exports = function (nodecg) {
     // Directories for pictos and athletes
     const pictosDir = path.join(__dirname, '../shared/assets/pictos');
     const athletesDir = path.join(__dirname, '../shared/assets/athletes');
+    console.log("Pictos Directory:", pictosDir);
+    console.log("Athletes Directory:", athletesDir);
 
     // Emit image list from a given directory
     function emitImageList(directory, topic) {
-        fs.readdir(directory, (err, files) => {
+        fs.stat(directory, (err, stats) => {
             if (err) {
-                console.error('Error reading image directory:', err);
+                console.error("Error accessing directory:", directory, err);
                 return;
             }
-
-            const imageFiles = files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
-            nodecg.sendMessage(topic, imageFiles);
+            if (!stats.isDirectory()) {
+                console.error("Not a directory:", directory);
+                return;
+            }
+            fs.readdir(directory, (err, files) => {
+                if (err) {
+                    console.error('Error reading image directory:', directory, err);
+                    return;
+                }
+                const imageFiles = files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
+                nodecg.sendMessage(topic, imageFiles);
+            });
         });
     }
 

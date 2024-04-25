@@ -4,37 +4,28 @@ const buttonClear1 = document.getElementById('out_btn_1');
 const buttonAuto1 = document.getElementById('auto_btn_1');
 const buttonNext1 = document.getElementById('next_btn_1');
 const intervalInput1 = document.getElementById('interval_input_1');
-const buttonStartInterval1 = document.getElementById('start_interval_btn_1');
-const buttonStopInterval1 = document.getElementById('stop_interval_btn_1');
+const buttonUpdateInterval1 = document.getElementById('update_interval_btn_1');
 const countdown1 = document.getElementById('countdown_1');
-const buttonSubmit1 = document.getElementById('submit_btn_1');
 // Button Elements - 2 Promo
 const buttonPlay2 = document.getElementById('in_btn_2');
 const buttonClear2 = document.getElementById('out_btn_2');
 const buttonAuto2 = document.getElementById('auto_btn_2');
 const buttonNext2 = document.getElementById('next_btn_2');
 const intervalInput2 = document.getElementById('interval_input_2');
-const buttonStartInterval2 = document.getElementById('start_interval_btn_2');
-const buttonStopInterval2 = document.getElementById('stop_interval_btn_2');
+const buttonUpdateInterval2 = document.getElementById('update_interval_btn_2');
 const countdown2 = document.getElementById('countdown_2');
-const buttonSubmit2 = document.getElementById('submit_btn_2');
 // Button Elements - 3 Results
 const buttonPlay3 = document.getElementById('in_btn_3');
 const buttonClear3 = document.getElementById('out_btn_3');
 const buttonAuto3 = document.getElementById('auto_btn_3');
 const buttonNext3 = document.getElementById('next_btn_3');
 const intervalInput3 = document.getElementById('interval_input_3');
-const buttonStartInterval3 = document.getElementById('start_interval_btn_3');
-const buttonStopInterval3 = document.getElementById('stop_interval_btn_3');
+const buttonUpdateInterval3 = document.getElementById('update_interval_btn_3');
 const countdown3 = document.getElementById('countdown_3');
-const buttonSubmit3 = document.getElementById('submit_btn_3');
 // Replicants
 const navbarItemsReplicant = nodecg.Replicant('navbarItems', { defaultValue: [] });
 const promoItemsReplicant = nodecg.Replicant('promoItems', { defaultValue: [] });
 const resultItemsReplicant = nodecg.Replicant('resultItems', { defaultValue: [] });
-const netCBCRep = nodecg.Replicant('netCBC');
-const netTSNRep = nodecg.Replicant('netTSN');
-const netRSNRep = nodecg.Replicant('netRSN');
 
 // Interval Navbar ------------------ 
 let isNavbarAuto;
@@ -62,9 +53,10 @@ function setIsNavbarAuto() {
 buttonAuto1.onclick = () => {
   isNavbarAuto = !isNavbarAuto;
   setIsNavbarAuto();
+  if (isNavbarAuto === false) stopAllNavbarIntervals();
 }
 
-buttonStartInterval1.onclick = () => {
+buttonUpdateInterval1.onclick = () => {
   startNavbarTransitions();
 };
 
@@ -98,14 +90,6 @@ function stopAllNavbarIntervals() {
   clearInterval(navbarAutoNextInterval);
   clearInterval(navbarCountdownTimerId);
   countdown1.textContent = '';  // Clear the countdown display
-}
-
-buttonStopInterval1.onclick = () => {
-  isNavbarAuto = false;
-  setIsNavbarAuto();
-  clearInterval(navbarAutoNextInterval);
-  clearInterval(navbarCountdownTimerId);
-  countdown1.textContent = '';
 }
 
 function startNavbarCountdownTimer() {
@@ -145,9 +129,10 @@ function setIsPromoAuto() {
 buttonAuto2.onclick = () => {
   isPromoAuto = !isPromoAuto;
   setIsPromoAuto();
+  if (isPromoAuto === false) stopAllPromoIntervals();
 }
 
-buttonStartInterval2.onclick = () => {
+buttonUpdateInterval2.onclick = () => {
   startPromoTransitions();
 };
 
@@ -181,14 +166,6 @@ function stopAllPromoIntervals() {
   clearInterval(promoAutoNextInterval);
   clearInterval(promoCountdownTimerId);
   countdown2.textContent = '';  // Clear the countdown display
-}
-
-buttonStopInterval2.onclick = () => {
-  isPromoAuto = false;
-  setIsPromoAuto();
-  clearInterval(promoAutoNextInterval);
-  clearInterval(promoCountdownTimerId);
-  countdown2.textContent = '';
 }
 
 function startPromoCountdownTimer() {
@@ -228,9 +205,10 @@ function setIsResultAuto() {
 buttonAuto3.onclick = () => {
   isResultAuto = !isResultAuto;
   setIsResultAuto();
+  if (isResultAuto === false) stopAllResultIntervals();
 }
 
-buttonStartInterval3.onclick = () => {
+buttonUpdateInterval3.onclick = () => {
   startResultTransitions();
 };
 
@@ -266,14 +244,6 @@ function stopAllResultIntervals() {
   countdown3.textContent = '';  // Clear the countdown display
 }
 
-buttonStopInterval3.onclick = () => {
-  isResultAuto = false;
-  setIsResultAuto();
-  clearInterval(resultAutoNextInterval);
-  clearInterval(resultCountdownTimerId);
-  countdown3.textContent = '';
-}
-
 function startResultCountdownTimer() {
   resultCountdownTimerId = setInterval(() => {
     resultCountdownValue -= 1;
@@ -287,12 +257,16 @@ function updateResultCountdownDisplay(value) {
 
 // Play / Stop / Next / Submit Navbar ----------------------
 buttonPlay1.onclick = () => {
-  if (isNavbarAuto) startNavbarTransitions();
-  console.log('play navbar');
-  nodecg.sendMessage('play1');
+  updateNavbarItems();
+  setTimeout(() => {
+    if (isNavbarAuto) startNavbarTransitions();
+    console.log('play navbar');
+    nodecg.sendMessage('play1');
+  }, 100);
 };
 
 buttonClear1.onclick = () => {
+  stopAllNavbarIntervals();
   console.log('stop navbar');
   nodecg.sendMessage('stop1');
 };
@@ -302,22 +276,18 @@ buttonNext1.onclick = () => {
   nodecg.sendMessage('next1');
 };
 
-buttonSubmit1.onclick = () => {
-  updateNavbarItems();
-  console.log('Updated navbarItems:', navbarItems);
-  console.log('Updated sendableNavbarItems:', sendableNavbarItems);
-  nodecg.sendMessage('update navbarItems');
-  navbarItemsReplicant.value = sendableNavbarItems;
-}
-
 // Play / Stop / Next / Submit Promo -----------------------
 buttonPlay2.onclick = () => {
-  if (isPromoAuto) startPromoTransitions();
-  console.log('play promo');
-  nodecg.sendMessage('play2');
+  updatePromoItems();
+  setTimeout(() => {
+    if (isPromoAuto) startPromoTransitions();
+    console.log('play promo');
+    nodecg.sendMessage('play2');
+  }, 100);
 };
 
 buttonClear2.onclick = () => {
+  stopAllPromoIntervals();
   console.log('stop promo');
   nodecg.sendMessage('stop2');
 };
@@ -327,22 +297,18 @@ buttonNext2.onclick = () => {
   nodecg.sendMessage('next2');
 };
 
-buttonSubmit2.onclick = () => {
-  updatePromoItems();
-  console.log('Updated promoItems:', promoItems);
-  console.log('Updated sendablePromoItems:', sendablePromoItems);
-  nodecg.sendMessage('update promoItems');
-  promoItemsReplicant.value = sendablePromoItems;
-}
-
 // Play / Stop / Next / Submit Result -----------------------
 buttonPlay3.onclick = () => {
-  if (isResultAuto) startResultTransitions();
-  console.log('play results');
-  nodecg.sendMessage('play3');
+  updateResultItems();
+  setTimeout(() => {
+    if (isResultAuto) startResultTransitions();
+    console.log('play results');
+    nodecg.sendMessage('play3');
+  }, 100);
 };
 
 buttonClear3.onclick = () => {
+  stopAllResultIntervals();
   console.log('stop results');
   nodecg.sendMessage('stop3');
 };
@@ -352,21 +318,16 @@ buttonNext3.onclick = () => {
   nodecg.sendMessage('next3');
 };
 
-buttonSubmit3.onclick = () => {
-  updateResultItems();
-  console.log('Updated resultItems:', resultItems);
-  console.log('Updated sendableResultItems:', sendableResultItems);
-  nodecg.sendMessage('update resultItems');
-  resultItemsReplicant.value = sendableResultItems;
-}
-
 // Load Replicant value for checkboxes
+const netCBCRep = nodecg.Replicant('netCBC');
+const netTSNRep = nodecg.Replicant('netTSN');
+const netRSNRep = nodecg.Replicant('netRSN');
 const CBCcheck = document.getElementById('netCBC');
 const TSNcheck = document.getElementById('netTSN');
 const RSNcheck = document.getElementById('netRSN');
-const netCBCStoredValue = localStorage.getItem('netCBC');
-const netTSNStoredValue = localStorage.getItem('netTSN');
-const netRSNStoredValue = localStorage.getItem('netRSN');
+const netCBCStoredValue = localStorage.getItem('navCBC');
+const netTSNStoredValue = localStorage.getItem('navTSN');
+const netRSNStoredValue = localStorage.getItem('navRSN');
 
 if (netCBCStoredValue !== null) {
   CBCcheck.checked = netCBCStoredValue === 'true';
@@ -380,7 +341,7 @@ if (netRSNStoredValue !== null) {
   RSNcheck.checked = netRSNStoredValue === 'true';
 }
 
-// Pass Checkbox Value
+// Save Checkbox Value
 function netCheck() {
   // Get the checkbox
   if (CBCcheck.checked == true) {
@@ -697,6 +658,9 @@ function updateNavbarItems() {
   });
   updateSendableNavbarItems();
   saveNavbarItems();
+  // Update navbarItems in graphic
+  nodecg.sendMessage('update navbarItems');
+  navbarItemsReplicant.value = sendableNavbarItems;
 }
 
 // Generate Navbar Table Rows
@@ -855,7 +819,6 @@ function addPromoTableRow(item, table) {
   // Date
   const date = document.createElement('span');
   date.className = 'date';
-  date.contentEditable = 'true';
   if (item.type === 'Continue') {
     const logoImg = document.createElement('img');
     logoImg.src = `../shared/assets/logos/cbc-gem.png`;  // Gem Logo
@@ -864,6 +827,7 @@ function addPromoTableRow(item, table) {
     date.appendChild(logoImg);
   } else {
     date.textContent = item.date;
+    date.contentEditable = 'true';
   }
 
   // Footer
@@ -910,8 +874,8 @@ function addPromoTableRow(item, table) {
   imgXInput.type = 'number';
   imgXInput.className = 'img-input';
   imgXInput.id = `img_x_${index + 1}`;
-  imgXInput.setAttribute('data-min', '-100');
-  imgXInput.setAttribute('data-max', '300');
+  imgXInput.setAttribute('data-min', '-1000');
+  imgXInput.setAttribute('data-max', '1000');
   imgXInput.value = '50';
   imgXInput.title = 'X Axis';
   imgXInput.addEventListener('mousedown', (event) => {
@@ -922,8 +886,8 @@ function addPromoTableRow(item, table) {
   imgYInput.type = 'number';
   imgYInput.className = 'img-input';
   imgYInput.id = `img_y_${index + 1}`;
-  imgYInput.setAttribute('data-min', '-500');
-  imgYInput.setAttribute('data-max', '500');
+  imgYInput.setAttribute('data-min', '-1000');
+  imgYInput.setAttribute('data-max', '1000');
   imgYInput.value = '50';
   imgYInput.title = 'Y Axis';
   imgYInput.addEventListener('mousedown', (event) => {
@@ -1071,7 +1035,7 @@ function addImageSelectionControls() {
 
     const inputs = rowWrapper.querySelectorAll('.img-input');
     if (inputs.length >= 1) inputs[0].value = height; // Set height
-    if (inputs.length >= 2) inputs[1].value = objectPosition[0].replace('%', ''); // Set x-axis percentage
+    if (inputs.length >= 2) inputs[1].value = objectPosition[0].replace('px', ''); // Set x-axis percentage
     if (inputs.length >= 3) inputs[2].value = objectPosition[1].replace('px', ''); // Set y-axis in pixels
   }
 
@@ -1156,7 +1120,8 @@ function updateImageStyle(inputElement) {
   const yInput = inputs[2];
 
   img.style.height = `${heightInput.value}px`;
-  img.style.objectPosition = `${xInput.value}% ${yInput.value}px`;
+  img.style.objectPosition = `${xInput.value}px ${yInput.value}px`;
+  console.log(img, img.style.objectPosition);
 }
 
 // Update Row Indexes
@@ -1183,7 +1148,7 @@ function addNewPromoFromDropdown() {
         type: 'Athlete',
         img: '../shared/assets/athletes/default.jpg',
         height: '196px',
-        objectPosition: '60% 2px',
+        objectPosition: '-51px 3px',
         title: 'New Athlete',
         subtitle: 'Sport',
         date: 'Today',
@@ -1195,7 +1160,7 @@ function addNewPromoFromDropdown() {
         type: 'Picto',
         img: '../shared/assets/pictos/archery.png',
         height: '196px',
-        objectPosition: '50% 0px',
+        objectPosition: '-10px -2px',
         title: 'New Picto',
         subtitle: 'Event',
         date: 'Date',
@@ -1207,7 +1172,7 @@ function addNewPromoFromDropdown() {
         type: 'Continue',
         img: '../shared/assets/pictos/archery.png',
         height: '196px',
-        objectPosition: '50% 0px',
+        objectPosition: '-10px -2px',
         title: 'Sport',
         subtitle: 'Continue Watching On',
         date: 'Gem',
@@ -1337,11 +1302,14 @@ function updatePromoItems() {
         promoItems[index].img = `../shared/assets/pictos/${dropdownValue}`;
       }
       promoItems[index].height = `${height}px`;
-      promoItems[index].objectPosition = `${imgX}% ${imgY}px`;
+      promoItems[index].objectPosition = `${imgX}px ${imgY}px`;
     }
   });
   updateSendablePromoItems();
   savePromoItems();
+  // Update promoItems in graphic
+  nodecg.sendMessage('update promoItems');
+  promoItemsReplicant.value = sendablePromoItems;
 }
 
 // Generate Promo Table Rows
@@ -1380,49 +1348,29 @@ function loadPromoItems() {
     promoItems = [
       {
         type: 'Athlete',
-        img: '../shared/assets/athletes/athlete-2.jpg',
-        height: '450px',
-        objectPosition: '59.5% -105px',
-        title: 'Deanne Rose',
-        subtitle: 'Football',
+        img: '../shared/assets/athletes/default.jpg',
+        height: '196px',
+        objectPosition: '-51px 3px',
+        title: 'New Athlete',
+        subtitle: 'Sport',
         date: 'Today',
         footer: 'CBC.CA/PARIS2024'
       },
       {
         type: 'Picto',
-        img: '../shared/assets/pictos/rowing.png',
+        img: '../shared/assets/pictos/basketball.png',
         height: '196px',
-        objectPosition: '50% 0px',
-        title: 'Jakub Buczek',
-        subtitle: 'Rowing',
+        objectPosition: '-10px -2px',
+        title: 'Jamal Murray',
+        subtitle: 'Basketball',
         date: 'Coming Up',
-        footer: 'CBC.CA/PARIS2024'
-      },
-      {
-        type: 'Athlete',
-        img: '../shared/assets/athletes/athlete-3.jpg',
-        height: '490px',
-        objectPosition: '49.5% -86px',
-        title: 'Mathew Sharpe',
-        subtitle: 'Triathlon',
-        date: 'Today',
-        footer: 'CBC.CA/PARIS2024'
-      },
-      {
-        type: 'Picto',
-        img: '../shared/assets/pictos/handball.png',
-        height: '196px',
-        objectPosition: '50% 0px',
-        title: 'Daniel Nestor',
-        subtitle: 'Beach Handball',
-        date: 'Next',
         footer: 'CBC.CA/PARIS2024'
       },
       {
         type: 'Continue',
         img: '../shared/assets/pictos/rowing.png',
         height: '196px',
-        objectPosition: '50% 0px',
+        objectPosition: '-10px -2px',
         title: 'Rowing',
         subtitle: 'Continue Watching On',
         date: 'Gem',
@@ -1835,6 +1783,9 @@ function updateResultItems() {
   });
   updateSendableResultItems();
   saveResultItems();
+  // Update resultItems in graphic
+  nodecg.sendMessage('update resultItems');
+  resultItemsReplicant.value = sendableResultItems;
 }
 
 // Generate Result Table Rows

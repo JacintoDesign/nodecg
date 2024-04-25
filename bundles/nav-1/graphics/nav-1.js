@@ -280,49 +280,29 @@ function animateNextNavbar() {
 let promoItems = [
   {
     type: 'Athlete',
-    img: '../shared/assets/athletes/athlete-2.jpg',
-    height: '450px',
-    objectPosition: '59.5% -105px',
-    title: 'Deanne Rose',
-    subtitle: 'Football',
+    img: '../shared/assets/athletes/default.jpg',
+    height: '196px',
+    objectPosition: '-51px 3px',
+    title: 'New Athlete',
+    subtitle: 'Sport',
     date: 'Today',
     footer: 'CBC.CA/PARIS2024'
   },
   {
     type: 'Picto',
-    img: '../shared/assets/pictos/rowing.png',
-    height: '180px',
-    objectPosition: 'center 10px',
-    title: 'Jakub Buczek',
-    subtitle: 'Rowing',
+    img: '../shared/assets/pictos/basketball.png',
+    height: '196px',
+    objectPosition: '-10px -2px',
+    title: 'Jamal Murray',
+    subtitle: 'Basketball',
     date: 'Coming Up',
-    footer: 'CBC.CA/PARIS2024'
-  },
-  {
-    type: 'Athlete',
-    img: '../shared/assets/athletes/athlete-3.jpg',
-    height: '490px',
-    objectPosition: '49.5% -86px',
-    title: 'Mathew Sharpe',
-    subtitle: 'Triathlon',
-    date: 'Today',
-    footer: 'CBC.CA/PARIS2024'
-  },
-  {
-    type: 'Picto',
-    img: '../shared/assets/pictos/handball.png',
-    height: '180px',
-    objectPosition: 'center 10px',
-    title: 'Daniel Nestor',
-    subtitle: 'Beach Handball',
-    date: 'Next',
     footer: 'CBC.CA/PARIS2024'
   },
   {
     type: 'Continue',
     img: '../shared/assets/pictos/rowing.png',
-    height: '180px',
-    objectPosition: 'center 10px',
+    height: '196px',
+    objectPosition: '-10px -2px',
     title: 'Rowing',
     subtitle: 'Continue Watching On',
     date: 'Gem',
@@ -1123,9 +1103,58 @@ function animateNextResults() {
 }
 
 // NodeCG Related ------------------------------------------ 
+const netCBCRep = nodecg.Replicant('netCBC');
+const netTSNRep = nodecg.Replicant('netTSN');
+const netRSNRep = nodecg.Replicant('netRSN');
 const navbarItemsReplicant = nodecg.Replicant('navbarItems');
 const promoItemsReplicant = nodecg.Replicant('promoItems');
 const resultItemsReplicant = nodecg.Replicant('resultItems');
+const networkReplicants = { netCBCRep, netTSNRep, netRSNRep };
+
+// Handle Instance of Network
+function handleInstanceAction(instanceId, replicants, action, logMessage, audioAction) {
+  const instanceActions = {
+    'CBC': { replicant: replicants.netCBCRep, logPrefix: 'CBC' },
+    'TSN': { replicant: replicants.netTSNRep, logPrefix: 'TSN' },
+    'RSN': { replicant: replicants.netRSNRep, logPrefix: 'RSN' }
+  };
+
+  const currentInstance = instanceActions[instanceId];
+  if (currentInstance && currentInstance.replicant.value === "true") {
+    action();
+    console.log(`${currentInstance.logPrefix} ${logMessage}`);
+    if (audioAction) audioAction();
+  }
+}
+
+// Get instance ID from URL
+function getParameterByName(name) {
+  name = name.replace(/[\[\]]/g, '\\$&');
+  var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+    results = regex.exec(window.location.href);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
+
+const instanceId = getParameterByName('instance');
+console.log('instanceId', instanceId);
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.title = `Navbar - ${instanceId}`;
+});
+
+// Play Audio In
+function playAudioIn() {
+  const audio = document.getElementById("audioIn");
+  if (audio) audio.play();
+}
+
+// Play Audio Out
+function playAudioOut() {
+  const audio = document.getElementById("audioOut");
+  if (audio) audio.play();
+}
 
 // Navbar -------------------------------------
 
@@ -1139,28 +1168,19 @@ navbarItemsReplicant.on('change', (newValue) => {
   }
 });
 
-// Animate In
+// Animate In with audio
 nodecg.listenFor('play1', () => {
-  // if (netCBCRep.value == 'true') {
-  animateInNavbar();
-  console.log('in');
-  // }
+  handleInstanceAction(instanceId, networkReplicants, animateInNavbar, 'in', playAudioIn);
 });
 
-// Animate Out
+// Animate Out with audio
 nodecg.listenFor('stop1', () => {
-  // if (netCBCRep.value == 'true') {
-  animateOutNavbar();
-  console.log('out');
-  // }
+  handleInstanceAction(instanceId, networkReplicants, animateOutNavbar, 'out', playAudioOut);
 });
 
-// Animate Next
+// Animate Next without specific audio
 nodecg.listenFor('next1', () => {
-  // if (netCBCRep.value == 'true') {
-  transitionToNextNavbar();
-  console.log('next');
-  // }
+  handleInstanceAction(instanceId, networkReplicants, transitionToNextNavbar, 'next');
 });
 
 // Promo -------------------------------------
@@ -1175,28 +1195,19 @@ promoItemsReplicant.on('change', (newValue) => {
   }
 });
 
-// Animate In
-nodecg.listenFor('play2', () => {
-  // if (netCBCRep.value == 'true') {
-  animateInPromo();
-  console.log('in');
-  // }
+// Animate In with audio
+nodecg.listenFor('play', () => {
+  handleInstanceAction(instanceId, networkReplicants, animateInPromo, 'in', playAudioIn);
 });
 
-// Animate Out
-nodecg.listenFor('stop2', () => {
-  // if (netCBCRep.value == 'true') {
-  animateOutPromo();
-  console.log('out');
-  // }
+// Animate Out with audio
+nodecg.listenFor('stop', () => {
+  handleInstanceAction(instanceId, networkReplicants, animateOutPromo, 'out', playAudioOut);
 });
 
-// Animate Next
-nodecg.listenFor('next2', () => {
-  // if (netCBCRep.value == 'true') {
-  transitionToNextPromo();
-  console.log('next');
-  // }
+// Animate Next without specific audio
+nodecg.listenFor('next', () => {
+  handleInstanceAction(instanceId, networkReplicants, transitionToNextPromo, 'next');
 });
 
 // Result -----------------------------------
@@ -1211,26 +1222,17 @@ resultItemsReplicant.on('change', (newValue) => {
   }
 });
 
-// Animate In
-nodecg.listenFor('play3', () => {
-  // if (netCBCRep.value == 'true') {
-  animateInResults();
-  console.log('in');
-  // }
+// Animate In with audio
+nodecg.listenFor('play', () => {
+  handleInstanceAction(instanceId, networkReplicants, animateInResults, 'in', playAudioIn);
 });
 
-// Animate Out
-nodecg.listenFor('stop3', () => {
-  // if (netCBCRep.value == 'true') {
-  animateOutResults();
-  console.log('out');
-  // }
+// Animate Out with audio
+nodecg.listenFor('stop', () => {
+  handleInstanceAction(instanceId, networkReplicants, animateOutResults, 'out', playAudioOut);
 });
 
-// Animate Next
-nodecg.listenFor('next3', () => {
-  // if (netCBCRep.value == 'true') {
-  transitionToNextResult();
-  console.log('next');
-  // }
+// Animate Next without specific audio
+nodecg.listenFor('next', () => {
+  handleInstanceAction(instanceId, networkReplicants, transitionToNextResult, 'next');
 });

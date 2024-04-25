@@ -248,4 +248,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const instanceId = getParameterByName('instance');
   console.log('instanceId', instanceId);
+
+  document.title = `Ticker - ${instanceId}`;
 });
