@@ -1196,17 +1196,17 @@ promoItemsReplicant.on('change', (newValue) => {
 });
 
 // Animate In with audio
-nodecg.listenFor('play', () => {
+nodecg.listenFor('play2', () => {
   handleInstanceAction(instanceId, networkReplicants, animateInPromo, 'in', playAudioIn);
 });
 
 // Animate Out with audio
-nodecg.listenFor('stop', () => {
+nodecg.listenFor('stop2', () => {
   handleInstanceAction(instanceId, networkReplicants, animateOutPromo, 'out', playAudioOut);
 });
 
 // Animate Next without specific audio
-nodecg.listenFor('next', () => {
+nodecg.listenFor('next2', () => {
   handleInstanceAction(instanceId, networkReplicants, transitionToNextPromo, 'next');
 });
 
@@ -1223,16 +1223,16 @@ resultItemsReplicant.on('change', (newValue) => {
 });
 
 // Animate In with audio
-nodecg.listenFor('play', () => {
+nodecg.listenFor('play3', () => {
   handleInstanceAction(instanceId, networkReplicants, animateInResults, 'in', playAudioIn);
 });
 
 // Animate Out with audio
-nodecg.listenFor('stop', () => {
+nodecg.listenFor('stop3', () => {
   handleInstanceAction(instanceId, networkReplicants, animateOutResults, 'out', playAudioOut);
 });
 
 // Animate Next without specific audio
-nodecg.listenFor('next', () => {
+nodecg.listenFor('next3', () => {
   handleInstanceAction(instanceId, networkReplicants, transitionToNextResult, 'next');
 });
