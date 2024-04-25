@@ -943,46 +943,75 @@ function addPromoTableRow(item, table) {
   addPromoDragAndDropHandlers(tr, table);
 }
 
+const imageClickHandler = function () {
+  const closestTd = this.closest('td');
+  const editContainer = closestTd.querySelector('.image-edit-container');
+  if (closestTd.style.paddingBottom === '50px') {
+    closestTd.style.paddingBottom = '';
+    editContainer.style.display = 'none';
+  } else {
+    closestTd.style.paddingBottom = '50px';
+    editContainer.style.display = 'flex';
+  }
+};
+
+let updateDropdownValues;
+
 // Add Image Selection Controls
 function addImageSelectionControls() {
   // Toggle Image Edit -----------------------
   const images = document.querySelectorAll('.promo-image img');
   images.forEach(function (image) {
-    image.addEventListener('click', function () {
-      const closestTd = this.closest('td');
-      const editContainer = closestTd.querySelector('.image-edit-container');
-      if (closestTd.style.paddingBottom === '50px') {
-        closestTd.style.paddingBottom = '';
-        editContainer.style.display = 'none';
-      } else {
-        closestTd.style.paddingBottom = '50px';
-        editContainer.style.display = 'flex';
-      }
-    });
+    // Remove any existing listeners
+    image.removeEventListener('click', imageClickHandler);
+    // Add new listener
+    image.addEventListener('click', imageClickHandler);
   });
 
   // Image Dropdown & Selection --------------
   function setupDropdownListeners(type, message, basePath) {
+    let previousLength = {};  // Cache to store previous length of image files for each type
+    updateDropdownValues = false;
+
     nodecg.listenFor(message, (imageFiles) => {
       const dropdowns = document.querySelectorAll(`select[id^='${type}_img_dropdown_']`);
-      dropdowns.forEach(dropdown => {
-        populateDropdown(dropdown, imageFiles);
-        dropdown.addEventListener('change', function () {
-          updateImageSource(this, this.value, basePath);
+      updateDropdownValues = false;
+
+      // Only update the dropdowns if the length of the array has changed
+      if (!previousLength[type] || previousLength[type] !== imageFiles.length) {
+        updateDropdownValues = true;
+        dropdowns.forEach(dropdown => {
+          populateDropdown(dropdown, imageFiles);
+          // Attach event listener only once (avoid adding multiple listeners)
+          if (!dropdown.hasAttribute('data-initialized')) {
+            dropdown.addEventListener('change', function () {
+              updateImageSource(this, this.value, basePath);
+            });
+            dropdown.setAttribute('data-initialized', 'true');
+          }
         });
-      });
+
+        // Update the stored length for this type
+        previousLength[type] = imageFiles.length;
+      }
     });
   }
 
   // Populate image dropdown
   function populateDropdown(dropdown, imageFiles) {
-    dropdown.innerHTML = '';  // Clear existing options first
-    imageFiles.forEach(file => {
-      const option = document.createElement('option');
-      option.value = file;
-      option.textContent = file;
-      dropdown.appendChild(option);
-    });
+    // Prevent clearing options if already initialized
+    if (!dropdown.hasAttribute('data-populated') || updateDropdownValues) {
+      const selectedValue = dropdown.value;
+      dropdown.innerHTML = '';  // Clear existing options first if not populated
+      imageFiles.forEach(file => {
+        const option = document.createElement('option');
+        option.value = file;
+        option.textContent = file;
+        dropdown.appendChild(option);
+      });
+      if (selectedValue) dropdown.value = selectedValue;
+      dropdown.setAttribute('data-populated', 'true');
+    }
 
     promoItems.forEach((item, index) => {
       const dropdown = document.querySelector(`#promo-row-${index} select`);
@@ -1121,7 +1150,6 @@ function updateImageStyle(inputElement) {
 
   img.style.height = `${heightInput.value}px`;
   img.style.objectPosition = `${xInput.value}px ${yInput.value}px`;
-  console.log(img, img.style.objectPosition);
 }
 
 // Update Row Indexes
@@ -1294,6 +1322,7 @@ function updatePromoItems() {
     if (promoItems[index]) {
       promoItems[index].title = titleText;
       promoItems[index].subtitle = subtitleText;
+      if (!dateText) dateText = 'Gem';
       promoItems[index].date = dateText;
       promoItems[index].footer = footerText;
       if (promoItems[index].type === 'Athlete') {

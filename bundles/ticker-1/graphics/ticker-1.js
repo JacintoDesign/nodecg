@@ -69,15 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeTicker();
     const tickerMain = document.getElementById('ticker-main');
     const tickerBackground = document.getElementById('ticker-background');
-    tickerMain.style.transform = "translateY(100%)";
-    tickerBackground.style.transform = "translateY(100%)";
+    tickerMain.style.transform = 'translateY(100%)';
+    tickerBackground.style.transform = 'translateY(100%)';
     tickerMain.style.animation = 'slide-up 0.75s ease-out forwards 0.3s';
     tickerBackground.style.animation = 'slide-up 0.75s ease-out forwards';
-    // Reset Ticker main / background position
-    setTimeout(() => {
-      tickerMain.style.transform = "translateY(0)";
-      tickerBackground.style.transform = "translateY(0)";
-    }, 3000);
     // Reset currentGroup Index
     currentGroupIndex = 0;
     const currentGroup = document.getElementById(`group-${currentGroupIndex}`);
@@ -111,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function animateOut() {
     const tickerMain = document.getElementById('ticker-main');
     const tickerBackground = document.getElementById('ticker-background');
+    tickerMain.style.transform = 'translateY(0)';
+    tickerBackground.style.transform = 'translateY(0)';
     tickerMain.style.animation = 'slide-down 0.75s ease-in forwards';
     tickerBackground.style.animation = 'slide-down 0.5s ease-out forwards 0.5s';
   }
@@ -156,6 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
       playAudioOut();
       const tickerMain = document.getElementById('ticker-main');
       const tickerBackground = document.getElementById('ticker-background');
+      tickerMain.style.transform = 'translateY(0)';
+      tickerBackground.style.transform = 'translateY(0)';
       tickerMain.style.animation = 'slide-down 0.75s ease-in forwards';
       tickerBackground.style.animation = 'slide-down 0.5s ease-out forwards 0.5s';
     }
@@ -178,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const currentInstance = instanceActions[instanceId];
-    if (currentInstance && currentInstance.replicant.value === "true") {
+    if (currentInstance && currentInstance.replicant.value === 'true') {
       action();
       console.log(`${currentInstance.logPrefix} ${logMessage}`);
       if (audioAction) audioAction();
@@ -190,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (newValue) {
       tickerItemsReplicant.value = newValue;
       groupItems = newValue;
-      console.log("ticker Items", tickerItemsReplicant.value, groupItems);
+      console.log('ticker Items', tickerItemsReplicant.value, groupItems);
       initializeTicker();
     }
   });
@@ -222,13 +221,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Play Audio In
   function playAudioIn() {
-    const audio = document.getElementById("audioIn");
+    const audio = document.getElementById('audioIn');
     if (audio) audio.play();
   }
 
   // Play Audio Out
   function playAudioOut() {
-    const audio = document.getElementById("audioOut");
+    const audio = document.getElementById('audioOut');
     if (audio) audio.play();
   }
 

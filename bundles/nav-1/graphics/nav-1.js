@@ -1123,7 +1123,7 @@ function handleInstanceAction(instanceId, replicants, action, logMessage, audioA
   };
 
   const currentInstance = instanceActions[instanceId];
-  if (currentInstance && currentInstance.replicant.value === "true") {
+  if (currentInstance && currentInstance.replicant.value === 'true') {
     action();
     console.log(`${currentInstance.logPrefix} ${logMessage}`);
     if (audioAction) audioAction();
@@ -1149,13 +1149,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Play Audio In
 function playAudioIn() {
-  const audio = document.getElementById("audioIn");
+  const audio = document.getElementById('audioIn');
   if (audio) audio.play();
 }
 
 // Play Audio Out
 function playAudioOut() {
-  const audio = document.getElementById("audioOut");
+  const audio = document.getElementById('audioOut');
   if (audio) audio.play();
 }
 

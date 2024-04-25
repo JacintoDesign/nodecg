@@ -176,7 +176,7 @@ function toggleVisibility(icon) {
   const tr = icon.closest('tr');
   const table = tr.closest('table');
   const rows = Array.from(table.querySelectorAll('tr'));
-  const index = rows.indexOf(tr);
+  const index = (rows.indexOf(tr) - 1);
   const item = tickerItems[index];
   const typeSelect = tr.querySelector('.type-cell');
   const message = tr.querySelector('.message-cell');
