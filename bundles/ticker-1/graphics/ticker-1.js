@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tickerBackground = document.getElementById('ticker-background');
     tickerMain.style.transform = 'translateY(100%)';
     tickerBackground.style.transform = 'translateY(100%)';
-    tickerMain.style.animation = 'slide-up 0.75s ease-out forwards 0.3s';
-    tickerBackground.style.animation = 'slide-up 0.75s ease-out forwards';
+    tickerMain.style.animation = 'slide-up 0.25s ease-out forwards 0.2s';
+    tickerBackground.style.animation = 'slide-up 0.25s ease-out forwards';
     // Reset currentGroup Index
     currentGroupIndex = 0;
     const currentGroup = document.getElementById(`group-${currentGroupIndex}`);
@@ -108,8 +108,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const tickerBackground = document.getElementById('ticker-background');
     tickerMain.style.transform = 'translateY(0)';
     tickerBackground.style.transform = 'translateY(0)';
-    tickerMain.style.animation = 'slide-down 0.75s ease-in forwards';
-    tickerBackground.style.animation = 'slide-down 0.5s ease-out forwards 0.5s';
+    tickerMain.style.animation = 'slide-down 0.25s ease-in forwards';
+    tickerBackground.style.animation = 'slide-down 0.3s ease-out forwards 0.2s';
   }
 
   // Transition between groups
@@ -155,8 +155,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const tickerBackground = document.getElementById('ticker-background');
       tickerMain.style.transform = 'translateY(0)';
       tickerBackground.style.transform = 'translateY(0)';
-      tickerMain.style.animation = 'slide-down 0.75s ease-in forwards';
-      tickerBackground.style.animation = 'slide-down 0.5s ease-out forwards 0.5s';
+      tickerMain.style.animation = 'slide-down 0.25s ease-in forwards';
+      tickerBackground.style.animation = 'slide-down 0.3s ease-out forwards 0.2s';
     }
   }
 
