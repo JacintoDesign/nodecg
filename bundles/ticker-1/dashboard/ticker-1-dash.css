@@ -4,7 +4,7 @@ body {
   margin: 0;
   overflow: hidden;
   max-width: 500px;
-  height: auto;
+  height: 800px;
 }
 
 /* Buttons Group */
@@ -77,22 +77,21 @@ body {
 .ticker-table {
   margin: 20px 5px;
   width: 675px;
+  overflow-y: auto;
+  max-height: 662px;
 }
 
 table {
   border-collapse: separate;
   border-spacing: 0;
   width: 100%;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  overflow: hidden;
 }
 
 th,
 td {
   border-right: 1px solid #ccc;
   border-bottom: 1px solid #ccc;
-  padding: 10px;
+  padding: 8px;
   text-align: left;
 }
 
@@ -104,7 +103,9 @@ td:first-child {
 th {
   background-color: #f4f4f4;
   color: black;
-  border-top: 1px solid #ccc;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 }
 
 tbody tr:first-child td {
