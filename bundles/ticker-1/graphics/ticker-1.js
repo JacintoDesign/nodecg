@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create Message
     const messageText = document.createElement('div');
     messageText.classList.add('ticker-message-text');
-    messageText.textContent = item.message;
+    messageText.innerHTML = item.message;
     group.appendChild(messageText);
 
     return group;
@@ -57,6 +57,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       tickerMain.appendChild(groupElement);
     });
+    // Add Sponsor Image if loaded
+    if (localStorage.getItem('sponsorDetails')) {
+      sponsorDetails = JSON.parse(localStorage.getItem('sponsorDetails'));
+      const sponsorContainer = document.createElement('div');
+      sponsorContainer.className = 'sponsor-container';
+      sponsorContainer.style.display = sponsorDetails.isDisplay ? 'block' : 'none';
+      const sponsorImage = document.createElement('img');
+      sponsorImage.className = 'sponsor-image';
+      sponsorImage.alt = 'sponsor image';
+      sponsorImage.src = sponsorDetails.imgSrc;
+      sponsorImage.style.height = sponsorDetails.imgHeight;
+      sponsorImage.style.objectPosition = sponsorDetails.imgPosition;
+      sponsorContainer.appendChild(sponsorImage);
+      tickerMain.appendChild(sponsorContainer);
+    }
   }
 
   // Animate In Helper
@@ -163,17 +178,17 @@ document.addEventListener('DOMContentLoaded', () => {
   // NodeCG Related ------------------- 
   const netCBCRep = nodecg.Replicant('netCBC');
   const netTSNRep = nodecg.Replicant('netTSN');
-  const netRSNRep = nodecg.Replicant('netRSN');
+  const netSNRep = nodecg.Replicant('netSN');
   const tickerItemsReplicant = nodecg.Replicant('tickerItems');
   const refreshIntervalReplicant = nodecg.Replicant('refreshInterval');
-  const networkReplicants = { netCBCRep, netTSNRep, netRSNRep };
+  const networkReplicants = { netCBCRep, netTSNRep, netSNRep };
 
   // Handle Instance of Network
   function handleInstanceAction(instanceId, replicants, action, logMessage, audioAction) {
     const instanceActions = {
       'CBC': { replicant: replicants.netCBCRep, logPrefix: 'CBC' },
       'TSN': { replicant: replicants.netTSNRep, logPrefix: 'TSN' },
-      'RSN': { replicant: replicants.netRSNRep, logPrefix: 'RSN' }
+      'SN': { replicant: replicants.netSNRep, logPrefix: 'SN' }
     };
 
     const currentInstance = instanceActions[instanceId];

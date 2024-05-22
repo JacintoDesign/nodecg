@@ -39,13 +39,13 @@ updateIntervalBtn.onclick = () => {
 // Load Replicant value for checkboxes
 const CBCcheck = document.getElementById('netCBC');
 const TSNcheck = document.getElementById('netTSN');
-const RSNcheck = document.getElementById('netRSN');
+const SNcheck = document.getElementById('netSN');
 const netCBCStoredValue = localStorage.getItem('tickerCBC');
 const netTSNStoredValue = localStorage.getItem('tickerTSN');
-const netRSNStoredValue = localStorage.getItem('tickerRSN');
+const netSNStoredValue = localStorage.getItem('tickerSN');
 const netCBCRep = nodecg.Replicant('netCBC');
 const netTSNRep = nodecg.Replicant('netTSN');
-const netRSNRep = nodecg.Replicant('netRSN');
+const netSNRep = nodecg.Replicant('netSN');
 
 if (netCBCStoredValue !== null) {
   CBCcheck.checked = netCBCStoredValue === 'true';
@@ -55,8 +55,8 @@ if (netTSNStoredValue !== null) {
   TSNcheck.checked = netTSNStoredValue === 'true';
 }
 
-if (netRSNStoredValue !== null) {
-  RSNcheck.checked = netRSNStoredValue === 'true';
+if (netSNStoredValue !== null) {
+  SNcheck.checked = netSNStoredValue === 'true';
 }
 
 // Save Checkbox Value
@@ -74,15 +74,15 @@ function netCheck() {
     netTSNRep.value = 'false';
   }
 
-  if (RSNcheck.checked == true) {
-    netRSNRep.value = 'true';
+  if (SNcheck.checked == true) {
+    netSNRep.value = 'true';
   } else {
-    netRSNRep.value = 'false';
+    netSNRep.value = 'false';
   }
 
   localStorage.setItem('tickerCBC', CBCcheck.checked);
   localStorage.setItem('tickerTSN', TSNcheck.checked);
-  localStorage.setItem('tickerRSN', RSNcheck.checked);
+  localStorage.setItem('tickerSN', SNcheck.checked);
 }
 
 // Populate the table with tickerItems ------------------------------------------
@@ -123,7 +123,16 @@ function addTableRow(item) {
   const message = document.createElement('span');
   message.className = 'message-cell';
   message.setAttribute('contenteditable', true);
-  message.textContent = item.message;
+  message.innerHTML = item.message;
+  message.addEventListener('keydown', function (e) {
+    if (e.ctrlKey && (e.key === 'b' || e.key === 'B')) {
+      e.preventDefault();
+      toggleFormat('b');
+    } else if (e.ctrlKey && (e.key === 'i' || e.key === 'I')) {
+      e.preventDefault();
+      toggleFormat('i');
+    }
+  });
   messageCell.appendChild(message);
   row.appendChild(messageCell);
 
@@ -267,7 +276,7 @@ function updateItems() {
     const dropdown = row.querySelector('td select');
     const dropdownValue = dropdown.value;
     const typeValue = dropdownValue;
-    const messageText = row.querySelector('.message-cell').textContent;
+    const messageText = row.querySelector('.message-cell').innerHTML;
 
     if (tickerItems[index]) {
       tickerItems[index].type = typeValue;
@@ -293,6 +302,208 @@ function generateTableRows() {
 // Update sendableTickerItems
 function updateSendableTickerItems() {
   sendableTickerItems = tickerItems.filter(item => item.visible);
+}
+
+// Function to wrap or unwrap selected text with a given tag
+function toggleFormat(tag) {
+  const selection = window.getSelection();
+  if (selection.rangeCount > 0) {
+    const range = selection.getRangeAt(0);
+    const selectedText = range.toString();
+    const parentNode = range.commonAncestorContainer.parentNode;
+
+    // Check if the selected text is already wrapped with the tag
+    if (parentNode.nodeName.toLowerCase() === tag) {
+      const unwrappedText = document.createTextNode(selectedText);
+      parentNode.replaceChild(unwrappedText, parentNode.firstChild);
+      parentNode.parentNode.replaceChild(unwrappedText, parentNode);
+    } else {
+      const wrapper = document.createElement(tag);
+      wrapper.textContent = selectedText;
+      range.deleteContents();
+      range.insertNode(wrapper);
+      selection.removeAllRanges();
+    }
+  }
+}
+
+// Sponsor Related -------------------------------------------------------------
+let isShowSponsor = false;
+let sponsorImgSrc = '';
+let sponsorFilename = '';
+let sponsorImgHeight = '';
+let sponsorImgPosition = '';
+let isDisplaySponsor = false;
+
+function showSponsor() {
+  const sponsorContainer = document.querySelector('.sponsor-container');
+  sponsorContainer.style.display = sponsorContainer.style.display === 'none' ? 'block' : 'none';
+  isShowSponsor = sponsorContainer.style.display === 'block';
+  // If Show Sponsor, change ticker-table max-height
+  const tickerTable = document.querySelector('.ticker-table');
+  tickerTable.style.maxHeight = isShowSponsor ? '494px' : '662px';
+  saveSponsorDetails();
+}
+
+// Image Dropdown and selection 
+document.addEventListener('DOMContentLoaded', function () {
+  function setupDropdownListeners(message, basePath) {
+    nodecg.listenFor(message, (imageFiles) => {
+      const dropdown = document.querySelector(`select[id^="sponsor-dropdown"]`);
+      populateDropdown(dropdown, imageFiles);
+      dropdown.addEventListener('change', function () {
+        updateImageSource(this.value, basePath);
+      });
+    });
+  }
+
+  // Populate Dropdown
+  function populateDropdown(dropdown, imageFiles) {
+    dropdown.innerHTML = '';  // Clear existing options first'
+    imageFiles.forEach(file => {
+      const option = document.createElement('option');
+      option.value = file;
+      option.textContent = file;
+      dropdown.appendChild(option);
+    });
+    if (sponsorFilename) dropdown.value = sponsorFilename;
+  }
+
+  // Update Image with selection
+  function updateImageSource(value, basePath) {
+    const imageElement = document.querySelector('.sponsor-image');
+    if (imageElement) {
+      const newImagePath = `${basePath}${value}`;
+      imageElement.src = newImagePath;
+      sponsorImgSrc = newImagePath;
+    }
+  }
+
+  // Setup listeners for sponsor images 
+  setupDropdownListeners('updateSponsorImages', '../shared/assets/sponsor/');
+
+  // Send initial requests for images 
+  nodecg.sendMessage('requestSponsorImages');
+});
+
+// Image Resizing Controls
+let mouseDownStatus = false;
+let oldX;
+const sensitivity = 0.5;
+let target, minVal, maxVal;
+
+const imageHeight = document.getElementById('img-height');
+const imageX = document.getElementById('img-x');
+const imageY = document.getElementById('img-y');
+
+imageHeight.addEventListener('mousedown', (event) => {
+  mouseDown(event);
+});
+
+imageX.addEventListener('mousedown', (event) => {
+  mouseDown(event);
+});
+
+imageY.addEventListener('mousedown', (event) => {
+  mouseDown(event);
+});
+
+function mouseDown(e) {
+  if (e.target.tagName === 'INPUT' && e.target.type === 'number') {
+    mouseDownStatus = true;
+    target = e.target;
+    minVal = parseInt(target.dataset.min, 10);
+    maxVal = parseInt(target.dataset.max, 10);
+    oldX = e.pageX;
+    target.style.userSelect = 'none';  // Prevent text selection during drag
+
+    document.addEventListener('mousemove', mouseMove);
+    document.addEventListener('mouseup', mouseUp);
+  }
+}
+
+function mouseUp() {
+  if (mouseDownStatus) {
+    document.addEventListener('mousemove', mouseMove);
+    document.addEventListener('mouseup', mouseUp);
+
+    mouseDownStatus = false;
+    if (target) {
+      target.style.userSelect = '';
+    }
+    target = null;
+  }
+}
+
+function mouseMove(e) {
+  if (mouseDownStatus && target) {
+    let deltaX = (e.pageX - oldX) / sensitivity;
+    let newValue = parseInt(target.value, 10) + deltaX;
+    newValue = Math.max(minVal, Math.min(newValue, maxVal));
+    target.value = Math.round(newValue);
+    oldX = e.pageX;
+    updateImageStyle();
+  }
+}
+
+// Update Image Preview 
+function updateImageStyle() {
+  const img = document.querySelector('.sponsor-image');
+  img.style.height = `${imageHeight.value}px`;
+  sponsorImgHeight = img.style.height;
+  img.style.objectPosition = `${imageX.value}px ${imageY.value}px`;
+  sponsorImgPosition = img.style.objectPosition;
+}
+
+// Save Sponsor Details
+function saveSponsorDetails() {
+  sponsorImgSrc = document.querySelector('.sponsor-image').src;
+  sponsorImgHeight = `${imageHeight.value}px`;
+  sponsorImgPosition = `${imageX.value}px ${imageY.value}px`;
+  sponsorDetails = {
+    imgHeight: sponsorImgHeight,
+    imgSrc: sponsorImgSrc,
+    imgPosition: sponsorImgPosition,
+    isDisplay: isDisplaySponsor
+  }
+  localStorage.setItem('sponsorDetails', JSON.stringify(sponsorDetails));
+}
+
+loadSponsorDetails();
+
+// Load Sponsor Details
+function loadSponsorDetails() {
+  if (localStorage.getItem('sponsorDetails')) {
+    sponsorDetails = JSON.parse(localStorage.getItem('sponsorDetails'));
+    const sponsorImage = document.querySelector('.sponsor-image');
+    sponsorImage.src = sponsorDetails.imgSrc;
+    sponsorFilename = getFilenameFromPath(sponsorImage.src);
+    imageHeight.value = +sponsorDetails.imgHeight.split('px')[0];
+    imageX.value = +sponsorDetails.imgPosition.split('px')[0];
+    imageY.value = +sponsorDetails.imgPosition.split('px')[1];
+    updateImageStyle();
+    isDisplaySponsor = sponsorDetails.isDisplay;
+    setToggleSponsor();
+  }
+}
+
+// Get Filename from Path
+function getFilenameFromPath(filePath) {
+  return filePath.split('/').pop();
+}
+
+// Show / Hide Sponsor
+function toggleSponsor() {
+  isDisplaySponsor = !isDisplaySponsor;
+  setToggleSponsor();
+  saveSponsorDetails();
+}
+
+// Set Toggle Sponsor Button
+function setToggleSponsor() {
+  const showHideSponsorBtn = document.getElementById('show_hide_sponsor');
+  showHideSponsorBtn.classList = isDisplaySponsor ? 'btn sm-btn sponsor-on' : 'btn sm-btn sponsor-off';
+  showHideSponsorBtn.textContent = isDisplaySponsor ? 'ON' : 'OFF';
 }
 
 // Initial Setup Save / Load -----------------------------------------------------------

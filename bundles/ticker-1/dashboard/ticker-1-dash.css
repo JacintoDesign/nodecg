@@ -7,6 +7,81 @@ body {
   height: 800px;
 }
 
+/* Sponsor Container */
+.sponsor-container {
+  overflow: hidden;
+  width: 675px;
+  margin: 10px 5px;
+}
+
+.ticker-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ticker-preview {
+  position: relative;
+  height: 120px;
+  width: 1920px;
+  background-color: #4C4C4C;
+  background-image: linear-gradient(#2C2A2B, #4C4C4C);
+  display: flex;
+  overflow: hidden;
+}
+
+.sponsor-image-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.sponsor-image {
+  overflow: visible;
+  max-height: 110px;
+}
+
+/* Dropdown */
+.image-edit-container {
+  display: flex;
+  height: 30px;
+  margin-bottom: 10px;
+}
+
+select {
+  width: 180px;
+  height: 30px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  font-size: 16px;
+
+  margin-right: 10px;
+}
+
+option {
+  padding-left: 10px;
+}
+
+.img-input {
+  width: 50px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
+  padding-left: 10px;
+  cursor: e-resize;
+  user-select: auto;
+}
+
+.sponsor-on {
+  background: #077007 !important;
+  margin-left: 0 !important;
+}
+
+.sponsor-off {
+  background: #9f0909 !important;
+  margin-left: 0 !important;
+}
+
 /* Buttons Group */
 .buttons-group {
   display: flex;

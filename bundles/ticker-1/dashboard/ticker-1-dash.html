@@ -27,9 +27,30 @@
 		<button class="btn" id="update_interval_btn">Update Interval</button>
 	</div>
 
-	<!-- Add / Submit -->
+	<!-- Add / Sponsor -->
 	<div class="buttons-group">
 		<button class="btn" id="add_btn" onclick="addNewTableRow()">Add Row</button>
+		<button class="btn" id="sponsor_btn" onclick="showSponsor()">Sponsor</button>
+	</div>
+
+	<!-- Sponsor Controls / Preview -->
+	<div class="sponsor-container" style="display: none;">
+		<div class="image-edit-container">
+			<select id="sponsor-dropdown"></select>
+			<input type="number" class="img-input" id="img-height" data-min="0" data-max="110" value="75"
+				title="Height">
+			<input type="number" class="img-input" id="img-x" data-min="-1000" data-max="1000" value="-30"
+				title="X Axis">
+			<input type="number" class="img-input" id="img-y" data-min="-1000" data-max="1000" value="5" title="Y Axis">
+			<button class="btn sm-btn sponsor-off" id="show_hide_sponsor" onclick="toggleSponsor()">OFF</button>
+		</div>
+		<div class="ticker-container">
+			<div class="ticker-preview">
+				<div class="sponsor-image-container">
+					<img src="" alt="sponsor" class="sponsor-image">
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<div class="container-main">
@@ -58,15 +79,15 @@
 		<label for="netCBC">CBC</label><br>
 		<input type="checkbox" id="netTSN" name="netTSN" onclick="netCheck()">
 		<label for="netTSN">TSN</label><br>
-		<input type="checkbox" id="netRSN" name="netRSN" onclick="netCheck()">
-		<label for="netRSN">RSN</label><br>
+		<input type="checkbox" id="netSN" name="netSN" onclick="netCheck()">
+		<label for="netSN">SN</label><br>
 		<div class="button-group-nested">
 			<a href="/bundles/ticker-1/graphics/ticker-1.html?instance=CBC" target="_blank"
 				class="btn sm-btn link-btn">CBC</a>
 			<a href="/bundles/ticker-1/graphics/ticker-1.html?instance=TSN" target="_blank"
 				class="btn sm-btn link-btn">TSN</a>
-			<a href="/bundles/ticker-1/graphics/ticker-1.html?instance=RSN" target="_blank"
-				class="btn sm-btn link-btn">RSN</a>
+			<a href="/bundles/ticker-1/graphics/ticker-1.html?instance=SN" target="_blank"
+				class="btn sm-btn link-btn">SN</a>
 		</div>
 	</div>
 

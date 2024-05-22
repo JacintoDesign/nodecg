@@ -63,6 +63,18 @@ body {
 	}
 }
 
+/* Sponsor */
+.sponsor-container {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.sponsor-image {
+	overflow: visible;
+	max-height: 110px;
+}
+
 /* Group */
 .group {
 	position: relative;

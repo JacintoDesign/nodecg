@@ -321,13 +321,13 @@ buttonNext3.onclick = () => {
 // Load Replicant value for checkboxes
 const netCBCRep = nodecg.Replicant('netCBC');
 const netTSNRep = nodecg.Replicant('netTSN');
-const netRSNRep = nodecg.Replicant('netRSN');
+const netSNRep = nodecg.Replicant('netSN');
 const CBCcheck = document.getElementById('netCBC');
 const TSNcheck = document.getElementById('netTSN');
-const RSNcheck = document.getElementById('netRSN');
+const SNcheck = document.getElementById('netSN');
 const netCBCStoredValue = localStorage.getItem('navCBC');
 const netTSNStoredValue = localStorage.getItem('navTSN');
-const netRSNStoredValue = localStorage.getItem('navRSN');
+const netSNStoredValue = localStorage.getItem('navSN');
 
 if (netCBCStoredValue !== null) {
   CBCcheck.checked = netCBCStoredValue === 'true';
@@ -337,8 +337,8 @@ if (netTSNStoredValue !== null) {
   TSNcheck.checked = netTSNStoredValue === 'true';
 }
 
-if (netRSNStoredValue !== null) {
-  RSNcheck.checked = netRSNStoredValue === 'true';
+if (netSNStoredValue !== null) {
+  SNcheck.checked = netSNStoredValue === 'true';
 }
 
 // Save Checkbox Value
@@ -356,15 +356,15 @@ function netCheck() {
     netTSNRep.value = 'false';
   }
 
-  if (RSNcheck.checked == true) {
-    netRSNRep.value = 'true';
+  if (SNcheck.checked == true) {
+    netSNRep.value = 'true';
   } else {
-    netRSNRep.value = 'false';
+    netSNRep.value = 'false';
   }
 
   localStorage.setItem('navCBC', CBCcheck.checked);
   localStorage.setItem('navTSN', TSNcheck.checked);
-  localStorage.setItem('navRSN', RSNcheck.checked);
+  localStorage.setItem('navSN', SNcheck.checked);
 }
 
 // Tab related logic ----------------------------------------

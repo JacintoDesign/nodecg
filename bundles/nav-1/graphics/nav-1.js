@@ -1108,18 +1108,18 @@ function animateNextResults() {
 // NodeCG Related ------------------------------------------ 
 const netCBCRep = nodecg.Replicant('netCBC');
 const netTSNRep = nodecg.Replicant('netTSN');
-const netRSNRep = nodecg.Replicant('netRSN');
+const netSNRep = nodecg.Replicant('netSN');
 const navbarItemsReplicant = nodecg.Replicant('navbarItems');
 const promoItemsReplicant = nodecg.Replicant('promoItems');
 const resultItemsReplicant = nodecg.Replicant('resultItems');
-const networkReplicants = { netCBCRep, netTSNRep, netRSNRep };
+const networkReplicants = { netCBCRep, netTSNRep, netSNRep };
 
 // Handle Instance of Network
 function handleInstanceAction(instanceId, replicants, action, logMessage, audioAction) {
   const instanceActions = {
     'CBC': { replicant: replicants.netCBCRep, logPrefix: 'CBC' },
     'TSN': { replicant: replicants.netTSNRep, logPrefix: 'TSN' },
-    'RSN': { replicant: replicants.netRSNRep, logPrefix: 'RSN' }
+    'SN': { replicant: replicants.netSNRep, logPrefix: 'SN' }
   };
 
   const currentInstance = instanceActions[instanceId];
