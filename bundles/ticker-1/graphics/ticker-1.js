@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let sponsorDetails = {
     imgHeight: '75px',
     imgSrc: 'http://localhost:9090/bundles/ticker-1/shared/assets/sponsor/sportchek.png',
-    imgPosition: '30px 25px',
+    imgX: '20px',
+    imgY: '20px',
     isDisplay: false
   }
 
@@ -74,7 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
       sponsorImage.alt = 'sponsor image';
       sponsorImage.src = sponsorDetails.imgSrc;
       sponsorImage.style.height = sponsorDetails.imgHeight;
-      sponsorImage.style.objectPosition = sponsorDetails.imgPosition;
+      sponsorImage.style.top = sponsorDetails.imgY;
+      sponsorImage.style.right = sponsorDetails.imgX;
       sponsorContainer.appendChild(sponsorImage);
       tickerMain.appendChild(sponsorContainer);
     }

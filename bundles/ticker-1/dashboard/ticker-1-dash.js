@@ -450,24 +450,28 @@ function mouseMove(e) {
   }
 }
 
-// Update Image Preview 
+// Update Sponsor Image Preview 
 function updateImageStyle() {
   const img = document.querySelector('.sponsor-image');
   img.style.height = `${imageHeight.value}px`;
   sponsorImgHeight = img.style.height;
-  img.style.objectPosition = `${imageX.value}px ${imageY.value}px`;
-  sponsorImgPosition = img.style.objectPosition;
+  img.style.top = `${imageY.value}px`;
+  img.style.right = `${imageX.value}px `;
+  sponsorImgY = img.style.top;
+  sponsorImgX = img.style.right;
 }
 
 // Save Sponsor Details
 function saveSponsorDetails() {
   sponsorImgSrc = document.querySelector('.sponsor-image').src;
   sponsorImgHeight = `${imageHeight.value}px`;
-  sponsorImgPosition = `${imageX.value}px ${imageY.value}px`;
+  sponsorImgX = `${imageX.value}px`;
+  sponsorImgY = `${imageY.value}px`
   sponsorDetails = {
     imgHeight: sponsorImgHeight,
     imgSrc: sponsorImgSrc,
-    imgPosition: sponsorImgPosition,
+    imgX: sponsorImgX,
+    imgY: sponsorImgY,
     isDisplay: isDisplaySponsor
   }
   // Update Sponsor Replicant
@@ -487,8 +491,8 @@ function loadSponsorDetails() {
     sponsorImage.src = sponsorDetails.imgSrc;
     sponsorFilename = getFilenameFromPath(sponsorImage.src);
     imageHeight.value = +sponsorDetails.imgHeight.split('px')[0];
-    imageX.value = +sponsorDetails.imgPosition.split('px')[0];
-    imageY.value = +sponsorDetails.imgPosition.split('px')[1];
+    imageX.value = +sponsorDetails.imgX.split('px')[0];
+    imageY.value = +sponsorDetails.imgY.split('px')[0];
     updateImageStyle();
     isDisplaySponsor = sponsorDetails.isDisplay;
     setToggleSponsor();

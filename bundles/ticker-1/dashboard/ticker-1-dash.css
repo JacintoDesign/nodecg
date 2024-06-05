@@ -29,17 +29,13 @@ body {
   overflow: hidden;
 }
 
-.sponsor-image-container {
-  position: absolute;
-  right: 0;
-  top: 0;
-}
-
 .sponsor-image {
-  overflow: visible;
   max-height: 110px;
   height: 75px;
-  object-position: -30px 25px;
+  object-fit: cover;
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 /* Dropdown */
