@@ -8,6 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
     { type: 'Free', message: 'Tension as Olympics approach' },
   ];
 
+  let sponsorDetails = {
+    imgHeight: '75px',
+    imgSrc: 'http://localhost:9090/bundles/ticker-1/shared/assets/sponsor/sportchek.png',
+    imgPosition: '30px 25px',
+    isDisplay: false
+  }
+
   let currentGroupIndex = 0;
   let refreshInterval = 5000;
   let transitionTimeoutId;
@@ -58,8 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
       tickerMain.appendChild(groupElement);
     });
     // Add Sponsor Image if loaded
-    if (localStorage.getItem('sponsorDetails')) {
-      sponsorDetails = JSON.parse(localStorage.getItem('sponsorDetails'));
+    if (sponsorDetails.isDisplay) {
       const sponsorContainer = document.createElement('div');
       sponsorContainer.className = 'sponsor-container';
       sponsorContainer.style.display = sponsorDetails.isDisplay ? 'block' : 'none';
@@ -180,6 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const netTSNRep = nodecg.Replicant('netTSN');
   const netSNRep = nodecg.Replicant('netSN');
   const tickerItemsReplicant = nodecg.Replicant('tickerItems');
+  const sponsorDetailsReplicant = nodecg.Replicant('sponsorDetails');
   const refreshIntervalReplicant = nodecg.Replicant('refreshInterval');
   const networkReplicants = { netCBCRep, netTSNRep, netSNRep };
 
@@ -204,9 +211,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if (newValue) {
       tickerItemsReplicant.value = newValue;
       groupItems = newValue;
-      console.log('ticker Items', tickerItemsReplicant.value, groupItems);
+      console.log('ticker Items', groupItems);
       initializeTicker();
     }
+  });
+
+  // Update Sponsor Details
+  sponsorDetailsReplicant.on('change', (newValue) => {
+    sponsorDetailsReplicant.value = newValue;
+    sponsorDetails = newValue;
+    console.log('sponsor details', sponsorDetails);
   });
 
   // Update Refresh Interval

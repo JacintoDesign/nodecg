@@ -29,6 +29,7 @@ const resultItemsReplicant = nodecg.Replicant('resultItems', { defaultValue: [] 
 
 // Interval Navbar ------------------ 
 let isNavbarAuto;
+let isNavbarPlaying;
 let navbarAutoNextInterval;
 let navbarCountdownValue;
 let navbarCountdownTimerId;
@@ -56,8 +57,12 @@ buttonAuto1.onclick = () => {
   if (isNavbarAuto === false) stopAllNavbarIntervals();
 }
 
+if (localStorage.getItem('navbarInterval')) intervalInput1.value = localStorage.getItem('navbarInterval');
+
 buttonUpdateInterval1.onclick = () => {
-  startNavbarTransitions();
+  const intervalSeconds = parseInt(intervalInput1.value);
+  localStorage.setItem('navbarInterval', intervalSeconds);
+  if (isNavbarPlaying) startNavbarTransitions();
 };
 
 function startNavbarTransitions() {
@@ -105,6 +110,7 @@ function updateNavbarCountdownDisplay(value) {
 
 // Interval Promo ----------------------
 let isPromoAuto;
+let isPromoPlaying;
 let promoAutoNextInterval;
 let promoCountdownValue;
 let promoCountdownTimerId;
@@ -132,8 +138,12 @@ buttonAuto2.onclick = () => {
   if (isPromoAuto === false) stopAllPromoIntervals();
 }
 
+if (localStorage.getItem('promoInterval')) intervalInput2.value = localStorage.getItem('promoInterval');
+
 buttonUpdateInterval2.onclick = () => {
-  startPromoTransitions();
+  const intervalSeconds = parseInt(intervalInput2.value);
+  localStorage.setItem('promoInterval', intervalSeconds);
+  if (isPromoPlaying) startPromoTransitions();
 };
 
 function startPromoTransitions() {
@@ -181,6 +191,7 @@ function updatePromoCountdownDisplay(value) {
 
 // Interval Results -------------------
 let isResultAuto;
+let isResultPlaying;
 let resultAutoNextInterval;
 let resultCountdownValue;
 let resultCountdownTimerId;
@@ -208,8 +219,12 @@ buttonAuto3.onclick = () => {
   if (isResultAuto === false) stopAllResultIntervals();
 }
 
+if (localStorage.getItem('resultsInterval')) intervalInput3.value = localStorage.getItem('resultsInterval');
+
 buttonUpdateInterval3.onclick = () => {
-  startResultTransitions();
+  const intervalSeconds = parseInt(intervalInput3.value);
+  localStorage.setItem('resultsInterval', intervalSeconds);
+  if(isResultPlaying) startResultTransitions();
 };
 
 function startResultTransitions() {
@@ -262,6 +277,7 @@ buttonPlay1.onclick = () => {
     if (isNavbarAuto) startNavbarTransitions();
     console.log('play navbar');
     nodecg.sendMessage('play1');
+    isNavbarPlaying = true;
   }, 100);
 };
 
@@ -269,6 +285,7 @@ buttonClear1.onclick = () => {
   stopAllNavbarIntervals();
   console.log('stop navbar');
   nodecg.sendMessage('stop1');
+  isNavbarPlaying = false;
 };
 
 buttonNext1.onclick = () => {
@@ -283,6 +300,7 @@ buttonPlay2.onclick = () => {
     if (isPromoAuto) startPromoTransitions();
     console.log('play promo');
     nodecg.sendMessage('play2');
+    isPromoPlaying = true;
   }, 100);
 };
 
@@ -290,6 +308,7 @@ buttonClear2.onclick = () => {
   stopAllPromoIntervals();
   console.log('stop promo');
   nodecg.sendMessage('stop2');
+  isPromoPlaying = false;
 };
 
 buttonNext2.onclick = () => {
@@ -304,6 +323,7 @@ buttonPlay3.onclick = () => {
     if (isResultAuto) startResultTransitions();
     console.log('play results');
     nodecg.sendMessage('play3');
+    isResultPlaying = true;
   }, 100);
 };
 
@@ -311,6 +331,7 @@ buttonClear3.onclick = () => {
   stopAllResultIntervals();
   console.log('stop results');
   nodecg.sendMessage('stop3');
+  isResultPlaying = false;
 };
 
 buttonNext3.onclick = () => {

@@ -4,6 +4,7 @@ const buttonPlay = document.getElementById('in_btn');
 const buttonClear = document.getElementById('out_btn');
 // Replicants
 const tickerItemsReplicant = nodecg.Replicant('tickerItems', { defaultValue: [] });
+const sponsorDetailsReplicant = nodecg.Replicant('sponsorDetails', { defaultValue: {} });
 const refreshIntervalReplicant = nodecg.Replicant('refreshInterval');
 
 // Animate In
@@ -34,7 +35,10 @@ const updateIntervalBtn = document.getElementById('update_interval_btn');
 updateIntervalBtn.onclick = () => {
   const intervalSeconds = parseInt(intervalInput.value);
   refreshIntervalReplicant.value = intervalSeconds;
+  localStorage.setItem('tickerInterval', intervalSeconds);
 };
+
+if (localStorage.getItem('tickerInterval')) intervalInput.value = localStorage.getItem('tickerInterval');
 
 // Load Replicant value for checkboxes
 const CBCcheck = document.getElementById('netCBC');
@@ -366,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function () {
       option.textContent = file;
       dropdown.appendChild(option);
     });
-    if (sponsorFilename) dropdown.value = sponsorFilename;
+    dropdown.value = sponsorFilename ? sponsorFilename : 'sportchek.png';
   }
 
   // Update Image with selection
@@ -466,6 +470,10 @@ function saveSponsorDetails() {
     imgPosition: sponsorImgPosition,
     isDisplay: isDisplaySponsor
   }
+  // Update Sponsor Replicant
+  nodecg.sendMessage('update');
+  sponsorDetailsReplicant.value = sponsorDetails;
+  // Local Storage
   localStorage.setItem('sponsorDetails', JSON.stringify(sponsorDetails));
 }
 

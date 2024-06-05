@@ -184,6 +184,10 @@ function animateInNavbar() {
     navbarTime.style.animation = 'fadeInUpText .35s ease-in-out forwards .65s';
     footerText.style.animation = 'fadeInLeft .65s ease-out forwards .9s';
     footerImage.style.animation = 'fadeInLeftMore 1.5s ease-out forwards .8s';
+    setTimeout(() => {
+      footerImage.style.opacity = '1';
+      footerImage.style.transform = 'translateX(0)';
+    }, 2300);
   }
   // Set animation for every other navbar
   const allNavbarItems = document.querySelectorAll('.navbar-wrapper');
