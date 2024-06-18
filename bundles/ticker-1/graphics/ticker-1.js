@@ -9,10 +9,10 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   let sponsorDetails = {
-    imgHeight: '75px',
-    imgSrc: 'http://localhost:9090/bundles/ticker-1/shared/assets/sponsor/sportchek.png',
-    imgX: '20px',
-    imgY: '20px',
+    imgHeight: '55px',
+    imgSrc: 'http://navtkr.cbcrc.ca:9090/bundles/ticker-1/shared/assets/sponsor/sportchek.png',
+    imgX: '100px',
+    imgY: '15px',
     isDisplay: false
   }
 
