@@ -370,7 +370,7 @@ document.addEventListener('DOMContentLoaded', function () {
       option.textContent = file;
       dropdown.appendChild(option);
     });
-    dropdown.value = sponsorFilename ? sponsorFilename : 'sportchek.png';
+    dropdown.value = sponsorFilename ? sponsorFilename : 'paris-2024.png';
   }
 
   // Update Image with selection

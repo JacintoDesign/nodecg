@@ -65,12 +65,12 @@ body {
 
 /* Sponsor */
 .sponsor-image {
-	max-height: 75px;
-	height: 55px;
+	max-height: 100px;
+	height: 100px;
 	object-fit: cover;
 	position: absolute;
-	top: 15px;
-	right: 100px;
+	top: -20px;
+	right: 0px;
 }
 
 /* Group */

@@ -8,13 +8,23 @@ document.addEventListener('DOMContentLoaded', () => {
     { type: 'Free', message: 'Tension as Olympics approach' },
   ];
 
+  // Paris 2024 Logo
   let sponsorDetails = {
-    imgHeight: '55px',
-    imgSrc: '../shared/assets/sponsor/sportchek.png',
-    imgX: '100px',
-    imgY: '15px',
+    imgHeight: '100px',
+    imgSrc: '../shared/assets/sponsor/paris-2024.png',
+    imgX: '0px',
+    imgY: '-20px',
     isDisplay: false
   }
+
+  // Sportchek Logo
+  // let sponsorDetails = {
+  //   imgHeight: '51px',
+  //   imgSrc: '../shared/assets/sponsor/paris-2024.png',
+  //   imgX: '126px',
+  //   imgY: '9px',
+  //   isDisplay: false
+  // }
 
   let currentGroupIndex = 0;
   let refreshInterval = 5000;
