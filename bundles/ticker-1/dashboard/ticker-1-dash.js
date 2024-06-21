@@ -92,7 +92,7 @@ function netCheck() {
 // Populate the table with tickerItems ------------------------------------------
 const tableBody = document.getElementById('table-body');
 
-function addTableRow(item) {
+function addTableRow(item, isAddedFromDropdown) {
   const index = tickerItems.indexOf(item);
   const row = document.createElement('tr');
   row.setAttribute('data-index', index);
@@ -171,15 +171,19 @@ function addTableRow(item) {
   // Drag and Drop functionality
   addDragAndDropHandlers(row);
 
-  tableBody.appendChild(row);
+  if (tableBody.firstChild && isAddedFromDropdown) {
+    tableBody.insertBefore(row, tableBody.firstChild);
+  } else {
+    tableBody.appendChild(row);
+  }
 }
 
 // Add Button functionality ------------------------------------------------------------------
 function addNewTableRow() {
   const newItem = { type: 'Free', message: 'New message' };
   newItem.visible = true;
-  tickerItems.push(newItem);
-  addTableRow(newItem);
+  tickerItems.unshift(newItem);
+  addTableRow(newItem, true);
   updateSendableTickerItems();
   saveItems();
 }
@@ -299,7 +303,7 @@ function generateTableRows() {
   tableBody.innerHTML = ''; // Clear the table first
 
   tickerItems.forEach((item) => {
-    addTableRow(item); // Adjust index for IDs
+    addTableRow(item, false); // Adjust index for IDs
   });
 }
 

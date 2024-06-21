@@ -410,7 +410,7 @@ document.getElementsByClassName('tablinks')[0].click();
 
 // Navbar Items --------------------------------------------------------------------
 
-function addNavbarTableRow(item, table) {
+function addNavbarTableRow(item, table, isAddedFromDropdown) {
   const index = navbarItems.indexOf(item);
   const tr = document.createElement('tr');
   tr.setAttribute('data-index', index);
@@ -538,7 +538,11 @@ function addNavbarTableRow(item, table) {
 
   addNavbarDragAndDropHandlers(tr, table);
 
-  table.appendChild(tr);
+  if (table.firstChild && isAddedFromDropdown) {
+    table.insertBefore(tr, table.firstChild);
+  } else {
+    table.appendChild(tr);
+  }
 }
 
 // Update Row Indexes
@@ -567,9 +571,9 @@ function addNewNavbarFromDropdown() {
   };
 
   newItem.visible = true;
-  navbarItems.push(newItem);
+  navbarItems.unshift(newItem); 
   const table = document.getElementById('navbar-table');
-  addNavbarTableRow(newItem, table);
+  addNavbarTableRow(newItem, table, true);
   updateSendableNavbarItems();
   saveNavbarItems();
 }
@@ -690,7 +694,7 @@ function generateNavbarTableRows() {
   table.innerHTML = ''; // Clear the table first
 
   navbarItems.forEach((item) => {
-    addNavbarTableRow(item, table); // Adjust index for IDs
+    addNavbarTableRow(item, table, false); // Adjust index for IDs
   });
 }
 
@@ -749,30 +753,6 @@ function loadNavbarItems() {
         time2: 'PM',
         time3: 'ET',
         footer: 'CBC.CA/PARIS2024'
-      },
-      {
-        img: 'ici-tele-logo.png',
-        title: 'Athletics',
-        time1: '11:30',
-        time2: 'AM',
-        time3: 'ET',
-        footer: 'CBC.CA/PARIS2024'
-      },
-      {
-        img: 'rds-logo.png',
-        title: 'Rugby Sevens',
-        time1: '2:30',
-        time2: 'PM',
-        time3: 'ET',
-        footer: 'CBC.CA/PARIS2024'
-      },
-      {
-        img: 'rds-2-logo.png',
-        title: 'Water Polo',
-        time1: '3:30',
-        time2: 'PM',
-        time3: 'ET',
-        footer: 'CBC.CA/PARIS2024'
       }
     ];
     navbarItems.forEach((item) => {
@@ -788,7 +768,7 @@ loadNavbarItems();
 
 // Promo Items ---------------------------------------------------------------------
 
-function addPromoTableRow(item, table) {
+function addPromoTableRow(item, table, isAddedFromDropdown) {
   const index = promoItems.indexOf(item);
   const tr = document.createElement('tr');
   tr.setAttribute('data-index', index);
@@ -959,7 +939,11 @@ function addPromoTableRow(item, table) {
   td.appendChild(rowWrapper);
   tr.appendChild(td);
 
-  table.appendChild(tr);
+  if (table.firstChild && isAddedFromDropdown) {
+    table.insertBefore(tr, table.firstChild);
+  } else {
+    table.appendChild(tr);
+  }
 
   addPromoDragAndDropHandlers(tr, table);
 }
@@ -1231,9 +1215,9 @@ function addNewPromoFromDropdown() {
   }
 
   newItem.visible = true;
+  promoItems.unshift(newItem);
   const table = document.getElementById('promo-table');
-  addPromoTableRow(newItem, table);
-  promoItems.push(newItem);
+  addPromoTableRow(newItem, table, true);
   addImageSelectionControls();
   updateSendablePromoItems();
   savePromoItems();
@@ -1368,7 +1352,7 @@ function generatePromoTableRows() {
   table.innerHTML = ''; // Clear existing rows
 
   promoItems.forEach((item) => {
-    addPromoTableRow(item, table);
+    addPromoTableRow(item, table, false);
   });
 }
 
@@ -1441,7 +1425,7 @@ loadPromoItems();
 
 // Results Items -------------------------------------------------------------------
 
-function addResultTableRow(item, table) {
+function addResultTableRow(item, table, isAddedFromDropdown) {
   const index = resultItems.indexOf(item);
   const tr = document.createElement('tr');
   tr.setAttribute('data-index', index);
@@ -1597,7 +1581,12 @@ function addResultTableRow(item, table) {
   rowWrapper.appendChild(settings);
   td.appendChild(rowWrapper);
   tr.appendChild(td);
-  table.appendChild(tr);
+  
+  if (table.firstChild && isAddedFromDropdown) {
+    table.insertBefore(tr, table.firstChild);
+  } else {
+    table.appendChild(tr);
+  }
 
   addResultDragAndDropHandlers(tr, table);
 
@@ -1672,9 +1661,9 @@ function addNewResultFromDropdown() {
   }
 
   newItem.visible = true;
+  resultItems.unshift(newItem);
   const table = document.getElementById('results-table');
-  addResultTableRow(newItem, table);
-  resultItems.push(newItem);
+  addResultTableRow(newItem, table, true);
   updateSendableResultItems();
   saveResultItems();
 }
@@ -1844,7 +1833,7 @@ function generateResultTableRows() {
   table.innerHTML = ''; // Clear existing rows
 
   resultItems.forEach((item, index) => {
-    addResultTableRow(item, table);
+    addResultTableRow(item, table, false);
   });
 }
 

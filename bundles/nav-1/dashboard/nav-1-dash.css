@@ -121,6 +121,10 @@ tr:last-child td {
     border-bottom: none;
 }
 
+.nav-text-container {
+    overflow: hidden;
+}
+
 /* Settings */
 .fa-trash-o,
 .fa-eye,
