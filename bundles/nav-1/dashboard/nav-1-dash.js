@@ -1426,6 +1426,8 @@ loadPromoItems();
 // Results Items -------------------------------------------------------------------
 
 function addResultTableRow(item, table, isAddedFromDropdown) {
+  const generateUniqueId = () => 'id-' + Math.random().toString(36).substr(2, 16);
+
   const index = resultItems.indexOf(item);
   const tr = document.createElement('tr');
   tr.setAttribute('data-index', index);
@@ -1480,6 +1482,7 @@ function addResultTableRow(item, table, isAddedFromDropdown) {
     for (let i = 1; i <= 4; i++) {
       if (item[`resultNumber${i}`]) {
         resultCount++;
+        const uniqueId = generateUniqueId();
         const resultRow = document.createElement('div');
         resultRow.className = 'result-row' + (i % 2 === 0 ? ' odd-row' : '');
 
@@ -1493,6 +1496,7 @@ function addResultTableRow(item, table, isAddedFromDropdown) {
         const flagImg = document.createElement('img');
         flagImg.src = `../shared/assets/flags/${item[`resultFlag${i}`]}.jpg`;
         flagImg.alt = 'Flag';
+        flagImg.id = uniqueId;
         resultFlag.appendChild(flagImg);
 
         const resultName = document.createElement('span');
@@ -1509,8 +1513,17 @@ function addResultTableRow(item, table, isAddedFromDropdown) {
         flagInput.className = 'flag-input';
         const inputField = document.createElement('input');
         inputField.type = 'text';
+        inputField.id = uniqueId;
         flagInput.appendChild(inputField);
         flagInputContainer.appendChild(flagInput);
+
+        // Change flag based on input
+        inputField.addEventListener('blur', () => updateFlag(inputField));
+        inputField.addEventListener('keyup', (e) => {
+          if (e.key === 'Enter') {
+            updateFlag(inputField);
+          }
+        });
       }
     }
   } else if (item.type === 'Results' || item.type === 'Breaking') {
@@ -1590,31 +1603,23 @@ function addResultTableRow(item, table, isAddedFromDropdown) {
 
   addResultDragAndDropHandlers(tr, table);
 
-  // Change flag based on input
-  const inputs = document.querySelectorAll('.flag-input-container .flag-input input');
-  inputs.forEach((input, index) => {
-    input.addEventListener('blur', () => updateFlag(input, index));
-    input.addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') {
-        updateFlag(input, index);
-      }
-    });
-  });
-
-  function updateFlag(input, index) {
+  // Update Flag from Input
+  function updateFlag(input) {
     const code = input.value.toUpperCase();
     if (code.length === 3) {
+      const img = document.querySelector(`img#${input.id}`);
       const imgPath = `../shared/assets/flags/${code}.jpg`;
+
       fetch(imgPath, { method: 'HEAD' })
         .then(res => {
           if (res.ok) {
-            const img = document.querySelectorAll('.result-flag img')[index];
             img.src = imgPath;
             input.value = '';
           } else {
             console.log(`Image not found for code: ${code}`);
           }
-        }).catch(err => console.log('Error:', err));
+        })
+        .catch(err => console.log('Error:', err));
     }
   }
 }
