@@ -1179,9 +1179,9 @@ function addNewPromoFromDropdown() {
     case 'option1': // Athlete
       newItem = {
         type: 'Athlete',
-        img: '../shared/assets/athletes/default.jpg',
+        img: '../shared/assets/athletes/1_default.jpg',
         height: '196px',
-        objectPosition: '-51px 3px',
+        objectPosition: '-9px -17px',
         title: 'New Athlete',
         subtitle: 'Sport',
         date: 'Today',
@@ -1382,9 +1382,9 @@ function loadPromoItems() {
     promoItems = [
       {
         type: 'Athlete',
-        img: '../shared/assets/athletes/default.jpg',
+        img: '../shared/assets/athletes/1_default.jpg',
         height: '196px',
-        objectPosition: '-51px 3px',
+        objectPosition: '-9px -17px',
         title: 'New Athlete',
         subtitle: 'Sport',
         date: 'Today',
