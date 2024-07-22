@@ -111,6 +111,9 @@
   "scripts": {
     "prepare": "(npm ls husky && husky install) || echo \"Skipping husky.\"",
     "start": "node index.js",
+    "startprod": "pm2 start index.js --name nodecg",
+    "stopprod": "pm2 stop nodecg",
+    "monitor": "pm2 monit",
     "dev": "concurrently --kill-others \"npm run build:watch:browser\" \"nodemon\"",
     "pretest": "trash .nyc_output coverage",
     "test": "nyc --instrument=false --reporter=none ava --config ava.config.js && nyc report --reporter=html --reporter=text --include=\"src/**\"",
