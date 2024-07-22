@@ -1047,12 +1047,12 @@ function addImageSelectionControls() {
   }
 
   // Setup listeners for both athlete and picto images
-  setupDropdownListeners('athlete', 'updateAthleteImages', '../shared/assets/athletes/');
   setupDropdownListeners('picto', 'updatePictoImages', '../shared/assets/pictos/');
+  setupDropdownListeners('athlete', 'updateAthleteImages', '../shared/assets/athletes/');
 
   // Send initial requests for images
-  nodecg.sendMessage('requestAthleteImages');
   nodecg.sendMessage('requestPictoImages');
+  nodecg.sendMessage('requestAthleteImages');
 
   // Image Property Settings -----------------------------
   const rowWrappers = document.querySelectorAll('#promo-table .row-wrapper');

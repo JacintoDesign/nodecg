@@ -10,31 +10,35 @@ module.exports = function (nodecg) {
 
     // Emit image list from a given directory
     function emitImageList(directory, topic) {
-        fs.stat(directory, (err, stats) => {
+        fs.readdir(directory, { withFileTypes: true }, (err, dirents) => {
             if (err) {
-                console.error("Error accessing directory:", directory, err);
+                console.error('Error reading image directory:', directory, err);
                 return;
             }
-            if (!stats.isDirectory()) {
-                console.error("Not a directory:", directory);
-                return;
-            }
-            fs.readdir(directory, (err, files) => {
-                if (err) {
-                    console.error('Error reading image directory:', directory, err);
-                    return;
-                }
-                const imageFiles = files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
-                nodecg.sendMessage(topic, imageFiles);
-            });
+    
+            // dirents.forEach(dirent => {
+            //     console.log(`${dirent.name}: ${dirent.isFile() ? 'File' : 'Directory'}`);
+            // });
+    
+            const imageFiles = dirents
+                .filter(dirent => dirent.isFile() && /\.(jpg|jpeg|png|gif)$/i.test(dirent.name))
+                .map(dirent => dirent.name);
+    
+            console.log(`Emitting ${imageFiles.length} images for ${topic} from ${directory}`);
+            nodecg.sendMessage(topic, imageFiles);
         });
     }
+    
 
     // Watch directories for changes and emit updates
     function watchDirectory(directory, topic) {
         fs.watch(directory, (eventType, filename) => {
-            console.log(`[${topic}] Event type: ${eventType}. File changed: ${filename}`);
-            emitImageList(directory, topic);
+            if (filename) {
+                console.log(`[${topic}] Event type: ${eventType}. File changed: ${filename}`);
+                emitImageList(directory, topic);
+            } else {
+                console.log(`[${topic}] Event type: ${eventType}. No specific file changed.`);
+            }
         });
     }
 
