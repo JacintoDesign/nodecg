@@ -1022,7 +1022,7 @@ function addImageSelectionControls() {
       const dropdown = document.querySelector(`#promo-row-${index} select`);
       const filename = getFilenameFromPath(item.img);
 
-      if (dropdown) {
+      if (dropdown && filename) {
         // If a dropdown with the correct ID exists, set its value to the filename
         dropdown.value = filename;
       }
@@ -1038,7 +1038,7 @@ function addImageSelectionControls() {
   function updateImageSource(dropdown, value, basePath) {
     const rowWrapper = dropdown.closest('.row-wrapper');
     const imageElement = rowWrapper.querySelector('.promo-image img');
-    if (imageElement) {
+    if (imageElement && value) {
       const newImagePath = `${basePath}${value}`;
       imageElement.src = newImagePath;
       dropdown.value = value;
@@ -1330,10 +1330,12 @@ function updatePromoItems() {
       if (!dateText) dateText = 'Gem';
       promoItems[index].date = dateText;
       promoItems[index].footer = footerText;
-      if (promoItems[index].type === 'Athlete') {
-        promoItems[index].img = `../shared/assets/athletes/${dropdownValue}`;
-      } else {
-        promoItems[index].img = `../shared/assets/pictos/${dropdownValue}`;
+      if (dropdownValue) {
+        if (promoItems[index].type === 'Athlete') {
+          promoItems[index].img = `../shared/assets/athletes/${dropdownValue}`;
+        } else {
+          promoItems[index].img = `../shared/assets/pictos/${dropdownValue}`;
+        }
       }
       promoItems[index].height = `${height}px`;
       promoItems[index].objectPosition = `${imgX}px ${imgY}px`;
