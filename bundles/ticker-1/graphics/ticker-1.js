@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sportchek Logo
   // let sponsorDetails = {
   //   imgHeight: '51px',
-  //   imgSrc: '../shared/assets/sponsor/paris-2024.png',
+  //   imgSrc: '../shared/assets/sponsor/sportchek.png',
   //   imgX: '126px',
   //   imgY: '9px',
   //   isDisplay: false

@@ -2,6 +2,7 @@
 const nextBtn = document.getElementById('next_btn');
 const buttonPlay = document.getElementById('in_btn');
 const buttonClear = document.getElementById('out_btn');
+const countdown = document.getElementById('countdown');
 // Replicants
 const tickerItemsReplicant = nodecg.Replicant('tickerItems', { defaultValue: [] });
 const sponsorDetailsReplicant = nodecg.Replicant('sponsorDetails', { defaultValue: {} });
@@ -13,6 +14,7 @@ buttonPlay.onclick = () => {
   setTimeout(() => {
     console.log('play');
     nodecg.sendMessage('play');
+    runCountdown();
   }, 100);
 };
 
@@ -20,13 +22,20 @@ buttonPlay.onclick = () => {
 buttonClear.onclick = () => {
   console.log('stop');
   nodecg.sendMessage('stop');
+  stopAllIntervals();
 };
 
 // Next Page
 nextBtn.onclick = () => {
   console.log('next');
   nodecg.sendMessage('next');
+  stopAllIntervals();
 };
+
+// Interval Ticker ---------------------------------
+let tickerInterval;
+let tickerCountdownTimerId;
+let tickerCount;
 
 // Update Interval
 const intervalInput = document.getElementById('interval_input');
@@ -39,6 +48,45 @@ updateIntervalBtn.onclick = () => {
 };
 
 if (localStorage.getItem('tickerInterval')) intervalInput.value = localStorage.getItem('tickerInterval');
+
+function runCountdown() {
+  tickerCount = sendableTickerItems.length;
+  clearInterval(tickerInterval);
+  clearInterval(tickerCountdownTimerId);
+  const intervalSeconds = parseInt(intervalInput.value);
+  startCountdownTimer(intervalSeconds);
+  
+  tickerInterval = setInterval(() => {
+    tickerCount--;
+    if (tickerCount === 0) {
+      stopAllIntervals();
+    } else {
+      startCountdownTimer(intervalSeconds);
+    }
+  }, intervalSeconds * 1000);
+}
+
+function stopAllIntervals() {
+  clearInterval(tickerInterval);
+  clearInterval(tickerCountdownTimerId);
+  countdown.textContent = '';  // Clear the countdown display
+}
+
+function startCountdownTimer(duration) {
+  clearInterval(tickerCountdownTimerId); // Clear any previous countdown timers
+  let timeRemaining = duration;
+  tickerCountdownTimerId = setInterval(() => {
+    timeRemaining -= 1;
+    updateCountdownDisplay(timeRemaining);
+    if (timeRemaining <= 0) {
+      clearInterval(tickerCountdownTimerId); // Clear the timer when it reaches 0
+    }
+  }, 950);
+}
+
+function updateCountdownDisplay(value) {
+  countdown.textContent = `${value}s`;
+}
 
 // Load Replicant value for checkboxes
 const CBCcheck = document.getElementById('netCBC');
