@@ -445,6 +445,9 @@ function addNavbarTableRow(item, table, isAddedFromDropdown) {
   // Title
   const navTitle = document.createElement('span');
   navTitle.className = 'nav-title';
+  if (item.squeeze === true || item.squeeze === false) {
+    if (item.squeeze === true) navTitle.className = 'nav-title squeeze';
+  }
   const titleText = document.createElement('span');
   titleText.className = 'text';
   titleText.id = `title-text-${index + 1}`;
@@ -478,6 +481,9 @@ function addNavbarTableRow(item, table, isAddedFromDropdown) {
   // Footer
   const footerText = document.createElement('span');
   footerText.className = 'text footer-text';
+  if (item.squeeze === true || item.squeeze === false) {
+    if (item.squeeze === true) footerText.className = 'text footer-text footer-squeeze';
+  }
   footerText.id = `nav-footer-text-${index + 1}`;
   footerText.contentEditable = 'true';
   footerText.textContent = item.footer;
@@ -522,12 +528,20 @@ function addNavbarTableRow(item, table, isAddedFromDropdown) {
   navWrapper.style.opacity = item.visible ? '1' : '0.5';
   visibilityIcon.onclick = () => toggleNavbarVisibility(visibilityIcon);
 
+  // Squeeze Font
+  const squeezeIcon = document.createElement('i');
+  if (item.squeeze === true || item.squeeze === false) squeezeIcon.className = item.squeeze ? 'fa fa-compress squeeze-icon' : 'fa fa-expand squeeze-icon';
+  if (item.squeeze === true || item.squeeze === false) squeezeIcon.title = item.squeeze ? 'Click to Expand Title' : 'Click to Squeeze Title';
+  squeezeIcon.style.cursor = 'pointer';
+  squeezeIcon.onclick = () => toggleFontSqueeze(squeezeIcon);
+
   // Drag and Drop
   const barsIcon = document.createElement('i');
   barsIcon.className = 'fa fa-bars';
 
   settings.appendChild(trashIcon);
   settings.appendChild(visibilityIcon);
+  if (item.squeeze === true || item.squeeze === false) settings.appendChild(squeezeIcon);
   settings.appendChild(barsIcon);
 
   rowWrapper.appendChild(navWrapper);
@@ -571,6 +585,7 @@ function addNewNavbarFromDropdown() {
   };
 
   newItem.visible = true;
+  newItem.squeeze = false;
   navbarItems.unshift(newItem); 
   const table = document.getElementById('navbar-table');
   addNavbarTableRow(newItem, table, true);
@@ -606,6 +621,35 @@ function toggleNavbarVisibility(icon) {
     }
   }
   saveNavbarItems();
+}
+
+// Toggle Font Squeeze
+function toggleFontSqueeze(icon) {
+  const tr = icon.closest('tr');
+  const table = tr.closest('table');
+  const rows = Array.from(table.querySelectorAll('tr'));
+  const index = rows.indexOf(tr);
+  const navWrapper = tr.querySelector('.nav-wrapper');
+  const navTitle = navWrapper.querySelector('.nav-title');
+  const item = navbarItems[index];
+
+  if (item.squeeze === true || item.squeeze === false) {
+    item.squeeze = !item.squeeze;
+    if (!item.squeeze) {
+      icon.classList.remove('fa-compress');
+      icon.classList.add('fa-expand');
+      icon.title = 'Click to Squeeze Title';
+      navTitle.className = 'nav-title';
+      item.squeeze = false;
+    } else {
+      icon.classList.remove('fa-expand');
+      icon.classList.add('fa-compress');
+      icon.title = 'Click to Expand Title';
+      navTitle.className = 'nav-title squeeze';
+      item.squeeze = true;
+    }
+    saveNavbarItems();
+  }
 }
 
 // Add Drag and Drop Handlers
@@ -757,6 +801,7 @@ function loadNavbarItems() {
     ];
     navbarItems.forEach((item) => {
       item.visible = true;
+      item.squeeze = false;
     })
     sendableNavbarItems = [...navbarItems];
     saveNavbarItems();

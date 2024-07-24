@@ -96,6 +96,9 @@ function createNavbarItem(item, index) {
   // Create and append the title
   const titleSpan = document.createElement('span');
   titleSpan.className = 'nav-title';
+  if (item.squeeze === true || item.squeeze === false) {
+    if (item.squeeze === true) titleSpan.className = 'nav-title squeeze';
+  }
   const titleText = document.createElement('span');
   titleText.className = 'text';
   if (item.title && item.title.startsWith('A')) {
@@ -121,6 +124,9 @@ function createNavbarItem(item, index) {
   // Create and append the footer text
   const footerText = document.createElement('span');
   footerText.className = 'text footer-text';
+  if (item.squeeze === true || item.squeeze === false) {
+    if (item.squeeze === true) footerText.className = 'text footer-text footer-squeeze';
+  }
   footerText.id = 'nav-footer-text';
   footerText.textContent = item.footer;
   contentContainer.appendChild(footerText);

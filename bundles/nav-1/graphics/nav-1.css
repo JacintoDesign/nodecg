@@ -196,6 +196,11 @@ body {
 	/* animation: fadeInUpText .35s ease-in-out forwards 1.55s; */
 }
 
+.squeeze {
+	font-size: 38px;
+	letter-spacing: -1px;
+}
+
 .nav-title .text {
 	display: inline-block;
 	position: relative;
@@ -232,6 +237,10 @@ body {
 	opacity: 0;
 	transform: translateX(15px);
 	/* animation: fadeInLeft .65s ease-out forwards 1.9s; */
+}
+
+.footer-squeeze {
+	top: 0px;
 }
 
 /* Footer Background */

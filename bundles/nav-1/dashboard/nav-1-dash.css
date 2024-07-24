@@ -141,6 +141,11 @@ tr:last-child td {
     color: rgb(108, 108, 108);
 }
 
+.fa-expand:hover,
+.fa-compress:hover {
+    color: rgb(108, 108, 108);
+}
+
 .fa-bars:hover {
     cursor: grab;
 }
