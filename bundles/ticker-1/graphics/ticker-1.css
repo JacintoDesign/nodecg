@@ -80,6 +80,7 @@ body {
 	top: 10px;
 	display: flex;
 	align-items: center;
+	height: 60px;
 }
 
 .group.animate-group-in {
@@ -212,7 +213,7 @@ body {
 
 /* Message */
 .ticker-message-text {
-	display: inline-block;
+	display: flex;
 	position: relative;
 	opacity: 0;
 	font-family: 'Radio Canada', sans-serif;
@@ -236,4 +237,80 @@ body {
 		opacity: 1;
 		transform: translateX(0);
 	}
+}
+
+/* Adding Images ---------------------- */
+
+/* Medals */
+.medal {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.gold {
+    background: linear-gradient(to bottom right, #FFD700, #FFB700);
+}
+
+.gold::before {
+    content: '';
+    position: absolute;
+    width: 31px;
+    height: 31px;
+    background: #FFDF00;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.silver {
+    background: linear-gradient(to bottom right, #C0C0C0, #A9A9A9);
+}
+
+.silver::before {
+    content: '';
+    position: absolute;
+    width: 31px;
+    height: 31px;
+    background: #D3D3D3;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.bronze {
+    background: linear-gradient(to bottom right, #CD7F32, #8B5A2B);
+}
+
+.bronze::before {
+    content: '';
+    position: absolute;
+    width: 31px;
+    height: 31px;
+    background: #D2691E;
+    border-radius: 50%;
+    z-index: 0;
+}
+
+.medal span {
+    position: relative;
+    z-index: 1;
+}
+
+/* Flag */
+.flag {
+	height: 40px;
+	margin-left: 15px;
+	margin-right: 15px;
+}
+
+.flag img {
+	height: 40px;
 }

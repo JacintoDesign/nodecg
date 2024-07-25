@@ -58,7 +58,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Create Message
     const messageText = document.createElement('div');
     messageText.classList.add('ticker-message-text');
-    messageText.innerHTML = item.message;
+
+    // Replace *GOLD with the desired HTML element
+    let replacedMessage = item.message.replace(/\*GOLD/g, 
+      `<div class="medal gold"><span>G</span></div>`);
+        replacedMessage = replacedMessage.replace(/\*SILVER/g, 
+            `<div class="medal silver"><span>S</span></div>`);
+        replacedMessage = replacedMessage.replace(/\*BRONZE/g, 
+            `<div class="medal bronze"><span>B</span></div>`);
+        replacedMessage = replacedMessage.replace(/\*CAN/g, 
+          `<div class="flag"><img src="../shared/assets/CAN.jpg" alt="Canada Flag"></div>`);
+
+    messageText.innerHTML = replacedMessage;
     group.appendChild(messageText);
 
     return group;
