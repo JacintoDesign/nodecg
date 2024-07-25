@@ -112,6 +112,10 @@ option {
   padding: 5px 0;
 }
 
+.bigger {
+  padding: 5px 10px;
+}
+
 .btn:hover {
   filter: brightness(1.2);
   cursor: pointer;

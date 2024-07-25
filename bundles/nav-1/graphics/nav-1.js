@@ -1129,11 +1129,12 @@ function handleInstanceAction(instanceId, replicants, action, logMessage, audioA
   const instanceActions = {
     'CBC': { replicant: replicants.netCBCRep, logPrefix: 'CBC' },
     'TSN': { replicant: replicants.netTSNRep, logPrefix: 'TSN' },
-    'SN': { replicant: replicants.netSNRep, logPrefix: 'SN' }
+    'SN': { replicant: replicants.netSNRep, logPrefix: 'SN' },
+    'PREVIEW': { replicant: 'true', logPrefix: 'PREVIEW' }
   };
 
   const currentInstance = instanceActions[instanceId];
-  if (currentInstance && currentInstance.replicant.value === 'true') {
+  if (currentInstance && currentInstance.replicant.value === 'true' || currentInstance.replicant === 'true') {
     action();
     console.log(`${currentInstance.logPrefix} ${logMessage}`);
     if (audioAction) audioAction();
