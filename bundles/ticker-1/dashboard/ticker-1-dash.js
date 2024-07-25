@@ -157,7 +157,7 @@ function addTableRow(item, isAddedFromDropdown) {
   const typeCell = document.createElement('td');
   const select = document.createElement('select');
   select.className = 'type-cell';
-  const options = ['Results', 'Breaking', 'Promo', 'Free'];
+  const options = ['Results', 'Breaking', 'Promo', 'News', 'Free'];
   options.forEach(opt => {
     const option = document.createElement('option');
     option.value = opt;
@@ -589,6 +589,7 @@ function loadItems() {
     tickerItems = [
       { type: 'Results', message: '100 Meter World Record Holder' },
       { type: 'Results', message: '200 Meter World Record Holder' },
+      { type: 'News', message: 'There is news from earlier today' },
       { type: 'Breaking', message: 'New Marathon Record' },
       { type: 'Breaking', message: 'Canadian swimmers set World Record' },
       { type: 'Promo', message: 'Upcoming: World Championship' },

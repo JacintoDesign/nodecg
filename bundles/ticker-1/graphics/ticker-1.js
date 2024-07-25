@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let groupItems = [
     { type: 'Results', message: '100 Meter World Record Holder' },
     { type: 'Results', message: '200 Meter World Record Holder' },
+    { type: 'News', message: 'There is news from earlier today' },
     { type: 'Breaking', message: 'New Marathon Record' },
     { type: 'Breaking', message: 'Canadian swimmers set World Record' },
     { type: 'Promo', message: 'Upcoming: World Championship' },
