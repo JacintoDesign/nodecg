@@ -240,7 +240,7 @@ body {
 }
 
 .footer-squeeze {
-	top: 0px;
+	top: .5px;
 }
 
 /* Footer Background */
