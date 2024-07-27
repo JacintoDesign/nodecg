@@ -811,6 +811,12 @@ function animateInResults() {
         });
       });
     }
+    const resultsTextSpans = currentResult.querySelectorAll('.results-text > div');
+    if (resultsTextSpans) {
+      resultsTextSpans.forEach((span, index) => {
+        span.style.animation = `fadeInUpTextMore .5s ease-out forwards ${0.7 + 0.2 * index}s`;
+      });
+    }
     if (footerText) footerText.style.animation = 'fadeInLeft .65s ease-out forwards 1s';
   }
   // Set animation for every other result
