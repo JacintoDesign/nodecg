@@ -85,6 +85,7 @@ option {
   display: flex;
   margin-left: 5px;
   margin-top: 5px;
+  width: 684px;
 }
 
 .buttons-group:not(:first-child) {
@@ -123,6 +124,13 @@ option {
 
 .btn:not(:first-child) {
   margin-left: 10px;
+}
+
+.time-stamp {
+  font-size: 18px;
+  margin-left: 10px;
+  position: relative;
+  top: 4px;
 }
 
 /* Interval */

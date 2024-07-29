@@ -198,7 +198,6 @@ function addTableRow(item, isAddedFromDropdown) {
       row.remove();
       tickerItems.splice(index, 1);
       sendableTickerItems = sendableTickerItems.filter((_, sendableIndex) => sendableIndex !== index);
-      saveItems();
     }
   };
   deleteCell.appendChild(deleteIcon);
@@ -232,8 +231,6 @@ function addNewTableRow() {
   newItem.visible = true;
   tickerItems.unshift(newItem);
   addTableRow(newItem, true);
-  updateSendableTickerItems();
-  saveItems();
 }
 
 // Toggle visibility function ------------------------------------------------------------
@@ -266,7 +263,6 @@ function toggleVisibility(icon) {
       sendableTickerItems.splice(index, 0, item);
     }
   }
-  saveItems();
 }
 
 // Drag and Drop functionality -----------------------------------------------------------
@@ -316,10 +312,6 @@ function addDragAndDropHandlers(row) {
       // Update tickerItems based on the new order
       const movedItem = tickerItems.splice(originIndex, 1)[0];
       tickerItems.splice(targetIndex, 0, movedItem);
-
-      // Update sendableTickerItems based on the new tickerItems order
-      updateSendableTickerItems();
-      saveItems();
     }
     Array.from(tableBody.children).forEach(child => child.classList.remove('highlight'));
   };
@@ -344,6 +336,7 @@ function updateItems() {
   // Update items in Ticker graphic
   nodecg.sendMessage('update');
   tickerItemsReplicant.value = sendableTickerItems;
+  updateTimestampMessage('time-stamp');
 }
 
 // Generate Table Rows
@@ -605,3 +598,23 @@ function loadItems() {
 }
 
 loadItems();
+
+function updateTimestampMessage(className) {
+  const now = new Date();
+  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = months[now.getMonth()];
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  const timestampMessage = `<i>Updated</i> &nbsp; ${month} ${day} - ${hours}:${minutes}:${seconds}`;
+
+  // Find the element with the specified class name and update its text content
+  const element = document.querySelector(`.${className}`);
+  if (element) {
+      element.innerHTML = timestampMessage;
+  } else {
+      console.warn(`Element with class '${className}' not found.`);
+  }
+}
