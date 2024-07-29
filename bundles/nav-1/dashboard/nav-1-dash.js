@@ -224,7 +224,7 @@ if (localStorage.getItem('resultsInterval')) intervalInput3.value = localStorage
 buttonUpdateInterval3.onclick = () => {
   const intervalSeconds = parseInt(intervalInput3.value);
   localStorage.setItem('resultsInterval', intervalSeconds);
-  if(isResultPlaying) startResultTransitions();
+  if (isResultPlaying) startResultTransitions();
 };
 
 function startResultTransitions() {
@@ -565,9 +565,6 @@ function updateNavbarRowIndices(table) {
   rows.forEach((row, index) => {
     row.setAttribute('data-index', index);
     row.id = `navbar-row-${index}`;
-
-    updateSendableNavbarItems();
-    saveNavbarItems();
   });
 }
 
@@ -586,11 +583,9 @@ function addNewNavbarFromDropdown() {
 
   newItem.visible = true;
   newItem.squeeze = false;
-  navbarItems.unshift(newItem); 
+  navbarItems.unshift(newItem);
   const table = document.getElementById('navbar-table');
   addNavbarTableRow(newItem, table, true);
-  updateSendableNavbarItems();
-  saveNavbarItems();
 }
 
 // Toggle Row Visibility
@@ -620,7 +615,6 @@ function toggleNavbarVisibility(icon) {
       sendableNavbarItems.splice(index, 0, item);
     }
   }
-  saveNavbarItems();
 }
 
 // Toggle Font Squeeze
@@ -648,7 +642,6 @@ function toggleFontSqueeze(icon) {
       navTitle.className = 'nav-title squeeze';
       item.squeeze = true;
     }
-    saveNavbarItems();
   }
 }
 
@@ -730,6 +723,7 @@ function updateNavbarItems() {
   // Update navbarItems in graphic
   nodecg.sendMessage('update navbarItems');
   navbarItemsReplicant.value = sendableNavbarItems;
+  updateTimestampMessage('navbar-time');
 }
 
 // Generate Navbar Table Rows
@@ -991,7 +985,7 @@ function addPromoTableRow(item, table, isAddedFromDropdown) {
   }
 
   addPromoDragAndDropHandlers(tr, table);
-  updatePromoRowIndices(table); 
+  updatePromoRowIndices(table);
 }
 
 const imageClickHandler = function () {
@@ -1088,7 +1082,6 @@ function addImageSelectionControls() {
       const newImagePath = `${basePath}${value}`;
       imageElement.src = newImagePath;
       dropdown.value = value;
-      updatePromoItems();
     }
   }
 
@@ -1209,9 +1202,6 @@ function updatePromoRowIndices(table) {
   rows.forEach((row, index) => {
     row.setAttribute('data-index', index);
     row.id = `promo-row-${index}`;
-
-    updateSendablePromoItems();
-    savePromoItems();
   });
 }
 
@@ -1265,8 +1255,6 @@ function addNewPromoFromDropdown() {
   const table = document.getElementById('promo-table');
   addPromoTableRow(newItem, table, true);
   addImageSelectionControls();
-  updateSendablePromoItems();
-  savePromoItems();
 }
 
 // Toggle Row Visibility
@@ -1296,7 +1284,6 @@ function togglePromoVisibility(icon) {
       sendablePromoItems.splice(index, 0, item);
     }
   }
-  savePromoItems();
 }
 
 // Add Drag and Drop Handlers
@@ -1392,6 +1379,7 @@ function updatePromoItems() {
   // Update promoItems in graphic
   nodecg.sendMessage('update promoItems');
   promoItemsReplicant.value = sendablePromoItems;
+  updateTimestampMessage('promo-time');
 }
 
 // Generate Promo Table Rows
@@ -1642,7 +1630,7 @@ function addResultTableRow(item, table, isAddedFromDropdown) {
   rowWrapper.appendChild(settings);
   td.appendChild(rowWrapper);
   tr.appendChild(td);
-  
+
   if (table.firstChild && isAddedFromDropdown) {
     table.insertBefore(tr, table.firstChild);
   } else {
@@ -1678,9 +1666,6 @@ function updateResultRowIndices(table) {
   rows.forEach((row, index) => {
     row.setAttribute('data-index', index);
     row.id = `result-row-${index}`;
-
-    updateSendableResultItems();
-    saveResultItems();
   });
 }
 
@@ -1717,8 +1702,6 @@ function addNewResultFromDropdown() {
   resultItems.unshift(newItem);
   const table = document.getElementById('results-table');
   addResultTableRow(newItem, table, true);
-  updateSendableResultItems();
-  saveResultItems();
 }
 
 // Toggle Row Visibility
@@ -1748,7 +1731,6 @@ function toggleResultVisibility(icon) {
       sendableResultItems.splice(index, 0, item);
     }
   }
-  saveResultItems();
 }
 
 // Add Drag and Drop Handlers
@@ -1878,6 +1860,7 @@ function updateResultItems() {
   // Update resultItems in graphic
   nodecg.sendMessage('update resultItems');
   resultItemsReplicant.value = sendableResultItems;
+  updateTimestampMessage('result-time');
 }
 
 // Generate Result Table Rows
@@ -2001,3 +1984,24 @@ function loadResultItems() {
 }
 
 loadResultItems();
+
+// Shared
+function updateTimestampMessage(className) {
+  const now = new Date();
+  const months = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+  const day = String(now.getDate()).padStart(2, '0');
+  const month = months[now.getMonth()];
+  const hours = String(now.getHours()).padStart(2, '0');
+  const minutes = String(now.getMinutes()).padStart(2, '0');
+  const seconds = String(now.getSeconds()).padStart(2, '0');
+
+  const timestampMessage = `<i>Updated</i> &nbsp; ${month} ${day} - ${hours}:${minutes}:${seconds}`;
+
+  // Find the element with the specified class name and update its text content
+  const element = document.querySelector(`.${className}`);
+  if (element) {
+      element.innerHTML = timestampMessage;
+  } else {
+      console.warn(`Element with class '${className}' not found.`);
+  }
+}

@@ -371,6 +371,13 @@ tr:last-child td {
     top: 2px;
 }
 
+.time-stamp {
+    font-size: 18px;
+    margin-left: 10px;
+    position: relative;
+    top: 4px;
+}
+
 /* Checkbox Group */
 .checkbox-group {
     position: absolute;
@@ -381,6 +388,6 @@ tr:last-child td {
 .button-group-nested {
     position: absolute;
     right: 0;
-    bottom: -46px;
+    bottom: -45px;
     display: flex;
 }
