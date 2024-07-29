@@ -991,6 +991,7 @@ function addPromoTableRow(item, table, isAddedFromDropdown) {
   }
 
   addPromoDragAndDropHandlers(tr, table);
+  updatePromoRowIndices(table); 
 }
 
 const imageClickHandler = function () {
